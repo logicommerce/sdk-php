@@ -24,6 +24,8 @@ abstract class AccountAddress extends PurchaseAddress {
 
     protected bool $defaultOne = false;
 
+    protected bool $defaultAddress = false;
+
     protected string $type = '';
 
 
@@ -34,6 +36,18 @@ abstract class AccountAddress extends PurchaseAddress {
      */
     public function getDefaultOne(): bool {
         return $this->defaultOne;
+    }
+    public function setDefaultOne(bool $defaultOne): void {
+        $this->defaultOne = $defaultOne;
+        $this->defaultAddress = $defaultOne;
+    }
+    /**
+     * Returns the default address.
+     *
+     * @return bool
+     */
+    public function getDefaultAddress(): bool {
+        return $this->defaultAddress;
     }
 
     /**

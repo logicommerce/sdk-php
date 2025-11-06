@@ -352,6 +352,7 @@ class SettingsService extends Service {
      * @param string $batchName
      *            the name that will identify the request on the batch return.
      *
+     * @deprecated 
      * @return void
      */
     public function addGetBasketStockLockingSettings(BatchRequests $batchRequests, string $batchName): void {

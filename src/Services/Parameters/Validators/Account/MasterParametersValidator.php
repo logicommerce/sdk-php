@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace SDK\Services\Parameters\Validators\Account;
 
 use SDK\Core\Services\Parameters\Validators\ParametersValidator;
-use SDK\Core\Services\Parameters\Validators\Traits\IdentifiableItemsParametersValidatorTrait;
 use SDK\Services\Parameters\Groups\Account\RegisteredUserParametersGroup;
 
 /**
@@ -40,6 +39,6 @@ class MasterParametersValidator extends ParametersValidator {
     }
 
     protected function validateJob($job): ?bool {
-        return $this->validateString($job);
+        return $this->validateString($job, 0);
     }
 }

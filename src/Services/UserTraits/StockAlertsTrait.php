@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SDK\Services\UserTraits;
 
@@ -32,7 +34,7 @@ trait StockAlertsTrait {
      * @return ElementCollection|NULL
      */
     public function getStockAlerts(): ?ElementCollection {
-        return $this->getElements(UserStockAlert::class, Resource::USER_STOCK_ALERTS);
+        return $this->getElements(UserStockAlert::class, Resource::ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS);
     }
 
     /**
@@ -45,7 +47,7 @@ trait StockAlertsTrait {
     public function deleteStockAlerts(int $id): ?Status {
         return $this->prepareElement(
             $this->call(
-                (new RequestBuilder())->path(Resource::USER_STOCK_ALERTS_ID)->method(self::DELETE)->pathParams(['id' => $id])->build()
+                (new RequestBuilder())->path(Resource::ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS_ID)->method(self::DELETE)->pathParams(['id' => $id])->build()
             ),
             Status::class
         );
@@ -61,6 +63,6 @@ trait StockAlertsTrait {
      * @return void
      */
     public function addGetStockAlerts(BatchRequests $batchRequests, string $batchName): void {
-        $batchRequests->addRequest((new BatchRequestBuilder())->requestId($batchName)->path(Resource::USER_STOCK_ALERTS)->build());
+        $batchRequests->addRequest((new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS)->build());
     }
 }

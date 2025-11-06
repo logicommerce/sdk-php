@@ -11,6 +11,7 @@ use SDK\Core\Dtos\Traits\IdentifiableElementTrait;
 use SDK\Core\Dtos\Traits\IntegrableElementTrait;
 use SDK\Core\Dtos\Traits\DateAddedTrait;
 use SDK\Core\Enums\Traits\EnumResolverTrait;
+use SDK\Enums\AccountAddressType;
 use SDK\Enums\AccountStatus;
 use SDK\Enums\AccountType;
 use SDK\Enums\UserType;
@@ -154,6 +155,15 @@ abstract class Account extends Element {
     }
 
     /**
+     * Returns the user default billing address.
+     *
+     * @return AccountInvoicingAddress|NULL
+     */
+    public function getDefaultInvoicingAddresses(): ?AccountInvoicingAddress {
+        return $this->getDefaultAccountAddress($this->getInvoicingAddresses());
+    }
+
+    /**
      * Returns the shipping addresses of the account.
      *
      * @return AccountShippingAddress[]
@@ -166,6 +176,14 @@ abstract class Account extends Element {
         $this->shippingAddresses = $this->setArrayField($shippingAddresses, AccountShippingAddress::class);
     }
 
+    /**
+     * Returns the user default shipping address.
+     *
+     * @return AccountShippingAddress|NULL
+     */
+    public function getDefaultShippingAddress(): ?AccountShippingAddress {
+        return $this->getDefaultAccountAddress($this->getShippingAddresses());
+    }
     /**
      * Returns the unique ID of the account.
      *
@@ -208,5 +226,48 @@ abstract class Account extends Element {
 
     protected function setSalesAgents(array $salesAgents): void {
         $this->salesAgents = $this->setArrayField($salesAgents, SalesAgentHeader::class);
+    }
+
+    /**
+     * Returns the user address filtered by the given id.
+     *
+     * @param int $id
+     *            Identifier of the address you want to get. 
+     * @param int $id
+     *            If the given id is 0, the default address will be returned by the AddressType given.
+     * @see AccountAddress
+     * @see SDK\Enums\AddressType
+     * @return AccountAddress|NULL
+     */
+    public function getAccountAddress(int $id, string $addressType = ''): ?AccountAddress {
+        if ($id == 0 && $addressType !== '') {
+            if ($addressType == AccountAddressType::INVOICING) {
+                $addresses = $this->getInvoicingAddresses();
+            } elseif ($addressType == AccountAddressType::SHIPPING) {
+                $addresses = $this->getShippingAddresses();
+            }
+        } else {
+            $addresses = [...$this->getInvoicingAddresses(), ...$this->getShippingAddresses()];
+        }
+
+        foreach ($addresses as $address) {
+            if ($address->getId() === $id) {
+                return $address;
+            }
+        }
+        return null;
+    }
+
+    protected function getDefaultAccountAddress(array $addresses): ?AccountAddress {
+        foreach ($addresses as $address) {
+            if ($address->getDefaultOne()) {
+                return $address;
+            }
+        }
+        return null;
+    }
+
+    public function isCompany(): bool {
+        return in_array($this->getType(), AccountType::getCompanyTypes());
     }
 }

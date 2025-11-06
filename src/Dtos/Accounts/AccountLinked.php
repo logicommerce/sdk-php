@@ -30,6 +30,8 @@ abstract class AccountLinked extends Element {
     protected ?InvoicingAddress $invoicingAddress = null;
     protected bool $useShippingAddress = false;
     protected ?ShippingAddress $shippingAddress = null;
+    protected int $selectedInvoicingAddressId = 0;
+    protected int $selectedShippingAddressId = 0;
 
     /**
      * Check if the account is linked.
@@ -125,5 +127,23 @@ abstract class AccountLinked extends Element {
 
     protected function setShippingAddress(array $shippingAddress): void {
         $this->shippingAddress = new ShippingAddress($shippingAddress);
+    }
+
+    /**
+     * Returns the user selected invoicing address internal identifier.
+     *
+     * @return int
+     */
+    public function getSelectedInvoicingAddressId(): int {
+        return $this->selectedInvoicingAddressId;
+    }
+
+    /**
+     * Returns the user selected shipping address internal identifier.
+     *
+     * @return int
+     */
+    public function getSelectedShippingAddressId(): int {
+        return $this->selectedShippingAddressId;
     }
 }

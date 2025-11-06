@@ -330,15 +330,14 @@ class AccountService extends Service {
      * @param BatchRequests $batchRequests
      * @param string $batchName
      *            the name that will identify the request on the batch return.
-     * @param string $idUsed
      * @param CompanyRolesParametersGroup $params
      *            object with the needed filters to send to the API account company roles resource
      *
      * @return void
      */
-    public function addGetCompanyRoles(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, CompanyRolesParametersGroup $params = null): void {
+    public function addGetCompanyRoles(BatchRequests $batchRequests, string $batchName, CompanyRolesParametersGroup $params = null): void {
         $batchRequests->addRequest(
-            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_COMPANY_ROLES)->pathParams(['idUsed' => $idUsed])->urlParams($params)->build()
+            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_COMPANY_ROLES)->urlParams($params)->build()
         );
     }
 
@@ -813,13 +812,13 @@ class AccountService extends Service {
                 ->method(self::POST)
                 ->body($data)->build()
         );
-        if ($response['httpStatus']['code'] == 202) {
+        if (isset($response['httpStatus']['code']) && $response['httpStatus']['code'] == 202) {
             $basket = new Basket(["error" => [
                 'message' => "A verification email has been sent to the account master. Deletion will remain pending until confirmation is received",
                 'code' => "A01000-ACCOUNT_MASTER_DELETE_VERIFICATION_SENT",
                 'status' => "204",
             ]]);
-        } else if ($response['httpStatus']['code'] == 204) {
+        } else if (isset($response['httpStatus']['code']) && $response['httpStatus']['code'] == 204) {
             $basket = $this->prepareElement(
                 $this->call((new RequestBuilder())->path(Resource::SESSION)->build()),
                 Basket::class

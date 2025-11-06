@@ -76,7 +76,7 @@ trait AddressTrait {
      *            Data validatior PId to apply
      *
      * @return Address|NULL
-     * deprecated use AccountService::updateAccountsInvoicingAddresses instead
+     * @deprecated use AccountService::updateAccountsInvoicingAddresses instead
      */
     public function updateBillingAddress(int $id, BillingAddressParametersGroup $data = null, string $dataValidatior = ''): ?Address {
         $data = UserToAccountFactory::mapBillingAddressFromAccountInvoicingAddressCompatible($data);
@@ -97,7 +97,7 @@ trait AddressTrait {
      *            Data validatior PId to apply
      *
      * @return Address|NULL
-     * deprecated use AccountService::updateAccountsShippingAddresses instead
+     * @deprecated use AccountService::updateAccountsShippingAddresses instead
      */
     public function updateShippingAddress(int $id, ShippingAddressParametersGroup $data = null, string $dataValidatior = ''): ?Address {
         $data = UserToAccountFactory::mapShippingAddressFromAccountShippingAddress($data);
@@ -117,7 +117,7 @@ trait AddressTrait {
      *            Data validatior PId to apply
      * 
      * @return Address|NULL
-     * deprecated use AccountService::createAccountInvoicingAddresses instead
+     * @deprecated use AccountService::createAccountInvoicingAddresses instead
      */
     public function createBillingAddress(BillingAddressParametersGroup $data = null, string $dataValidatior = ''): ?BillingAddress {
         $data = UserToAccountFactory::mapBillingAddressFromAccountInvoicingAddressCompatible($data);
@@ -139,7 +139,7 @@ trait AddressTrait {
      *            Data validatior PId to apply
      *
      * @return Address|NULL
-     * deprecated use AccountService::createAccountShippingAddresses instead
+     * @deprecated use AccountService::createAccountShippingAddresses instead
      */
     public function createShippingAddress(ShippingAddressParametersGroup $data = null, string $dataValidatior = ''): ?ShippingAddress {
         $data = UserToAccountFactory::mapShippingAddressFromAccountShippingAddress($data);
@@ -181,7 +181,7 @@ trait AddressTrait {
      * @param int $id
      *
      * @return Status|NULL
-     * deprecated use AccountService::deleteAccountAddress instead
+     * @deprecated use AccountService::deleteAccountAddress instead
      */
     public function deleteAddress(int $id): ?Status {
         return $this->prepareElement(
@@ -284,6 +284,6 @@ trait AddressTrait {
      * deprecated use AccountService::addGetShippingAddresses instead
      */
     public function addGetShippingAddresses(BatchRequests $batchRequests, string $batchName): void {
-        $batchRequests->addRequest((new BatchRequestBuilder())->requestId($batchName)->path(Resource::USER_SHIPPING_ADDRESSES)->build());
+        $batchRequests->addRequest((new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_SHIPPING_ADDRESSES)->pathParams(['idUsed' => AccountKey::USED])->build(), true);
     }
 }

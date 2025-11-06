@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace SDK\Services\Parameters\Groups\Account;
 
-use SDK\Services\Parameters\Validators\Account\MasterParametersValidator;
 use SDK\Services\Parameters\Validators\Account\MasterUpdateParametersValidator;
 
 /**

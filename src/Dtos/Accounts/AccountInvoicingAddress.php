@@ -2,8 +2,10 @@
 
 namespace SDK\Dtos\Accounts;
 
+use FWK\Core\Theme\Dtos\User;
 use SDK\Core\Enums\Traits\EnumResolverTrait;
 use SDK\Enums\CustomerType;
+use SDK\Enums\UserType;
 
 /**
  * AccountInvoicingAddress class.
@@ -22,6 +24,8 @@ class AccountInvoicingAddress extends AccountAddress {
     protected bool $reverseChargeVat = false;
 
     protected string $customerType = '';
+
+    protected string $userType = '';
 
     /**
      * Returns if tax is applied.
@@ -72,5 +76,15 @@ class AccountInvoicingAddress extends AccountAddress {
                 return;
         }
         $this->customerType = CustomerType::tryFrom($customerType);
+        $this->userType = UserType::getEnum($this->getCustomerType());
+    }
+
+    /**
+     * Returns the user type.
+     * 
+     * @return string
+     */
+    public function getUserType(): string {
+        return $this->userType;
     }
 }

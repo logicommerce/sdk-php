@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace SDK\Services\Parameters\Groups\Basket;
 
-use SDK\Core\Services\Parameters\Groups\ParametersGroup;
-use SDK\Services\Parameters\Validators\Basket\BasketCustomTagsParametersValidator;
-use SDK\Core\Services\Parameters\Groups\Traits\PaginableItemsParametersGroupTrait;
+use SDK\Enums\CustomTagType;
+use SDK\Services\Parameters\Groups\CustomTagsParametersGroup;
+use SDK\Services\Parameters\Validators\CustomTagsParametersValidator;
 
 /**
  * This is the basket model (get custom tags resource) parameters group class.
  *
  * @package SDK\Services\Parameters\Groups\Basket
  */
-class BasketCustomTagsParametersGroup extends ParametersGroup {
-    use PaginableItemsParametersGroupTrait;
+class BasketCustomTagsParametersGroup extends CustomTagsParametersGroup {
+
+    protected string $type = CustomTagType::ORDER;
 
     /**
      * @see ParametersGroup::getValidator()
      */
-    protected function getValidator(): BasketCustomTagsParametersValidator {
-        return new BasketCustomTagsParametersValidator();
+    protected function getValidator(): CustomTagsParametersValidator {
+        return new CustomTagsParametersValidator();
     }
 }

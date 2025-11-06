@@ -174,7 +174,7 @@ abstract class Resource extends Enum {
 
     public const ACCOUNTS_COMPANY_ROLE = self::ACCOUNTS . '/company/roles' . self::ID_WILDCARD;
 
-    public const ACCOUNTS_COMPANY_ROLES = self::ACCOUNTS . self::ID_USED_WILDCARD . '/company/roles';
+    public const ACCOUNTS_COMPANY_ROLES = self::ACCOUNTS . '/used/company/roles';
 
     public const ACCOUNTS_COMPANY_STRUCTURE = self::ACCOUNTS . self::ID_USED_WILDCARD . '/companyStructure';
 
@@ -192,13 +192,25 @@ abstract class Resource extends Enum {
 
     public const ACCOUNTS_REGISTERED_USERS = self::ACCOUNTS . self::ID_USED_WILDCARD . '/registeredUsers';
 
+    public const ACCOUNTS_REGISTERED_USERS_APPROVE = self::ACCOUNTS . self::ID_WILDCARD . '/registeredUsers' . self::REGISTERED_USER_ID_WILDCARD . '/approve';
+
     public const ACCOUNTS_REGISTERED_USERS_SEARCH = self::ACCOUNTS . self::ID_USED_WILDCARD . '/registeredUsers/search';
+
+    public const ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS = self::ACCOUNTS . '/used/registeredUsers/me/stockAlerts';
+
+    public const ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS_ID = self::ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS . self::ID_WILDCARD;
+
+    public const ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS = self::ACCOUNTS . '/used/registeredUsers/me/subscriptions';
+
+    public const ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS_VERIFY_TOKEN = self::ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS . '/verify' . self::TOKEN_WILDCARD;
+
+    public const ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS_UNSUBSCRIBE = self::ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS . '/unsubscribe';
+
+    public const ACCOUNTS_REGISTERED_USERS_UNSUBSCRIBE_TOKEN = self::ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS . '/unsubscribe' . self::TOKEN_WILDCARD;
 
     public const ACCOUNTS_REGISTERED_USERS_WITH_REGISTERED_ID = self::ACCOUNTS . self::ID_USED_WILDCARD . '/registeredUsers' . self::REGISTERED_USER_ID_WILDCARD;
 
     public const ACCOUNTS_REGISTERED_USERS_WITH_REGISTERED_ID_PENDING_APPROVAL = self::ACCOUNTS . self::ID_WILDCARD . '/registeredUsers' . self::REGISTERED_USER_ID_WILDCARD . '/pendingApproval';
-
-    public const ACCOUNTS_REGISTERED_USERS_APPROVE = self::ACCOUNTS . self::ID_WILDCARD . '/registeredUsers' . self::REGISTERED_USER_ID_WILDCARD . '/approve';
 
     public const ACCOUNTS_SHIPPING_ADDRESSES = self::ACCOUNTS . self::ID_USED_WILDCARD . '/shippingAddresses';
 
@@ -258,6 +270,7 @@ abstract class Resource extends Enum {
 
     public const BASKET_COMMENT = self::BASKET . '/comment';
 
+    /**@deprecated*/
     public const BASKET_CUSTOM_TAGS = self::BASKET . '/customTags';
 
     public const BASKET_CUSTOMER = self::BASKET . '/customer';
@@ -394,6 +407,8 @@ abstract class Resource extends Enum {
     public const CUSTOM_FORM_SEND_DATA = self::CUSTOM_FORM . '/sendData';
 
     public const CUSTOM_FORM_SEND_MAIL = self::CUSTOM_FORM . '/sendMail';
+
+    public const CUSTOM_TAGS = '/customTags';
 
     public const DATA_FEED_LANGUAGE_INITIALS_HASH = '/dataFeed/{languageCode}' . self::HASH_WILDCARD;
 
@@ -652,6 +667,7 @@ abstract class Resource extends Enum {
 
     public const USER_BILLING_ADDRESSES_ID = self::USER_BILLING_ADDRESSES . self::ID_WILDCARD;
 
+    /**@deprecated*/
     public const USER_CUSTOM_TAGS = self::USER . '/customTags';
 
     public const USER_EXISTS_VALUE = self::USER . '/exists/{value}';
@@ -733,16 +749,22 @@ abstract class Resource extends Enum {
 
     public const USER_SHOPPING_LISTS_ROWS_ID = self::USER_SHOPPING_LISTS . '/rows' . self::ID_WILDCARD;
 
+    /**@deprecated*/
     public const USER_STOCK_ALERTS = self::USER . '/stockAlerts';
 
+    /**@deprecated*/
     public const USER_STOCK_ALERTS_ID = self::USER_STOCK_ALERTS . self::ID_WILDCARD;
 
+    /**@deprecated*/
     public const USER_SUBSCRIPTIONS = self::USER . '/subscriptions';
 
+    /**@deprecated*/
     public const USER_SUBSCRIPTIONS_VERIFY_TOKEN = self::USER_SUBSCRIPTIONS . '/verify' . self::TOKEN_WILDCARD;
 
+    /**@deprecated*/
     public const USER_SUBSCRIPTIONS_UNSUBSCRIBE = self::USER_SUBSCRIPTIONS . '/unsubscribe';
 
+    /**@deprecated*/
     public const USER_UNSUBSCRIBE_TOKEN = self::USER_SUBSCRIPTIONS . '/unsubscribe' . self::TOKEN_WILDCARD;
 
     private const USER_VERIFY = self::USER . '/verify';
@@ -852,13 +874,16 @@ abstract class Resource extends Enum {
                 } elseif ($resource === 'ACCOUNTS_REGISTERED_USERS') {
                     $class = MasterFactory::class;
                     break;
+                } elseif ($resource === 'ACCOUNTS_REGISTERED_USERS_APPROVE') {
+                    $class = MasterValFactory::class;
+                    break;
                 } elseif ($resource === 'ACCOUNTS_REGISTERED_USERS_SEARCH') {
                     $class = RegisteredUserSimpleProfile::class;
                     break;
-                } elseif ($resource === 'ACCOUNTS_REGISTERED_USERS_WITH_REGISTERED_ID') {
-                    $class = MasterValFactory::class;
+                } elseif ($resource === 'ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS') {
+                    $class = Subscription::class;
                     break;
-                } elseif ($resource === 'ACCOUNTS_REGISTERED_USERS_APPROVE') {
+                } elseif ($resource === 'ACCOUNTS_REGISTERED_USERS_WITH_REGISTERED_ID') {
                     $class = MasterValFactory::class;
                     break;
                 } elseif ($resource === 'ACCOUNTS_REGISTERED_USERS_WITH_REGISTERED_ID_PENDING_APPROVAL') {
@@ -989,7 +1014,10 @@ abstract class Resource extends Enum {
                 'ACCOUNTS_ORDERS',
                 'ACCOUNTS_REGISTERED_USERS',
                 'ACCOUNTS_REGISTERED_USERS_SEARCH',
+                'ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS',
+                'ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS',
                 'ACCOUNTS_SHIPPING_ADDRESSES',
+                'ACCOUNT_REGISTERED_USERS_ME_ACCOUNTS',
                 'ACCOUNT_SALES_AGENT_CUSTOMERS',
                 'ACCOUNT_SALES_AGENT_CUSTOMERS_ID_ORDERS',
                 'ACCOUNT_SALES_AGENT_SALES',
@@ -1021,6 +1049,7 @@ abstract class Resource extends Enum {
                 'CATEGORIES_ID_RELATED_TYPE',
                 'CATEGORIES_TREE',
                 'CONTACT_MOTIVES',
+                'CUSTOM_TAGS',
                 'DATA_VALIDATION',
                 'DISCOUNTS',
                 'DISCOUNT_SELECTABLE_GIFTS_ID_PRODUCTS',
@@ -1053,7 +1082,6 @@ abstract class Resource extends Enum {
                 'PRODUCTS_ID_RELATED_TYPE',
                 'PRODUCTS_ID_REWARD_POINTS',
                 'PRODUCTS_TOP_SELLERS',
-                'ACCOUNT_REGISTERED_USERS_ME_ACCOUNTS',
                 'SETTINGS_COUNTRIES',
                 'SETTINGS_COUNTRIES_LINKS',
                 'SETTINGS_CURRENCIES',
@@ -1096,7 +1124,7 @@ abstract class Resource extends Enum {
             $class = Basket::class;
         } elseif ($resource === 'ORDERS_ID_PAY') {
             $class = PayResponse::class;
-        } elseif (strpos($resource, 'USER_STOCK_ALERTS') !== false) {
+        } elseif (strpos($resource, 'USER_STOCK_ALERTS') !== false or strpos($resource, 'ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS') !== false) {
             $class = UserStockAlert::class;
         } elseif ($resource === 'DATA_FEED_LANGUAGE_INITIALS_HASH' || $resource === 'SITEMAP') {
             $class = DataFile::class;

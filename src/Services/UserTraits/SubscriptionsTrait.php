@@ -39,7 +39,7 @@ trait SubscriptionsTrait {
     public function verifySubscriptionByToken(string $token): ?Status {
         return $this->prepareElement(
             $this->call(
-                (new RequestBuilder())->path(Resource::USER_SUBSCRIPTIONS_VERIFY_TOKEN)->method(self::POST)->pathParams(['token' => $token])->build()
+                (new RequestBuilder())->path(Resource::ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS_VERIFY_TOKEN)->method(self::POST)->pathParams(['token' => $token])->build()
             ),
             Status::class
         );
@@ -55,7 +55,7 @@ trait SubscriptionsTrait {
     public function unsubscribeSubscriptionByToken(string $token): ?Status {
         return $this->prepareElement(
             $this->call(
-                (new RequestBuilder())->path(Resource::USER_UNSUBSCRIBE_TOKEN)->method(self::DELETE)->pathParams(['token' => $token])->build()
+                (new RequestBuilder())->path(Resource::ACCOUNTS_REGISTERED_USERS_UNSUBSCRIBE_TOKEN)->method(self::DELETE)->pathParams(['token' => $token])->build()
             ),
             Status::class
         );
@@ -70,7 +70,7 @@ trait SubscriptionsTrait {
      */
     public function unsubscribeSubscriptions(UnsubscribeSubscriptionsParametersGroup $params): ?Status {
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path(Resource::USER_SUBSCRIPTIONS_UNSUBSCRIBE)->method(self::DELETE)->urlParams($params)->build()),
+            $this->call((new RequestBuilder())->path(Resource::ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS_UNSUBSCRIBE)->method(self::DELETE)->urlParams($params)->build()),
             Status::class
         );
     }
@@ -84,7 +84,7 @@ trait SubscriptionsTrait {
      * @return ElementCollection|NULL
      */
     public function getSubscriptions(SubscriptionsParametersGroup $params = null): ?ElementCollection {
-        return $this->getElements(Subscription::class, Resource::USER_SUBSCRIPTIONS, $params);
+        return $this->getElements(Subscription::class, Resource::ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS, $params);
     }
 
     /**
@@ -101,7 +101,7 @@ trait SubscriptionsTrait {
     public function addGetSubscriptions(BatchRequests $batchRequests, string $batchName, SubscriptionsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
-                ->requestId($batchName)->path(Resource::USER_SUBSCRIPTIONS)->urlParams($params)
+                ->requestId($batchName)->path(Resource::ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS)->urlParams($params)
                 ->build()
         );
     }

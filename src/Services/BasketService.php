@@ -54,6 +54,7 @@ use SDK\Services\Parameters\Groups\Basket\RewardPointsRedeemParametersGroup;
 use SDK\Services\Parameters\Groups\Basket\SetBasketAddressesBookParametersGroup;
 use SDK\Services\Parameters\Groups\Basket\SetRowsParametersGroup;
 use SDK\Services\Parameters\Groups\Basket\UpdateLockedStockTimerParametersGroup;
+use SDK\Services\Parameters\Groups\CustomTagsParametersGroup;
 use SDK\Services\Parameters\Groups\LinkedParametersGroup;
 use SDK\Services\Parameters\Groups\PluginAccountIdParametersGroup;
 use SDK\Services\Parameters\Groups\RelatedItemsParametersGroup;
@@ -573,8 +574,8 @@ class BasketService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getCustomTags(BasketCustomTagsParametersGroup $params = null): ?ElementCollection {
-        return $this->getElements(CustomTag::class, Resource::BASKET_CUSTOM_TAGS, $params);
+    public function getCustomTags(CustomTagsParametersGroup $params = new BasketCustomTagsParametersGroup()): ?ElementCollection {
+        return $this->getElements(CustomTag::class, Resource::CUSTOM_TAGS, $params);
     }
 
     /**
@@ -834,11 +835,11 @@ class BasketService extends Service {
     public function addGetCustomTags(
         BatchRequests $batchRequests,
         string $batchName,
-        BasketCustomTagsParametersGroup $params = null
+        CustomTagsParametersGroup $params = new BasketCustomTagsParametersGroup()
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
-                ->requestId($batchName)->path(Resource::BASKET_CUSTOM_TAGS)->urlParams($params)
+                ->requestId($batchName)->path(Resource::CUSTOM_TAGS)->urlParams($params)
                 ->build()
         );
     }

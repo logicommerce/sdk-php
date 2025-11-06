@@ -30,8 +30,10 @@ use SDK\Dtos\User\UserOauthUrl;
 use SDK\Dtos\User\UserOrder;
 use SDK\Dtos\User\UserRMA;
 use SDK\Enums\AccountKey;
+use SDK\Enums\CustomTagType;
 use SDK\Enums\RelatedItemsType;
 use SDK\Services\Parameters\Groups\Account\DeleteAccountParametersGroup;
+use SDK\Services\Parameters\Groups\CustomTagsParametersGroup;
 use SDK\Services\Parameters\Groups\RelatedItemsParametersGroup;
 use SDK\Services\Parameters\Groups\User\CreateUserParametersGroup;
 use SDK\Services\Parameters\Groups\User\LoginParametersGroup;
@@ -272,13 +274,13 @@ class UserService extends Service {
                 ->method(self::POST)
                 ->body($data)->build()
         );
-        if ($response['httpStatus']['code'] == 202) {
+        if (isset($response['httpStatus']['code']) && $response['httpStatus']['code'] == 202) {
             $basket = new Basket(["error" => [
                 'message' => "A verification email has been sent to the account master. Deletion will remain pending until confirmation is received",
                 'code' => "A01000-ACCOUNT_MASTER_DELETE_VERIFICATION_SENT",
                 'status' => "204",
             ]]);
-        } else if ($response['httpStatus']['code'] == 204) {
+        } else if (isset($response['httpStatus']['code']) && $response['httpStatus']['code'] == 204) {
             $basket = $this->prepareElement(
                 $this->call((new RequestBuilder())->path(Resource::SESSION)->build()),
                 Basket::class
@@ -487,13 +489,13 @@ class UserService extends Service {
     /**
      * Returns the custom tags filtered with the given parameters for the current user
      *
-     * @param UserCustomTagsParametersGroup $params
+     * @param CustomTagsParametersGroup $params
      *            object with the needed filters to send to the API user resource
      *
      * @return ElementCollection|NULL
      */
-    public function getCustomTags(UserCustomTagsParametersGroup $params = null): ?ElementCollection {
-        return $this->getElements(CustomTag::class, Resource::USER_CUSTOM_TAGS, $params);
+    public function getCustomTags(CustomTagsParametersGroup $params = new UserCustomTagsParametersGroup()): ?ElementCollection {
+        return $this->getElements(CustomTag::class, Resource::CUSTOM_TAGS, $params);
     }
 
     /**
@@ -735,15 +737,15 @@ class UserService extends Service {
      * @param BatchRequests $batchRequests
      * @param string $batchName
      *            the name that will identify the request on the batch return.
-     * @param UserCustomTagsParametersGroup $params
+     * @param CustomTagsParametersGroup $params
      *            object with the needed filters to send to the API user resource
      *
      * @return void
      */
-    public function addGetCustomTags(BatchRequests $batchRequests, string $batchName, UserCustomTagsParametersGroup $params = null): void {
+    public function addGetCustomTags(BatchRequests $batchRequests, string $batchName, CustomTagsParametersGroup $params = new UserCustomTagsParametersGroup()): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
-                ->requestId($batchName)->path(Resource::USER_CUSTOM_TAGS)->urlParams($params)
+                ->requestId($batchName)->path(Resource::CUSTOM_TAGS)->urlParams($params)
                 ->build()
         );
     }

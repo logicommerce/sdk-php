@@ -57,7 +57,7 @@ abstract class UserToAccountFactory {
             self::setIfNotNull($registeredUser, 'setEmail',     $updateUser['email'] ?? null);
             self::setIfNotNull($registeredUser, 'setFirstName', $updateUser['firstName'] ?? null);
             self::setIfNotNull($registeredUser, 'setLastName',  $updateUser['lastName'] ?? null);
-            if ($updateUser['birthday'] != null) {
+            if (isset($updateUser['birthday'])) {
                 self::setIfNotNull($registeredUser, 'setBirthday', Date::create($updateUser['birthday'])->getDateTime());
             }
             self::setIfNotNull($registeredUser, 'setImage',     $updateUser['image'] ?? null);
@@ -108,7 +108,7 @@ abstract class UserToAccountFactory {
             self::setIfNotNull($registeredUser, 'setFirstName',  $createUser['billingAddress']['firstName'] ?? null);
             self::setIfNotNull($registeredUser, 'setLastName',   $createUser['billingAddress']['lastName'] ?? null);
         }
-        if ($createUser['birthday'] != null) {
+        if (isset($createUser['birthday'])) {
             self::setIfNotNull($registeredUser, 'setBirthday', Date::create($createUser['birthday'])->getDateTime());
         }
         self::setIfNotNull($registeredUser, 'setImage',      $createUser['image'] ?? null);
@@ -175,7 +175,7 @@ abstract class UserToAccountFactory {
         self::setIfNotNull($updateCustomer, 'setPId', $createUser['pId'] ?? null);
         self::setIfNotNull($updateCustomer, 'setEmail', $createUser['email'] ?? null);
         self::setIfNotNull($updateCustomer, 'setGender', $createUser['gender'] ?? null);
-        if ($createUser['birthday'] != null) {
+        if (isset($createUser['birthday'])) {
             self::setIfNotNull($updateCustomer, 'setBirthday', Date::create($createUser['birthday'])->getDateTime());
         }
         self::setIfNotNull($updateCustomer, 'setCustomerName', $createUser['nick'] ?? null);
