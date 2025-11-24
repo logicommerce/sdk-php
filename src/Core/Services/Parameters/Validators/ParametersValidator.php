@@ -91,6 +91,16 @@ abstract class ParametersValidator {
         return $paramValue . '';
     }
 
+    protected function validateFloatNumeric($floatNumeric): ?bool {
+        if (is_numeric($floatNumeric)) {
+            $floatNumeric = filter_var($floatNumeric, FILTER_VALIDATE_FLOAT);
+            if ($floatNumeric !== false) {
+                return true;
+            }
+        }
+        return null;
+    }
+
     protected function validateNumeric($numeric): ?bool {
         if (is_numeric($numeric)) {
             $numeric = filter_var($numeric, FILTER_VALIDATE_INT);
@@ -103,6 +113,13 @@ abstract class ParametersValidator {
 
     protected function validatePositiveNumeric($numeric): ?bool {
         if ($this->validateNumeric($numeric) && $numeric > 0) {
+            return true;
+        }
+        return null;
+    }
+
+    protected function validatePositiveFloatNumeric($floatNumeric): ?bool {
+        if ($this->validateFloatNumeric($floatNumeric) && $floatNumeric > 0) {
             return true;
         }
         return null;

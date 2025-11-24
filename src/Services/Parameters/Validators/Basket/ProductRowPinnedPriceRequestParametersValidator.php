@@ -20,6 +20,6 @@ class ProductRowPinnedPriceRequestParametersValidator extends ParametersValidato
     }
 
     protected function validateAmount($amount): ?bool {
-        return $this->validatePositiveNumeric($amount);
+        return $this->validateFloatNumeric($amount);
     }
 }
