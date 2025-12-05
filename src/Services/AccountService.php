@@ -60,34 +60,60 @@ use SDK\Services\Parameters\Groups\Account\UpdateRegisteredUserParametersGroup;
 use SDK\Services\Parameters\Groups\Account\UpdateCompanyRoleParametersGroup;
 
 /**
- * This is the account service class.
- * This class will retrieve the accounts from LogiCommerce API and transform them to objects.
- * All the needed accounts operations previous to Framework must be done here.
+ * This is the AccountService class.
+ * A service is an extension of a SDK model that adds additional actions to a model request or creates new methods to simplify common requests.
+ * In this case, the AccountService extends the SDK\Services\Service class and provides methods to interact with various account-related resources.
  *
- * Splitted on traits to divide the methods between them.
- *
+ * @see AccountService::getAccounts()
+ * @see AccountService::getCompanyDivision()
+ * @see AccountService::getCompanyStructure()
+ * @see AccountService::getCompanyRoles()
+ * @see AccountService::getCompanyRole()
  * @see AccountService::getOrders()
+ * @see AccountService::getRegisteredUsers()
+ * @see AccountService::getRegisteredUsersExists()
+ * @see AccountService::getRegisteredUsersPendingApproval()
+ * @see AccountService::getRegisteredUsersWithRegisteredId()
+ * @see AccountService::getRegisteredUserSearch()
+ * @see AccountService::getRegisteredUsersMe()
  * @see AccountService::getRegisteredUsersMeAccounts()
  * @see AccountService::getSalesAgentCustomers()
  * @see AccountService::getSalesAgentSales()
  * @see AccountService::getSalesAgentOrders()
+ * @see AccountService::getSession()
+ * @see AccountService::addGetAccounts()
+ * @see AccountService::addGetCompanyRoles()
+ * @see AccountService::addGetCompanyRole()
+ * @see AccountService::addGetCompanyStructure()
  * @see AccountService::addGetOrders()
+ * @see AccountService::addGetRegisteredUsers()
+ * @see AccountService::addGetRegisteredUsersExists()
+ * @see AccountService::addGetRegisteredUsersSearch()
+ * @see AccountService::addGetRegisteredUsersMe()
  * @see AccountService::addGetRegisteredUsersMeAccounts()
+ * @see AccountService::addGetRegisteredUsersWithRegisteredId()
+ * @see AccountService::addGetRegisteredUsersPendingApproval()
  * @see AccountService::addGetSalesAgentCustomers()
  * @see AccountService::addGetSalesAgentOrders()
  * @see AccountService::addGetSalesAgentSales()
+ * @see AccountService::addGetSession()
  * @see AccountService::salesAgentLogin()
  * @see AccountService::salesAgentLogout()
  * @see AccountService::usedAccount()
+ * @see AccountService::createAccount()
+ * @see AccountService::createAccountRegisteredUser()
  * @see AccountService::createCompanyDivisions()
- * 
- * @see BatchRequests
- *
- * @see Service
- *
- * @uses ServiceTrait
- * @see ServiceTrait
- *
+ * @see AccountService::createCompanyRole()
+ * @see AccountService::updateUsedAccount()
+ * @see AccountService::updateAccount()
+ * @see AccountService::updateAccountRegisteredUser()
+ * @see AccountService::updateCompanyRole()
+ * @see AccountService::updateRegisteredUserMe()
+ * @see AccountService::deleteAccount()
+ * @see AccountService::deleteRegisteredUsers()
+ * @see AccountService::deleteCompanyRole()
+ * @see AccountService::approveRegisteredUser()
+ * @see AccountService::ordersApprovalDecision()
  *
  * @package SDK\Services
  */

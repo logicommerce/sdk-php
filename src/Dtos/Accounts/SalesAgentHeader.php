@@ -8,17 +8,18 @@ use SDK\Core\Dtos\Traits\IdentifiableElementTrait;
 use SDK\Core\Dtos\Traits\IntegrableElementTrait;
 
 /**
- * Represents a sales agent header.
- * The asales agent header will be stored in that class and will remain immutable (only get methods are available)
+ * This is the sales agent header main class.
+ * The sales agent header information will be stored in this class and will remain immutable (only get methods are available).
  *
- * @see salesAgentHeader::getActive()
- * @see salesAgentHeader::getPercentCommission()
- * @see salesAgentHeader::getRegisteredUser()
+ * @see SalesAgentHeader::getActive()
+ * @see SalesAgentHeader::getPercentCommission()
+ * @see SalesAgentHeader::getRegisteredUser()
  *
  * @see Element
  * @see ElementTrait
  * @see IdentifiableElementTrait
  * @see IntegrableElementTrait
+ * @see RegisteredUserHeader
  *
  * @package SDK\Dtos\Accounts
  */

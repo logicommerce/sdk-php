@@ -13,6 +13,8 @@ use SDK\Core\Enums\Enum;
  */
 abstract class DiscountConditionType extends Enum {
 
+    public const ACCOUNT = 'ACCOUNT';
+
     public const PERIOD = 'PERIOD';
 
     public const ACTIVITY_LIMIT = 'ACTIVITY_LIMIT';

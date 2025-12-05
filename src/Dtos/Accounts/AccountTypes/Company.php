@@ -3,16 +3,17 @@
 namespace SDK\Dtos\Accounts\AccountTypes;
 
 use SDK\Dtos\Accounts\Account;
-use SDK\Enums\AccountType;
 
 /**
- * Account company class.
- * 
- * @see Account
+ * This is the company account main class.
+ * The company account information will be stored in this class and will remain immutable (only get methods are available).
+ *
  * @see Company::getDescription()
  * @see Company::getEmail()
- * 
- * @package SDK\Dtos\Accounts
+ *
+ * @see Account
+ *
+ * @package SDK\Dtos\Accounts\AccountTypes
  */
 class Company extends Account {
 

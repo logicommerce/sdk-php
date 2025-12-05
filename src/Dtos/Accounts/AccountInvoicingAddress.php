@@ -2,18 +2,28 @@
 
 namespace SDK\Dtos\Accounts;
 
-use FWK\Core\Theme\Dtos\User;
 use SDK\Core\Enums\Traits\EnumResolverTrait;
 use SDK\Enums\CustomerType;
 use SDK\Enums\UserType;
 
 /**
- * AccountInvoicingAddress class.
- * 
+ * This is the account invoicing address main class.
+ * The account invoicing address information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see AccountInvoicingAddress::isTax()
+ * @see AccountInvoicingAddress::isRe()
+ * @see AccountInvoicingAddress::isReverseChargeVat()
+ * @see AccountInvoicingAddress::getCustomerType()
+ * @see AccountInvoicingAddress::getUserType()
+ *
  * @see AccountAddress
- * 
+ * @see EnumResolverTrait
+ * @see CustomerType
+ * @see UserType
+ *
  * @package SDK\Dtos\Accounts
  */
+
 class AccountInvoicingAddress extends AccountAddress {
     use EnumResolverTrait;
 

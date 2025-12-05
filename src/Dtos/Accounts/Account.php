@@ -17,23 +17,38 @@ use SDK\Enums\AccountType;
 use SDK\Enums\UserType;
 
 /**
- * Account class.
- * 
- * @see Element
- * @see IdentifiableElementTrait
- * @see IntegrableElementTrait
- * @see DateAddedTrait
- * @see CustomTagValuesTrait
- * @see EnumResolverTrait
- * 
+ * This is the base account main abstract class.
+ * The account information will be stored in this class and will remain immutable (only get methods are available).
+ *
  * @see Account::getType()
+ * @see Account::getUserType()
  * @see Account::getLastUsed()
  * @see Account::getImage()
  * @see Account::getStatus()
  * @see Account::getMaster()
  * @see Account::getGroup()
  * @see Account::getInvoicingAddresses()
- * 
+ * @see Account::getDefaultInvoicingAddresses()
+ * @see Account::getShippingAddresses()
+ * @see Account::getDefaultShippingAddress()
+ * @see Account::getUniqueId()
+ * @see Account::getAlias()
+ * @see Account::getName()
+ * @see Account::getSalesAgents()
+ * @see Account::getAccountAddress()
+ * @see Account::isCompany()
+ *
+ * @see Element
+ * @see MasterFactory
+ * @see AccountGroup
+ * @see AccountAddress
+ * @see AccountInvoicingAddress
+ * @see AccountShippingAddress
+ * @see SalesAgentHeader
+ * @see AccountType
+ * @see AccountStatus
+ * @see UserType
+ *
  * @package SDK\Dtos\Accounts
  */
 abstract class Account extends Element {

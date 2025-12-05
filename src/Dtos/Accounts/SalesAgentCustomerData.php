@@ -9,17 +9,20 @@ use SDK\Core\Dtos\Traits\IdentifiableElementTrait;
 use SDK\Dtos\User\SalesAgentTotals;
 
 /**
- * This is the sales agent customer class.
- * The asales agent customer will be stored in that class and will remain immutable (only get methods are available)
+ * This is the sales agent customer data main class.
+ * The sales agent customer data information will be stored in this class and will remain immutable (only get methods are available).
  *
- * @see SalesAgentCustomerData::getId()
  * @see SalesAgentCustomerData::getAccount()
  * @see SalesAgentCustomerData::getSalesAgentTotals()
+ * @see SalesAgentCustomerData::getSalesAgent()
  *
  * @see Element
  * @see ElementTrait
  * @see IdentifiableElementTrait
+ * @see Account
  * @see AccountFactory
+ * @see SalesAgentTotals
+ * @see SalesAgentHeader
  *
  * @package SDK\Dtos\Accounts
  */

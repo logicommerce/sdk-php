@@ -8,17 +8,22 @@ use SDK\Core\Dtos\Traits\DateAddedTrait;
 use SDK\Core\Dtos\Traits\ElementTrait;
 
 /**
- * AccountHeader class.
- * 
+ * This is the account header extended main class.
+ * The extended account header information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see AccountHeaderExtended::getInvoicingAddress()
+ * @see AccountHeaderExtended::getGroup()
+ *
  * @see Element
  * @see ElementTrait
- * @see IdentifiableElementTrait
- * @see IntegrableElementTrait
- * @see EnumResolverTrait
- * 
- * 
+ * @see BaseAccountHeaderTrait
+ * @see DateAddedTrait
+ * @see AccountAddressHeaderExtended
+ * @see AccountGroup
+ *
  * @package SDK\Dtos\Accounts
  */
+
 class AccountHeaderExtended extends Element {
     use BaseAccountHeaderTrait, DateAddedTrait;
 

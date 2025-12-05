@@ -7,16 +7,17 @@ use SDK\Core\Dtos\Traits\ElementTrait;
 
 /**
  * This is the document registered user main class.
- * 
+ * The document registered user information will be stored in this class and will remain immutable (only get methods are available).
+ *
  * @see DocumentRegisteredUser::getUsername()
  * @see DocumentRegisteredUser::getFirstName()
  * @see DocumentRegisteredUser::getLastName()
  * @see DocumentRegisteredUser::getEmail()
  * @see DocumentRegisteredUser::getRegisteredUserId()
- * 
+ *
  * @see Element
- * @uses ElementTrait
- * 
+ * @see ElementTrait
+ *
  * @package SDK\Dtos\Accounts
  */
 class DocumentRegisteredUser extends Element {

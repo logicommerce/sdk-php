@@ -8,12 +8,18 @@ use SDK\Core\Dtos\Traits\SimpleAccountRegisteredUserTrait;
 use SDK\Enums\MasterType;
 
 /**
- * master ref class.
- * 
+ * This is the master reference main class.
+ * The master reference information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see MasterRef::getType()
+ * @see MasterRef::getRegisteredUserId()
+ * @see MasterRef::getAccountId()
+ *
  * @see Element
  * @see ElementTrait
  * @see SimpleAccountRegisteredUserTrait
- * 
+ * @see MasterType
+ *
  * @package SDK\Dtos\Accounts
  */
 class MasterRef extends Element {

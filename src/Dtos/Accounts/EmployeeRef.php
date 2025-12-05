@@ -5,11 +5,16 @@ namespace SDK\Dtos\Accounts;
 use SDK\Core\Dtos\Factories\CompanyRoleHeaderFactory;
 
 /**
- * This class represents a company employee reference.
- * 
+ * This is the employee reference main class.
+ * The employee reference information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see EmployeeRef::getJob()
+ * @see EmployeeRef::getRole()
+ *
  * @see MasterRef
  * @see CompanyRoleHeader
- * 
+ * @see CompanyRoleHeaderFactory
+ *
  * @package SDK\Dtos\Accounts
  */
 class EmployeeRef extends MasterRef {

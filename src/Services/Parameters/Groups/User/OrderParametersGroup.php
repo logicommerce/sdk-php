@@ -12,7 +12,6 @@ use SDK\Services\Parameters\Validators\User\OrderParametersValidator;
  * This is the user model (orders resource) parameters group class.
  *
  * @package SDK\Services\Parameters\Groups\User
- * @deprecated
  */
 class OrderParametersGroup extends ParametersGroup {
     use PaginableItemsParametersGroupTrait;

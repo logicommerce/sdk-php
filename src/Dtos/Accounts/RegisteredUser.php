@@ -12,8 +12,27 @@ use SDK\Core\Resources\Date;
 use SDK\Enums\Gender;
 
 /**
- * This is the RegisteredUser class.
- * 
+ * This is the registered user main class.
+ * The registered user information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see RegisteredUser::getUsername()
+ * @see RegisteredUser::getEmail()
+ * @see RegisteredUser::getFirstName()
+ * @see RegisteredUser::getLastName()
+ * @see RegisteredUser::getGender()
+ * @see RegisteredUser::getBirthday()
+ * @see RegisteredUser::getLastUsed()
+ * @see RegisteredUser::getImage()
+ *
+ * @see Element
+ * @see ElementTrait
+ * @see IdentifiableElementTrait
+ * @see IntegrableElementTrait
+ * @see DateAddedTrait
+ * @see EnumResolverTrait
+ * @see Date
+ * @see Gender
+ *
  * @package SDK\Dtos\Accounts
  */
 class RegisteredUser extends Element {

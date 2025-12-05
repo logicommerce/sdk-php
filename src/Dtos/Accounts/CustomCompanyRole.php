@@ -3,15 +3,22 @@
 namespace SDK\Dtos\Accounts;
 
 use SDK\Core\Enums\Traits\EnumResolverTrait;
-use SDK\Enums\CompanyRoleType;
 use SDK\Enums\CustomCompanyRoleTarget;
 
 /**
- * Represents a custom company role.
- * 
+ * This is the custom company role main class.
+ * The custom company role information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see CustomCompanyRole::getName()
+ * @see CustomCompanyRole::getDescription()
+ * @see CustomCompanyRole::getPId()
+ * @see CustomCompanyRole::getTarget()
+ * @see CustomCompanyRole::getTargetDefault()
+ *
  * @see CompanyRole
- * @see CompanyRoleFactory
- * 
+ * @see EnumResolverTrait
+ * @see CustomCompanyRoleTarget
+ *
  * @package SDK\Dtos\Accounts
  */
 class CustomCompanyRole extends CompanyRole {

@@ -3,7 +3,6 @@
 namespace SDK\Dtos\Accounts\AccountTypes;
 
 use SDK\Dtos\Accounts\Account;
-use SDK\Enums\AccountType;
 
 /**
  * General Account class.

@@ -8,12 +8,19 @@ use SDK\Core\Dtos\Traits\SimpleAccountRegisteredUserTrait;
 use SDK\Enums\MasterType;
 
 /**
- * master class.
- * 
+ * This is the master main class.
+ * The master information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see Master::getType()
+ * @see Master::getRegisteredUser()
+ * @see Master::getAccountId()
+ *
  * @see Element
  * @see ElementTrait
  * @see SimpleAccountRegisteredUserTrait
- * 
+ * @see RegisteredUserSimpleProfile
+ * @see MasterType
+ *
  * @package SDK\Dtos\Accounts
  */
 class Master extends Element {

@@ -35,7 +35,7 @@ trait SaveForLaterListRowsTrait {
      * @return ElementCollection|NULL
      */
     public function getSaveForLaterListRows(SaveForLaterListRowsParametersGroup $params = null): ?ElementCollection {
-        return $this->getElements(SaveForLaterListRow::class, Resource::USER_SAVE_FOR_LATER_LIST_ROWS, $params);
+        return $this->getElements(SaveForLaterListRow::class, Resource::ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS, $params);
     }
 
     /**
@@ -47,7 +47,7 @@ trait SaveForLaterListRowsTrait {
      */
     public function addSaveForLaterListRows(AddSaveForLaterListRowsParametersGroup $data): ?IncidenceSaveForLaterListRowsCollection {
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path(Resource::USER_SAVE_FOR_LATER_LIST_ROWS)->method(self::POST)->body($data)->build()),
+            $this->call((new RequestBuilder())->path(Resource::ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS)->method(self::POST)->body($data)->build()),
             IncidenceSaveForLaterListRowsCollection::class
         );
     }
@@ -61,7 +61,7 @@ trait SaveForLaterListRowsTrait {
      */
     public function deleteSaveForLaterListRow(int $id): ?Status {
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path(Resource::USER_SAVE_FOR_LATER_LIST_ROWS_ID)->method(self::DELETE)->pathParams(['id' => $id])->build()),
+            $this->call((new RequestBuilder())->path(Resource::ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS_ID)->method(self::DELETE)->pathParams(['id' => $id])->build()),
             Status::class
         );
     }
@@ -77,7 +77,7 @@ trait SaveForLaterListRowsTrait {
      */
     public function addGetSaveForLaterListRows(BatchRequests $batchRequests, string $batchName, SaveForLaterListRowsParametersGroup $params = null): void {
         $batchRequests->addRequest(
-            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::USER_SAVE_FOR_LATER_LIST_ROWS)->urlParams($params)->build()
+            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS)->urlParams($params)->build()
         );
     }
 
@@ -91,7 +91,7 @@ trait SaveForLaterListRowsTrait {
     public function transferToBasketSaveForLaterListRow(int $id): ?Status {
         return $this->prepareElement(
             $this->call(
-                (new RequestBuilder())->path(Resource::USER_SAVE_FOR_LATER_LIST_ROWS_ID_TRANSFER_TO_BASKET)->method(self::POST)->pathParams(['id' => $id])->build()
+                (new RequestBuilder())->path(Resource::ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS_ID_TRANSFER_TO_BASKET)->method(self::POST)->pathParams(['id' => $id])->build()
             ),
             Status::class
         );

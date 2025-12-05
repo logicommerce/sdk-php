@@ -3,10 +3,13 @@
 namespace SDK\Dtos\Accounts;
 
 /**
- * Represents a custom company role header with employees quantity.
- * 
+ * This is the custom company role header with employees quantity main class.
+ * The custom company role header with employees quantity information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see CustomCompanyRoleHeaderWithEmployeesQty::getEmployeesQuantity()
+ *
  * @see CustomCompanyRoleHeader
- * 
+ *
  * @package SDK\Dtos\Accounts
  */
 class CustomCompanyRoleHeaderWithEmployeesQty extends CustomCompanyRoleHeader {

@@ -2,17 +2,15 @@
 
 namespace SDK\Dtos\Accounts;
 
-use SDK\Core\Enums\Traits\EnumResolverTrait;
-use SDK\Enums\CustomerType;
-
 /**
- * This is the account address header main class.
- * The account address header information will be stored in that class and will remain immutable (only get methods are available)
+ * This is the account address header extended main class.
+ * The extended account address header information will be stored in this class and will remain immutable (only get methods are available).
  *
- * @see AccountAddressHeaderExtended::getCustomerType()
+ * @see AccountAddressHeaderExtended::getPhone()
+ * @see AccountAddressHeaderExtended::getMobile()
+ * @see AccountAddressHeaderExtended::getAddress()
  *
  * @see AccountAddressHeader
- * @uses EnumResolverTrait
  *
  * @package SDK\Dtos\Accounts
  */

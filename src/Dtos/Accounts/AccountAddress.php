@@ -9,14 +9,20 @@ use SDK\Enums\AccountAddressType;
 use SDK\Enums\AddressType;
 
 /**
- * AccountAddress class.
- * 
+ * This is the base account address main abstract class.
+ * The account address information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see AccountAddress::getDefaultOne()
+ * @see AccountAddress::getDefaultAddress()
+ * @see AccountAddress::getType()
+ *
  * @see PurchaseAddress
  * @see IdentifiableElementTrait
  * @see IntegrableElementTrait
- * 
- * @property bool $defaultOne
- * 
+ * @see EnumResolverTrait
+ * @see AccountAddressType
+ * @see AddressType
+ *
  * @package SDK\Dtos\Accounts
  */
 abstract class AccountAddress extends PurchaseAddress {

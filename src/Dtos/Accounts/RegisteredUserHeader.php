@@ -10,16 +10,25 @@ use SDK\Core\Enums\Traits\EnumResolverTrait;
 use SDK\Enums\Gender;
 
 /**
- * Represents a registered user header.
- * 
+ * This is the registered user header main class.
+ * The registered user header information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see RegisteredUserHeader::getUsername()
+ * @see RegisteredUserHeader::getEmail()
+ * @see RegisteredUserHeader::getFirstName()
+ * @see RegisteredUserHeader::getLastName()
+ * @see RegisteredUserHeader::getGender()
+ *
  * @see Element
  * @see ElementTrait
  * @see IdentifiableElementTrait
  * @see IntegrableElementTrait
  * @see EnumResolverTrait
- * 
+ * @see Gender
+ *
  * @package SDK\Dtos\Accounts
  */
+
 class RegisteredUserHeader extends Element {
     use IdentifiableElementTrait, IntegrableElementTrait, EnumResolverTrait;
 
@@ -33,43 +42,48 @@ class RegisteredUserHeader extends Element {
     protected string $lastName = '';
     protected string $gender = '';
 
+    /**
+     * Returns the username.
+     *
+     * @return string
+     */
     public function getUsername(): string {
         return $this->username;
     }
 
-    protected function setUsername(string $username): void {
-        $this->username = $username;
-    }
-
+    /**
+     * Returns the email.
+     *
+     * @return string
+     */
     public function getEmail(): string {
         return $this->email;
     }
 
-    protected function setEmail(string $email): void {
-        $this->email = $email;
-    }
-
+    /**
+     * Returns the first name.
+     *
+     * @return string
+     */
     public function getFirstName(): string {
         return $this->firstName;
     }
 
-    protected function setFirstName(string $firstName): void {
-        $this->firstName = $firstName;
-    }
-
+    /**
+     * Returns the last name.
+     *
+     * @return string
+     */
     public function getLastName(): string {
         return $this->lastName;
     }
 
-    protected function setLastName(string $lastName): void {
-        $this->lastName = $lastName;
-    }
-
+    /**
+     * Returns the gender.
+     *
+     * @return string
+     */
     public function getGender(): string {
         return $this->getEnum(Gender::class, $this->gender, '');
-    }
-
-    protected function setGender(string $gender): void {
-        $this->gender = $gender;
     }
 }

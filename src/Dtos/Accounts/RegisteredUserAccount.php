@@ -7,13 +7,16 @@ use SDK\Core\Dtos\Traits\BaseAccountRegisteredUserTrait;
 use SDK\Core\Dtos\Traits\ElementTrait;
 
 /**
- * Represents a registered user account.
- * 
+ * This is the registered user account main class.
+ * The registered user account information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see RegisteredUserAccount::getAccount()
+ *
  * @see Element
  * @see ElementTrait
  * @see BaseAccountRegisteredUserTrait
  * @see AccountHeader
- * 
+ *
  * @package SDK\Dtos\Accounts
  */
 class RegisteredUserAccount extends Element {

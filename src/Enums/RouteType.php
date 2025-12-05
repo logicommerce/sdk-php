@@ -13,51 +13,39 @@ use SDK\Core\Enums\Enum;
  */
 abstract class RouteType extends Enum {
 
-    public const ACCOUNT_CREATE = 'ACCOUNT_CREATE';
-
-    public const ACCOUNT_VERIFY = 'ACCOUNT_VERIFY';
-
-    public const ACCOUNT_DELETE_CONFIRM = 'ACCOUNT_DELETE_CONFIRM';
-
-    public const ACCOUNT_WELCOME = 'ACCOUNT_WELCOME';
-
     public const ACCOUNT = 'ACCOUNT';
-
-    public const ACCOUNT_ID = 'ACCOUNT_ID';
-
-    public const ACCOUNT_DELETE = 'ACCOUNT_DELETE';
 
     public const ACCOUNT_ADDRESSES = 'ACCOUNT_ADDRESSES';
 
-    public const ACCOUNT_ADDRESS_CREATE = 'ACCOUNT_ADDRESS_CREATE';
-
     public const ACCOUNT_ADDRESS = 'ACCOUNT_ADDRESS';
 
-    public const ACCOUNT_REGISTERED_USERS  = 'ACCOUNT_REGISTERED_USERS';
-
-    public const ACCOUNT_REGISTERED_USER_CREATE  = 'ACCOUNT_REGISTERED_USER_CREATE';
-
-    public const ACCOUNT_REGISTERED_USER = 'ACCOUNT_REGISTERED_USER';
-
-    public const ACCOUNT_REGISTERED_USER_APPROVE  = 'ACCOUNT_REGISTERED_USER_APPROVE';
-
-    public const ACCOUNT_ORDERS = 'ACCOUNT_ORDERS';
-
-    public const ACCOUNT_ORDER = 'ACCOUNT_ORDER';
-
-    public const ACCOUNT_RMAS = 'ACCOUNT_RMAS';
-
-    public const ACCOUNT_COMPANY_STRUCTURE = 'ACCOUNT_COMPANY_STRUCTURE';
-
-    public const ACCOUNT_COMPANY_ROLES = 'ACCOUNT_COMPANY_ROLES';
-
-    public const ACCOUNT_COMPANY_ROLE = 'ACCOUNT_COMPANY_ROLE';
+    public const ACCOUNT_ADDRESS_CREATE = 'ACCOUNT_ADDRESS_CREATE';
 
     public const ACCOUNT_COMPLETE = 'ACCOUNT_COMPLETE';
 
-    public const ACCOUNT_REWARD_POINTS = 'ACCOUNT_REWARD_POINTS';
+    public const ACCOUNT_COMPANY_ROLE = 'ACCOUNT_COMPANY_ROLE';
 
-    public const ACCOUNT_VOUCHER_CODES = 'ACCOUNT_VOUCHER_CODES';
+    public const ACCOUNT_COMPANY_ROLES = 'ACCOUNT_COMPANY_ROLES';
+
+    public const ACCOUNT_COMPANY_STRUCTURE = 'ACCOUNT_COMPANY_STRUCTURE';
+
+    public const ACCOUNT_CREATE = 'ACCOUNT_CREATE';
+
+    public const ACCOUNT_DELETE = 'ACCOUNT_DELETE';
+
+    public const ACCOUNT_DELETE_CONFIRM = 'ACCOUNT_DELETE_CONFIRM';
+
+    public const ACCOUNT_ID = 'ACCOUNT_ID';
+
+    public const ACCOUNT_ORDER = 'ACCOUNT_ORDER';
+
+    public const ACCOUNT_ORDERS = 'ACCOUNT_ORDERS';
+
+    public const ACCOUNT_REGISTERED_USER = 'ACCOUNT_REGISTERED_USER';
+
+    public const ACCOUNT_REGISTERED_USER_APPROVE = 'ACCOUNT_REGISTERED_USER_APPROVE';
+
+    public const ACCOUNT_REGISTERED_USER_CREATE = 'ACCOUNT_REGISTERED_USER_CREATE';
 
     public const ACCOUNT_REGISTERED_USER_PAYMENT_CARDS = 'ACCOUNT_REGISTERED_USER_PAYMENT_CARDS';
 
@@ -67,6 +55,18 @@ abstract class RouteType extends Enum {
 
     public const ACCOUNT_REGISTERED_USER_SUBSCRIPTIONS = 'ACCOUNT_REGISTERED_USER_SUBSCRIPTIONS';
 
+    public const ACCOUNT_REGISTERED_USERS = 'ACCOUNT_REGISTERED_USERS';
+
+    public const ACCOUNT_REWARD_POINTS = 'ACCOUNT_REWARD_POINTS';
+
+    public const ACCOUNT_RMAS = 'ACCOUNT_RMAS';
+
+    public const ACCOUNT_VERIFY = 'ACCOUNT_VERIFY';
+
+    public const ACCOUNT_VOUCHER_CODES = 'ACCOUNT_VOUCHER_CODES';
+
+    public const ACCOUNT_WELCOME = 'ACCOUNT_WELCOME';
+
     public const AREA = ItemType::AREA;
 
     public const BASKET = 'BASKET';
@@ -74,8 +74,6 @@ abstract class RouteType extends Enum {
     public const BASKET_RECOVERY = 'BASKET_RECOVERY';
 
     public const BLOG = 'BLOG';
-
-    public const BLOG_HOME = 'BLOG_HOME';
 
     public const BLOG_ARCHIVE = 'BLOG_ARCHIVE';
 
@@ -86,6 +84,8 @@ abstract class RouteType extends Enum {
     public const BLOG_CATEGORY = ItemType::BLOG_CATEGORY;
 
     public const BLOG_CATEGORY_UNSUBSCRIBE = 'BLOG_CATEGORY_UNSUBSCRIBE';
+
+    public const BLOG_HOME = 'BLOG_HOME';
 
     public const BLOG_POST = ItemType::BLOG_POST;
 
@@ -103,7 +103,7 @@ abstract class RouteType extends Enum {
 
     public const BRANDS = 'BRANDS';
 
-    // @deprecated
+    /** @deprecated */
     public const CAMPAIGNS = 'CAMPAIGNS';
 
     public const CATEGORY = ItemType::CATEGORY;
@@ -132,14 +132,16 @@ abstract class RouteType extends Enum {
 
     public const CHECKOUT_PAYMENT_AND_SHIPPING = 'CHECKOUT_PAYMENT_AND_SHIPPING';
 
-    public const PRODUCT_COMPARISON = 'PRODUCT_COMPARISON';
-
     public const CONTACT = 'CONTACT';
 
     public const DISCOUNT = ItemType::DISCOUNT;
 
     /** @deprecated */
     public const DISCOUNTS = 'DISCOUNTS';
+
+    public const EXPRESS_CHECKOUT_CANCEL = 'EXPRESS_CHECKOUT_CANCEL';
+
+    public const EXPRESS_CHECKOUT_RETURN = 'EXPRESS_CHECKOUT_RETURN';
 
     public const FEATURED_PRODUCTS = 'FEATURED_PRODUCTS';
 
@@ -181,29 +183,31 @@ abstract class RouteType extends Enum {
 
     public const PRODUCT = ItemType::PRODUCT;
 
+    public const PRODUCT_COMPARISON = 'PRODUCT_COMPARISON';
+
     public const REGISTERED_USER = 'REGISTERED_USER';
 
     public const REGISTERED_USER_CHANGE_PASSWORD = 'REGISTERED_USER_CHANGE_PASSWORD';
 
-    public const REGISTERED_USER_SALES_AGENT  = 'REGISTERED_USER_SALES_AGENT';
-
-    public const REGISTERED_USER_SALES_AGENT_SALES  = 'REGISTERED_USER_SALES_AGENT_SALES';
-
-    public const REGISTERED_USER_SALES_AGENT_CUSTOMERS  = 'REGISTERED_USER_SALES_AGENT_CUSTOMERS';
-
-    public const REGISTERED_USER_LOST_PASSWORD  = 'REGISTERED_USER_LOST_PASSWORD';
+    public const REGISTERED_USER_LOST_PASSWORD = 'REGISTERED_USER_LOST_PASSWORD';
 
     public const REGISTERED_USER_OAUTH = 'REGISTERED_USER_OAUTH';
 
     public const REGISTERED_USER_OAUTH_CALLBACK = 'REGISTERED_USER_OAUTH_CALLBACK';
 
+    public const REGISTERED_USER_SALES_AGENT = 'REGISTERED_USER_SALES_AGENT';
+
+    public const REGISTERED_USER_SALES_AGENT_CUSTOMERS = 'REGISTERED_USER_SALES_AGENT_CUSTOMERS';
+
+    public const REGISTERED_USER_SALES_AGENT_SALES = 'REGISTERED_USER_SALES_AGENT_SALES';
+
     public const SEARCH = 'SEARCH';
 
     public const SITEMAP = 'SITEMAP';
 
-    public const SUBSCRIPTION_VERIFY = 'SUBSCRIPTION_VERIFY';
-
     public const SUBSCRIPTION_UNSUBSCRIBE = 'SUBSCRIPTION_UNSUBSCRIBE';
+
+    public const SUBSCRIPTION_VERIFY = 'SUBSCRIPTION_VERIFY';
 
     public const TERMS_OF_USE = 'TERMS_OF_USE';
 
@@ -296,14 +300,10 @@ abstract class RouteType extends Enum {
     /** deprecated use RouteType::ACCOUNT_VOUCHER_CODES */
     public const USER_VOUCHER_CODES = 'USER_VOUCHER_CODES';
 
-    public const EXPRESS_CHECKOUT_RETURN = 'EXPRESS_CHECKOUT_RETURN';
-
-    public const EXPRESS_CHECKOUT_CANCEL = 'EXPRESS_CHECKOUT_CANCEL';
+    /** @deprecated */
+    public const USER_WISHLIST = 'USER_WISHLIST';
 
     public const WEBHOOK = 'WEBHOOK';
 
     public const WEBHOOK_PATH = 'WEBHOOK_PATH';
-
-    /** @deprecated */
-    public const USER_WISHLIST = 'USER_WISHLIST';
 }

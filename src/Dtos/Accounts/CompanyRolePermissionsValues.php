@@ -6,14 +6,56 @@ use SDK\Core\Dtos\Element;
 use SDK\Core\Dtos\Traits\ElementTrait;
 
 /**
- * Class CompanyRolePermissionsValues
+ * This is the company role permissions values main class.
+ * The company role permissions values information will be stored in this class and will remain immutable (only get methods are available).
  *
- * This class represents the permissions values associated with a company's role.
- * It provides methods to manage and retrieve the permissions for different roles within a company.
- * 
+ * @see CompanyRolePermissionsValues::getCompanyRead()
+ * @see CompanyRolePermissionsValues::getCompanyUpdate()
+ * @see CompanyRolePermissionsValues::getCompanyDelete()
+ * @see CompanyRolePermissionsValues::getCompanyMasterUpdate()
+ * @see CompanyRolePermissionsValues::getCompanyEmployeesCreate()
+ * @see CompanyRolePermissionsValues::getCompanyEmployeesDelete()
+ * @see CompanyRolePermissionsValues::getCompanyEmployeesRead()
+ * @see CompanyRolePermissionsValues::getCompanyEmployeesUpdate()
+ * @see CompanyRolePermissionsValues::getCompanyEmployeesRoleUpdate()
+ * @see CompanyRolePermissionsValues::getThisAccountUpdate()
+ * @see CompanyRolePermissionsValues::getThisAccountDelete()
+ * @see CompanyRolePermissionsValues::getThisAccountRead()
+ * @see CompanyRolePermissionsValues::getThisAccountMasterUpdate()
+ * @see CompanyRolePermissionsValues::getThisAccountEmployeesCreate()
+ * @see CompanyRolePermissionsValues::getThisAccountEmployeesDelete()
+ * @see CompanyRolePermissionsValues::getThisAccountEmployeesRead()
+ * @see CompanyRolePermissionsValues::getThisAccountEmployeesUpdate()
+ * @see CompanyRolePermissionsValues::getThisAccountEmployeesRoleUpdate()
+ * @see CompanyRolePermissionsValues::getSubCompanyStructureCreate()
+ * @see CompanyRolePermissionsValues::getSubCompanyStructureRead()
+ * @see CompanyRolePermissionsValues::getSubCompanyStructureUpdate()
+ * @see CompanyRolePermissionsValues::getSubCompanyStructureDelete()
+ * @see CompanyRolePermissionsValues::getSubCompanyStructureMasterUpdate()
+ * @see CompanyRolePermissionsValues::getSubCompanyStructureEmployeesCreate()
+ * @see CompanyRolePermissionsValues::getSubCompanyStructureEmployeesDelete()
+ * @see CompanyRolePermissionsValues::getSubCompanyStructureEmployeesRead()
+ * @see CompanyRolePermissionsValues::getSubCompanyStructureEmployeesUpdate()
+ * @see CompanyRolePermissionsValues::getSubCompanyStructureEmployeesRoleUpdate()
+ * @see CompanyRolePermissionsValues::getRolesCreate()
+ * @see CompanyRolePermissionsValues::getRolesRead()
+ * @see CompanyRolePermissionsValues::getRolesUpdate()
+ * @see CompanyRolePermissionsValues::getRolesDelete()
+ * @see CompanyRolePermissionsValues::getOrdersReadOwn()
+ * @see CompanyRolePermissionsValues::getOrdersReadAllEmployees()
+ * @see CompanyRolePermissionsValues::getOrdersReadThisAccount()
+ * @see CompanyRolePermissionsValues::getOrdersReadSubAccounts()
+ * @see CompanyRolePermissionsValues::getOrdersCreateWithoutApproval()
+ * @see CompanyRolePermissionsValues::getOrdersApprovalDecisionThisAccount()
+ * @see CompanyRolePermissionsValues::getOrdersApprovalDecisionSubAccounts()
+ * @see CompanyRolePermissionsValues::getOrdersLimitAmountPerOrder()
+ * @see CompanyRolePermissionsValues::getOrdersLimitOrderQuantityPerEmployee()
+ *
  * @see Element
  * @see ElementTrait
- * 
+ * @see RangeByCurrency
+ * @see IntegerLimitInLastDays
+ *
  * @package SDK\Dtos\Accounts
  */
 class CompanyRolePermissionsValues extends Element {

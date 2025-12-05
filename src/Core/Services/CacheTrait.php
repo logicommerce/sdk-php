@@ -22,12 +22,15 @@ trait CacheTrait {
 
     protected function call(Request $request, string $apiUrl = null): array {
         $urlParams = $request->getUrlParams();
-        if ($request->getMethod() !== self::GET
+        if (
+            $request->getMethod() !== self::GET
             || $request->getPath() === Resource::USER_PLUGIN_PROPERTIES
+            || $request->getPath() === Resource::ACCOUNTS_PLUGIN_PROPERTIES
             || ($request->getPath() === Resource::PLUGINS
                 && (!array_key_exists('navigationHash', $urlParams)
                     || array_key_exists('navigationHash', $urlParams)
-                        && strlen($urlParams['navigationHash']) == 0))) {
+                    && strlen($urlParams['navigationHash']) == 0))
+        ) {
             return parent::call($request, $apiUrl);
         }
 

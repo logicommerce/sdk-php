@@ -6,12 +6,20 @@ use SDK\Core\Dtos\Factories\CompanyRoleHeaderFactory;
 use SDK\Core\Dtos\Traits\IdentifiableElementTrait;
 
 /**
- * Represents an account employee.
- * 
+ * This is the account employee main class.
+ * The account employee information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see AccountEmployee::getJob()
+ * @see AccountEmployee::getRole()
+ *
+ * @see Master
  * @see IdentifiableElementTrait
- * 
+ * @see CompanyRoleHeader
+ * @see CompanyRoleHeaderFactory
+ *
  * @package SDK\Dtos\Accounts
  */
+
 class AccountEmployee extends Master {
     use IdentifiableElementTrait;
 

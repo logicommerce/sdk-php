@@ -7,11 +7,19 @@ use SDK\Core\Enums\Traits\EnumResolverTrait;
 use SDK\Enums\CustomCompanyRoleTarget;
 
 /**
- * Represents a custom company role header.
- * 
+ * This is the custom company role header main class.
+ * The custom company role header information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see CustomCompanyRoleHeader::getName()
+ * @see CustomCompanyRoleHeader::getDescription()
+ * @see CustomCompanyRoleHeader::getTarget()
+ * @see CustomCompanyRoleHeader::getTargetDefault()
+ *
  * @see CompanyRoleHeader
- * @see CompanyRoleType
- * 
+ * @see EnumResolverTrait
+ * @see IntegrableElementTrait
+ * @see CustomCompanyRoleTarget
+ *
  * @package SDK\Dtos\Accounts
  */
 class CustomCompanyRoleHeader extends CompanyRoleHeader {

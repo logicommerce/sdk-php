@@ -8,16 +8,19 @@ use SDK\Enums\DocumentType;
 
 /**
  * This is the account return main class.
- * The account return information will be stored in that class and will remain immutable (only get methods are available)
- * 
+ * The account return information will be stored in this class and will remain immutable (only get methods are available).
+ *
  * @see AccountReturn::getCorrectiveInvoices()
  * @see AccountReturn::getDocumentType()
  * @see AccountReturn::getCreditNotes()
- * 
+ *
  * @see AccountDocument
- * @uses ElementTrait
- * @uses EnumResolverTrait
- * 
+ * @see ElementTrait
+ * @see EnumResolverTrait
+ * @see AccountCorrectiveInvoice
+ * @see AccountCreditNotes
+ * @see DocumentType
+ *
  * @package SDK\Dtos\Accounts
  */
 class AccountReturn extends AccountDocument {

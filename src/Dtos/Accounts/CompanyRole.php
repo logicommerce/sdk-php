@@ -9,13 +9,19 @@ use SDK\Core\Enums\Traits\EnumResolverTrait;
 use SDK\Enums\CompanyRoleType;
 
 /**
- * Represents a company role.
- * 
+ * This is the base company role main abstract class.
+ * The company role information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see CompanyRole::getPermissions()
+ * @see CompanyRole::getType()
+ *
+ * @see Element
+ * @see ElementTrait
  * @see IdentifiableElementTrait
- * @see CompanyRoleFactory
- * @see CompanyRoleType
+ * @see EnumResolverTrait
  * @see CompanyRolePermissionsValues
- * 
+ * @see CompanyRoleType
+ *
  * @package SDK\Dtos\Accounts
  */
 abstract class CompanyRole extends Element {

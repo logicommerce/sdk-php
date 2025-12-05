@@ -10,19 +10,31 @@ use SDK\Core\Enums\Traits\EnumResolverTrait;
 use SDK\Enums\AccountStatus;
 use SDK\Enums\AccountType;
 
-/** 
- * BaseCompanyStructureTreeNode class.
- * 
- * 
+/**
+ * This is the base company structure tree node main abstract class.
+ * The company structure tree node information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see BaseCompanyStructureTreeNode::getType()
+ * @see BaseCompanyStructureTreeNode::getImage()
+ * @see BaseCompanyStructureTreeNode::getMaster()
+ * @see BaseCompanyStructureTreeNode::getStatus()
+ * @see BaseCompanyStructureTreeNode::getInvoicingAddress()
+ * @see BaseCompanyStructureTreeNode::getAlias()
+ * @see BaseCompanyStructureTreeNode::getName()
+ * @see BaseCompanyStructureTreeNode::getHasSubCompanyDivisionsToLoad()
+ *
  * @see Element
  * @see ElementTrait
  * @see IdentifiableElementTrait
  * @see IntegrableElementTrait
  * @see EnumResolverTrait
- * 
+ * @see RegisteredUserHeader
+ * @see AccountAddressHeaderReduced
+ * @see AccountStatus
+ * @see AccountType
+ *
  * @package SDK\Dtos\Accounts
  */
-
 abstract class BaseCompanyStructureTreeNode extends Element {
     use IdentifiableElementTrait, IntegrableElementTrait, EnumResolverTrait;
 

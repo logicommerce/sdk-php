@@ -8,16 +8,18 @@ use SDK\Enums\DocumentType;
 
 /**
  * This is the account invoice main class.
- * The account invoice information will be stored in that class and will remain immutable (only get methods are available)
+ * The account invoice information will be stored in this class and will remain immutable (only get methods are available).
  *
  * @see AccountInvoice::getDocumentType()
- * 
+ *
  * @see AccountDocument
- * @uses ElementTrait
- * @uses EnumResolverTrait
+ * @see ElementTrait
+ * @see EnumResolverTrait
+ * @see DocumentType
  *
  * @package SDK\Dtos\Accounts
  */
+
 class AccountInvoice extends AccountDocument {
     use ElementTrait, EnumResolverTrait;
 

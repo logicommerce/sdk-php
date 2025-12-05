@@ -6,18 +6,19 @@ use SDK\Core\Dtos\Traits\ElementTrait;
 use SDK\Core\Dtos\Element;
 
 /**
- * This is the account return shipment tracking package main class.
- * The account return shipment tracking package information will be stored in that class and will remain immutable (only get methods are available)
+ * This is the account document shipping tracking package main class.
+ * The shipping tracking package information will be stored in this class and will remain immutable (only get methods are available).
  *
  * @see AccountDocumentShippingTrackingPackage::getTrackingURL()
  * @see AccountDocumentShippingTrackingPackage::getWeight()
  * @see AccountDocumentShippingTrackingPackage::getWeightUnits()
  *
  * @see Element
- * @uses ElementTrait
+ * @see ElementTrait
  *
  * @package SDK\Dtos\Accounts
  */
+
 class AccountDocumentShippingTrackingPackage extends Element {
     use ElementTrait;
 

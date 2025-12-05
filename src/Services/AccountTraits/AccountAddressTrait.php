@@ -22,22 +22,22 @@ use SDK\Services\Parameters\Groups\Account\GetAccountInvoicingAddressParametersG
 use SDK\Services\Parameters\Groups\Account\GetAccountShippingAddressParametersGroup;
 
 /**
- * This is the user address trait.
- * The methods that manage addresses requests to the API will be located here.
+ * This is the AccountAddressTrait trait.
+ * The purpose of this trait is to encapsulate the logic for handling account-related addresses such as invoicing and shipping addresses.
+ * It includes methods for retrieving, updating, creating, and deleting account addresses, as well as batch processing for address-related requests.
  *
  * @see AccountAddressTrait::getAccountsAddresses()
- * @see AccountAddressTrait::getInvoicingAddresses()
- * @see AccountAddressTrait::getShippingAddresses()
  * @see AccountAddressTrait::updateAccountsInvoicingAddresses()
  * @see AccountAddressTrait::updateAccountsShippingAddresses()
  * @see AccountAddressTrait::createAccountInvoicingAddresses()
  * @see AccountAddressTrait::createAccountShippingAddresses()
- *
- * @see AddressTrait::addGetAccountsAddresses()
- * @see AddressTrait::addGetInvoicingAddresses()
- * @see AddressTrait::addGetShippingAddresses()
- * @see BatchRequests
- *
+ * @see AccountAddressTrait::deleteAccountAddress()
+ * @see AccountAddressTrait::getInvoicingAddresses()
+ * @see AccountAddressTrait::getShippingAddresses()
+ * @see AccountAddressTrait::addGetAccountsAddresses()
+ * @see AccountAddressTrait::addGetInvoicingAddresses()
+ * @see AccountAddressTrait::addGetShippingAddresses()
+ * 
  * @package SDK\Services\AccountTraits
  */
 trait AccountAddressTrait {

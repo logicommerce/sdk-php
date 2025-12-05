@@ -46,13 +46,13 @@ final class BatchRequests {
      *
      * @return array
      */
-    public function addRequest(BatchRequest $request, bool $isMapping = false): void {
+    public function addRequest(BatchRequest $request, bool $isMapping = false, string $getClassPath = ''): void {
         $requestId = $request->getRequestId();
         $this->checkRequestId($requestId);
         $this->checkMethod($request->getMethod());
 
         $path = $request->getPath();
-        $class = Resource::getClass($path, $isMapping);
+        $class = Resource::getClass($getClassPath === '' ? $path : $getClassPath, $isMapping);
         $this->checkClass($class, $path);
 
         $request = $request->toArray();

@@ -8,17 +8,18 @@ use SDK\Enums\DocumentType;
 
 /**
  * This is the account corrective invoice main class.
- * The account corrective invoice information will be stored in that class and will remain immutable (only get methods are available)
- * 
- * @see AccountCorrectiveInvoice::getDocumentType()
- * 
- * @see AccountDocument
- * @uses ElementTrait
- * @uses EnumResolverTrait
+ * The corrective invoice information will be stored in this class and will remain immutable (only get methods are available).
  *
- * 
+ * @see AccountCorrectiveInvoice::getDocumentType()
+ *
+ * @see AccountDocument
+ * @see ElementTrait
+ * @see EnumResolverTrait
+ * @see DocumentType
+ *
  * @package SDK\Dtos\Accounts
  */
+
 class AccountCorrectiveInvoice extends AccountDocument {
     use ElementTrait, EnumResolverTrait;
 

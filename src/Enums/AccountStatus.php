@@ -4,6 +4,11 @@ namespace SDK\Enums;
 
 use SDK\Core\Enums\Enum;
 
+/**
+ * This is the account status enumerate.
+ *
+ * @package SDK\Enums
+ */
 abstract class AccountStatus extends Enum {
     public const ENABLED = 'ENABLED';
 

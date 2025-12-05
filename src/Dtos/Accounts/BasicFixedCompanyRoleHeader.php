@@ -6,11 +6,15 @@ use SDK\Core\Enums\Traits\EnumResolverTrait;
 use SDK\Enums\BasicFixedCompanyRoleTarget;
 
 /**
- * Represents a basic fixed company role header.
- * 
+ * This is the basic fixed company role header main class.
+ * The basic fixed company role header information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see BasicFixedCompanyRoleHeader::getTarget()
+ *
  * @see CompanyRoleHeader
- * @see CompanyRoleType
- * 
+ * @see EnumResolverTrait
+ * @see BasicFixedCompanyRoleTarget
+ *
  * @package SDK\Dtos\Accounts
  */
 class BasicFixedCompanyRoleHeader extends CompanyRoleHeader {

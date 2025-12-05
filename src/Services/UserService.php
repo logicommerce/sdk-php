@@ -30,7 +30,6 @@ use SDK\Dtos\User\UserOauthUrl;
 use SDK\Dtos\User\UserOrder;
 use SDK\Dtos\User\UserRMA;
 use SDK\Enums\AccountKey;
-use SDK\Enums\CustomTagType;
 use SDK\Enums\RelatedItemsType;
 use SDK\Services\Parameters\Groups\Account\DeleteAccountParametersGroup;
 use SDK\Services\Parameters\Groups\CustomTagsParametersGroup;
@@ -341,7 +340,7 @@ class UserService extends Service {
      * @return ElementCollection|NULL
      */
     public function getRMAs(): ?ElementCollection {
-        return $this->getElement(UserRMA::class, Resource::USER_RMAS);
+        return $this->getElement(UserRMA::class, Resource::ACCOUNTS_RMAS);
     }
 
     /**
@@ -553,7 +552,7 @@ class UserService extends Service {
      * @return ElementCollection|NULL
      */
     public function getRewardPoints(RewardPointsParametersGroup $params = null): ?ElementCollection {
-        return $this->getElements(RewardPointsBalance::class, Resource::USER_REWARD_POINTS, $params);
+        return $this->getElements(RewardPointsBalance::class, Resource::ACCOUNTS_REWARD_POINTS, $params);
     }
 
     /**
@@ -565,7 +564,7 @@ class UserService extends Service {
      * @return ElementCollection|NULL
      */
     public function getVouchers(UserVouchersParametersGroup $params = null): ?ElementCollection {
-        return $this->getElements(Voucher::class, Resource::USER_VOUCHERS, $params);
+        return $this->getElements(Voucher::class, Resource::ACCOUNTS_VOUCHERS, $params);
     }
 
     /**
@@ -683,7 +682,7 @@ class UserService extends Service {
      */
     public function addGetRMAs(BatchRequests $batchRequests, string $batchName): void {
         $batchRequests->addRequest(
-            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::USER_RMAS)->build()
+            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_RMAS)->build()
         );
     }
 
@@ -717,7 +716,7 @@ class UserService extends Service {
     }
 
     private function getRelatedItemsResource(string $type): string {
-        $resource = Resource::USER_RELATED;
+        $resource = Resource::ACCOUNTS_RELATED;
 
         if (strlen(trim($type)) !== 0) {
             if (!RelatedItemsType::isValid($type)) {
@@ -726,7 +725,7 @@ class UserService extends Service {
                     InvalidParameterException::INVALID_PARAMETER_VALUE
                 );
             }
-            $resource = Resource::USER_RELATED_TYPE;
+            $resource = Resource::ACCOUNTS_RELATED_TYPE;
         }
         return $resource;
     }
@@ -783,7 +782,7 @@ class UserService extends Service {
     public function addGetRewardPoints(BatchRequests $batchRequests, string $batchName, RewardPointsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
-                ->requestId($batchName)->path(Resource::USER_REWARD_POINTS)->urlParams($params)
+                ->requestId($batchName)->path(Resource::ACCOUNTS_REWARD_POINTS)->urlParams($params)
                 ->build()
         );
     }
@@ -802,7 +801,7 @@ class UserService extends Service {
     public function addGetVouchers(BatchRequests $batchRequests, string $batchName, UserVouchersParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
-                ->requestId($batchName)->path(Resource::USER_VOUCHERS)->urlParams($params)
+                ->requestId($batchName)->path(Resource::ACCOUNTS_VOUCHERS)->urlParams($params)
                 ->build()
         );
     }

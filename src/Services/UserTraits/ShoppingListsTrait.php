@@ -41,7 +41,7 @@ trait ShoppingListsTrait {
      * @return ElementCollection|NULL
      */
     public function getShoppingLists(ShoppingListsParametersGroup $params = null): ?ElementCollection {
-        return $this->getElements(ShoppingList::class, Resource::USER_SHOPPING_LISTS, $params);
+        return $this->getElements(ShoppingList::class, Resource::ACCOUNTS_SHOPPING_LISTS, $params);
     }
 
     /**
@@ -53,7 +53,7 @@ trait ShoppingListsTrait {
      */
     public function createShoppingList(AddShoppingListParametersGroup $data): ?ShoppingList {
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path(Resource::USER_SHOPPING_LISTS)->method(self::POST)->body($data)->build()),
+            $this->call((new RequestBuilder())->path(Resource::ACCOUNTS_SHOPPING_LISTS)->method(self::POST)->body($data)->build()),
             ShoppingList::class
         );
     }
@@ -67,7 +67,7 @@ trait ShoppingListsTrait {
      */
     public function updateShoppingList(int $id, AddShoppingListParametersGroup $data): ?ShoppingList {
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path(Resource::USER_SHOPPING_LISTS_ID)->method(self::PUT)->pathParams(['id' => $id])->body($data)->build()),
+            $this->call((new RequestBuilder())->path(Resource::SHOPPING_LISTS_ID)->method(self::PUT)->pathParams(['id' => $id])->body($data)->build()),
             ShoppingList::class
         );
     }
@@ -81,7 +81,7 @@ trait ShoppingListsTrait {
      */
     public function deleteShoppingList(int $id): ?Status {
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path(Resource::USER_SHOPPING_LISTS_ID)->method(self::DELETE)->pathParams(['id' => $id])->build()),
+            $this->call((new RequestBuilder())->path(Resource::SHOPPING_LISTS_ID)->method(self::DELETE)->pathParams(['id' => $id])->build()),
             Status::class
         );
     }
@@ -92,7 +92,7 @@ trait ShoppingListsTrait {
      * @return ElementCollection|NULL
      */
     public function getShoppingListRows(int $id, ShoppingListRowsParametersGroup $params = null): ?ElementCollection {
-        return $this->getElements(ShoppingListRow::class,  $this->replaceWildcards(Resource::USER_SHOPPING_LISTS_ID_ROWS, ['id' => $id]), $params);
+        return $this->getElements(ShoppingListRow::class,  $this->replaceWildcards(Resource::SHOPPING_LISTS_ID_ROWS, ['id' => $id]), $params);
     }
 
     /**
@@ -105,7 +105,7 @@ trait ShoppingListsTrait {
      */
     public function createShoppingListRow(int $id, AddShoppingListRowsParametersGroup $data): ?ElementCollection {
         return $this->getResponse(
-            $this->call((new RequestBuilder())->path($this->replaceWildcards(Resource::USER_SHOPPING_LISTS_ID_ROWS, ['id' => $id]))->method(self::POST)->body($data)->build()),
+            $this->call((new RequestBuilder())->path($this->replaceWildcards(Resource::SHOPPING_LISTS_ID_ROWS, ['id' => $id]))->method(self::POST)->body($data)->build()),
             ShoppingListRow::class
         );
     }
@@ -120,7 +120,7 @@ trait ShoppingListsTrait {
      */
     public function updateShoppingListRow(int $id, AddShoppingListRowParametersGroup $data): ?ShoppingListRow {
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path($this->replaceWildcards(Resource::USER_SHOPPING_LISTS_ROWS_ID, ['id' => $id]))->method(self::PUT)->body($data)->build()),
+            $this->call((new RequestBuilder())->path($this->replaceWildcards(Resource::SHOPPING_LISTS_ROWS_ID, ['id' => $id]))->method(self::PUT)->body($data)->build()),
             ShoppingListRow::class
         );
     }
@@ -132,7 +132,7 @@ trait ShoppingListsTrait {
      */
     public function deleteShoppingListRow(int $id): ?Status {
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path($this->replaceWildcards(Resource::USER_SHOPPING_LISTS_ROWS_ID, ['id' => $id]))->method(self::DELETE)->build()),
+            $this->call((new RequestBuilder())->path($this->replaceWildcards(Resource::SHOPPING_LISTS_ROWS_ID, ['id' => $id]))->method(self::DELETE)->build()),
             Status::class
         );
     }
@@ -146,7 +146,7 @@ trait ShoppingListsTrait {
      */
     public function deleteShoppingListRows(int $id, DeleteShoppingListRowsParametersGroup $deleteShoppingListRowsParametersGroup): ?IncidencesDeleteItem {
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path($this->replaceWildcards(Resource::USER_SHOPPING_LISTS_ID_ROWS_DELETE, ['id' => $id]))->method(self::POST)->body($deleteShoppingListRowsParametersGroup)->build()),
+            $this->call((new RequestBuilder())->path($this->replaceWildcards(Resource::SHOPPING_LISTS_ID_ROWS_DELETE, ['id' => $id]))->method(self::POST)->body($deleteShoppingListRowsParametersGroup)->build()),
             IncidencesDeleteItem::class
         );
     }
@@ -162,7 +162,7 @@ trait ShoppingListsTrait {
      */
     public function addGetShoppingLists(BatchRequests $batchRequests, string $batchName, ShoppingListsParametersGroup $params = null): void {
         $batchRequests->addRequest(
-            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::USER_SHOPPING_LISTS)->urlParams($params)->build()
+            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_SHOPPING_LISTS)->urlParams($params)->build()
         );
     }
 
@@ -173,7 +173,7 @@ trait ShoppingListsTrait {
      */
     public function addGetShoppingListRows(BatchRequests $batchRequests, string $batchName, int $id, ShoppingListRowsParametersGroup $params = null): void {
         $batchRequests->addRequest(
-            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::USER_SHOPPING_LISTS_ID_ROWS)->pathParams(['id' => $id])->urlParams($params)->build()
+            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::SHOPPING_LISTS_ID_ROWS)->pathParams(['id' => $id])->urlParams($params)->build()
         );
     }
 }

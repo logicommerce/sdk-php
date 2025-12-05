@@ -98,8 +98,10 @@ class PluginService extends Service {
      */
     public function getPlugins(PluginConnectorTypeParametersGroup|string $params = PluginConnectorType::NONE): ?ElementCollection {
         $plugins = null;
-        if ($params === PluginConnectorType::NONE
-            || ($params instanceof PluginConnectorTypeParametersGroup && $params->getType() === PluginConnectorType::NONE)) {
+        if (
+            $params === PluginConnectorType::NONE
+            || ($params instanceof PluginConnectorTypeParametersGroup && $params->getType() === PluginConnectorType::NONE)
+        ) {
             $plugins = Application::getInstance()->getEcommercePlugins();
         }
         if (is_null($plugins)) {
@@ -121,7 +123,7 @@ class PluginService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getPluginsByModule(PluginModuleParametersGroup $params): ?Array {
+    public function getPluginsByModule(PluginModuleParametersGroup $params): ?array {
         $plugins = Application::getInstance()->getEcommercePlugins();
         if (is_null($plugins)) {
             $plugins = $this->getElements(Plugin::class, Resource::PLUGINS, $params);
@@ -166,7 +168,7 @@ class PluginService extends Service {
      * @return ElementCollection|NULL
      */
     public function getUserPluginProperties(string $type): ?ElementCollection {
-        return $this->getElements(UserPlugin::class, Resource::USER_PLUGIN_PROPERTIES, $this->getPluginsTypeParams($type));
+        return $this->getElements(UserPlugin::class, Resource::ACCOUNTS_PLUGIN_PROPERTIES, $this->getPluginsTypeParams($type));
     }
 
     /**
@@ -177,7 +179,7 @@ class PluginService extends Service {
      * @return ElementCollection|NULL
      */
     public function getUserPluginPaymentTokens(int $id): ?ElementCollection {
-        return $this->getElements(UserPluginPaymentTokenFactory::class, $this->replaceWildcards(Resource::USER_PLUGIN_ID_PAYMENT_TOKENS, ['id' => $id]));
+        return $this->getElements(UserPluginPaymentTokenFactory::class, $this->replaceWildcards(Resource::ACCOUNTS_PLUGIN_ID_PAYMENT_TOKENS, ['id' => $id]));
     }
 
     /**
@@ -190,7 +192,7 @@ class PluginService extends Service {
     public function deleteUserPluginProperties(int $id): ?Status {
         return $this->prepareElement(
             $this->call(
-                (new RequestBuilder())->path(Resource::USER_PLUGIN_PROPERTIES_ID)->method(self::DELETE)->pathParams(['id' => $id])->build()
+                (new RequestBuilder())->path(Resource::ACCOUNTS_PLUGIN_PROPERTIES_ID)->method(self::DELETE)->pathParams(['id' => $id])->build()
             ),
             Status::class
         );
@@ -207,7 +209,7 @@ class PluginService extends Service {
     public function deleteUserPluginPaymentTokens(int $id, string $token): ?Status {
         return $this->prepareElement(
             $this->call(
-                (new RequestBuilder())->path(Resource::USER_PLUGIN_ID_PAYMENT_DELETE_TOKEN)->method(self::DELETE)->pathParams(['id' => $id, 'token' => urlencode($token)])->build()
+                (new RequestBuilder())->path(Resource::ACCOUNTS_PLUGIN_ID_PAYMENT_DELETE_TOKEN)->method(self::DELETE)->pathParams(['id' => $id, 'token' => urlencode($token)])->build()
             ),
             Status::class
         );
@@ -410,7 +412,7 @@ class PluginService extends Service {
     public function addGetUserPluginProperties(BatchRequests $batchRequests, string $batchName, string $type): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
-                ->requestId($batchName)->path(Resource::USER_PLUGIN_PROPERTIES)->urlParams($this->getPluginsTypeParams($type))
+                ->requestId($batchName)->path(Resource::ACCOUNTS_PLUGIN_PROPERTIES)->urlParams($this->getPluginsTypeParams($type))
                 ->build()
         );
     }
@@ -428,7 +430,7 @@ class PluginService extends Service {
     public function addGetUserPluginPaymentTokens(BatchRequests $batchRequests, string $batchName, int $id): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
-                ->requestId($batchName)->path(Resource::USER_PLUGIN_ID_PAYMENT_TOKENS)->pathParams(['id' => $id])
+                ->requestId($batchName)->path(Resource::ACCOUNTS_PLUGIN_ID_PAYMENT_TOKENS)->pathParams(['id' => $id])
                 ->build()
 
         );

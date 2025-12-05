@@ -357,8 +357,10 @@ class SettingsService extends Service {
      */
     public function addGetBasketStockLockingSettings(BatchRequests $batchRequests, string $batchName): void {
         $batchRequests->addRequest((new BatchRequestBuilder())
-                ->requestId($batchName)->path(Resource::SETTINGS_BASKET_STOCK_LOCKING)
-                ->build()
+                ->requestId($batchName)->path(Resource::SETTINGS)
+                ->build(),
+            false,
+            Resource::SETTINGS_BASKET_STOCK_LOCKING
         );
     }
 

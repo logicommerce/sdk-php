@@ -35,6 +35,7 @@ use SDK\Services\Parameters\Groups\Product\CommentsParametersGroup;
 use SDK\Services\Parameters\Groups\Product\GetBundleDefinitionsGroupingsCombinationDataParametersGroup;
 use SDK\Services\Parameters\Groups\Product\ProductDiscountsParametersGroup;
 use SDK\Services\Parameters\Groups\Product\ProductParametersGroup;
+use SDK\Services\Parameters\Groups\Product\ProductRewardPointsParametersGroup;
 use SDK\Services\Parameters\Groups\Product\ProductsParametersGroup;
 use SDK\Services\Parameters\Groups\Product\ProductsDiscountsParametersGroup;
 use SDK\Services\Parameters\Groups\Product\QueryParametersGroup;
@@ -130,8 +131,8 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getProductRewardPoints(int $id = 0): ?ElementCollection {
-        return $this->getElements(ProductRewardPoints::class, $this->replaceWildcards(Resource::PRODUCTS_ID_REWARD_POINTS, ['id' => $id]));
+    public function getProductRewardPoints(int $id = 0, ProductRewardPointsParametersGroup $params = null): ?ElementCollection {
+        return $this->getElements(ProductRewardPoints::class, $this->replaceWildcards(Resource::PRODUCTS_ID_REWARD_POINTS, ['id' => $id]), $params);
     }
 
     /**
@@ -446,12 +447,13 @@ class ProductService extends Service {
      * @param string $batchName
      *            the name that will identify the request on the batch return.
      * @param int $id
+     * @param ProductRewardPointsParametersGroup $params
      *
      * @return void
      */
-    public function addGetProductRewardPoints(BatchRequests $batchRequests, string $batchName, int $id): void {
+    public function addGetProductRewardPoints(BatchRequests $batchRequests, string $batchName, int $id, ProductRewardPointsParametersGroup $params = null): void {
         $batchRequests->addRequest(
-            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::PRODUCTS_ID_REWARD_POINTS)->pathParams(['id' => $id])->build()
+            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::PRODUCTS_ID_REWARD_POINTS)->pathParams(['id' => $id])->urlParams($params)->build()
         );
     }
 

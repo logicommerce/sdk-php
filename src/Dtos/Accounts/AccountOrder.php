@@ -11,24 +11,31 @@ use SDK\Dtos\Accounts\AccountRMA;
 use SDK\Enums\OrderStatus;
 
 /**
- * Account class.
- * 
- * @see Account::getOwnerAccountId()
- * @see Account::getRegisteredUserCreator()
- * @see Account::getShipments()
- * @see Account::getStatus()
- * @see Account::getSubstatus()
- * @see Account::getAllowReturn()
- * @see Account::getTotal()
- * @see Account::getInvoices()
- * @see Account::getRmas()
- * 
+ * This is the account order main class.
+ * The account order information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see AccountOrder::getOwnerAccountId()
+ * @see AccountOrder::getRegisteredUserCreator()
+ * @see AccountOrder::getShipments()
+ * @see AccountOrder::getStatus()
+ * @see AccountOrder::getSubstatus()
+ * @see AccountOrder::getAllowReturn()
+ * @see AccountOrder::getTotal()
+ * @see AccountOrder::getInvoices()
+ * @see AccountOrder::getRmas()
+ *
  * @see AccountDocument
- * @uses EnumResolverTrait
- * @uses ElementTrait
- * 
+ * @see ElementTrait
+ * @see EnumResolverTrait
+ * @see DocumentRegisteredUser
+ * @see AccountDocumentShipment
+ * @see AccountInvoice
+ * @see AccountRMA
+ * @see OrderStatus
+ *
  * @package SDK\Dtos\Accounts
  */
+
 class AccountOrder extends AccountDocument {
     use EnumResolverTrait;
 

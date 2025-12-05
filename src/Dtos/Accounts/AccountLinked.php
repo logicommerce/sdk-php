@@ -12,14 +12,32 @@ use SDK\Enums\CustomerType;
 use SDK\Enums\Gender;
 
 /**
- * Represents an AccountLinked entity, used as a customer in a Basket.
- * 
+ * This is the base account linked main abstract class.
+ * The account linked information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see AccountLinked::isAccountLinked()
+ * @see AccountLinked::getType()
+ * @see AccountLinked::getEmail()
+ * @see AccountLinked::getGender()
+ * @see AccountLinked::getBirthday()
+ * @see AccountLinked::getInvoicingAddress()
+ * @see AccountLinked::isUseShippingAddress()
+ * @see AccountLinked::getShippingAddress()
+ * @see AccountLinked::getSelectedInvoicingAddressId()
+ * @see AccountLinked::getSelectedShippingAddressId()
+ *
  * @see Element
  * @see ElementTrait
+ * @see CustomTagValuesTrait
+ * @see EnumResolverTrait
  * @see InvoicingAddress
  * @see ShippingAddress
- * 
+ * @see CustomerType
+ * @see Gender
+ *
+ * @package SDK\Dtos\Accounts
  */
+
 abstract class AccountLinked extends Element {
     use ElementTrait, CustomTagValuesTrait, EnumResolverTrait;
 

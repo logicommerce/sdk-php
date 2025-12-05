@@ -7,21 +7,23 @@ use SDK\Core\Dtos\Traits\ElementTrait;
 use SDK\Core\Dtos\Traits\IdentifiableElementTrait;
 use SDK\Core\Dtos\Traits\IntegrableElementTrait;
 
-/** 
- * AccountGroup class.
- * 
+/**
+ * This is the account group main class.
+ * The account group information will be stored in this class and will remain immutable (only get methods are available).
+ *
  * @see AccountGroup::getName()
  * @see AccountGroup::getDescription()
  * @see AccountGroup::isDefaultOne()
  * @see AccountGroup::isSystemGroup()
- * 
+ *
  * @see Element
  * @see ElementTrait
  * @see IdentifiableElementTrait
  * @see IntegrableElementTrait
- * 
+ *
  * @package SDK\Dtos\Accounts
  */
+
 class AccountGroup extends Element {
     use IdentifiableElementTrait, IntegrableElementTrait;
 

@@ -7,15 +7,16 @@ use SDK\Core\Dtos\Traits\ElementTrait;
 use SDK\Core\Dtos\Traits\IdentifiableElementTrait;
 
 /**
- * This is the account address header main class.
- * The account address header information will be stored in that class and will remain immutable (only get methods are available)
+ * This is the account address header reduced main class.
+ * The reduced account address header information will be stored in this class and will remain immutable (only get methods are available).
  *
  * @see AccountAddressHeaderReduced::getFirstName()
  * @see AccountAddressHeaderReduced::getLastName()
  * @see AccountAddressHeaderReduced::getCompany()
  *
  * @see Element
- * @uses IdentifiableElementTrait
+ * @see ElementTrait
+ * @see IdentifiableElementTrait
  *
  * @package SDK\Dtos\Accounts
  */

@@ -5,17 +5,18 @@ namespace SDK\Dtos\Accounts;
 use SDK\Dtos\Common\BasicAddress;
 
 /**
- * Purchase address class.
- * 
- * @see BasicAddress
+ * This is the base purchase address main abstract class.
+ * The purchase address information will be stored in this class and will remain immutable (only get methods are available).
+ *
  * @see PurchaseAddress::getAlias()
  * @see PurchaseAddress::getFirstName()
  * @see PurchaseAddress::getLastName()
  * @see PurchaseAddress::getCompany()
  * @see PurchaseAddress::getVat()
  * @see PurchaseAddress::getNif()
- * @see PurchaseAddress::getType()
- * 
+ *
+ * @see BasicAddress
+ *
  * @package SDK\Dtos\Accounts
  */
 abstract class PurchaseAddress extends BasicAddress {

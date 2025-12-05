@@ -8,12 +8,20 @@ use SDK\Core\Dtos\Traits\SimpleAccountRegisteredUserTrait;
 use SDK\Enums\MasterType;
 
 /**
- * master class.
- * 
+ * This is the master value main class.
+ * The master value information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see MasterVal::getType()
+ * @see MasterVal::getAccount()
+ * @see MasterVal::getRegisteredUser()
+ *
  * @see Element
  * @see ElementTrait
  * @see SimpleAccountRegisteredUserTrait
- * 
+ * @see AccountHeaderExtended
+ * @see RegisteredUserSimpleProfile
+ * @see MasterType
+ *
  * @package SDK\Dtos\Accounts
  */
 class MasterVal extends Element {

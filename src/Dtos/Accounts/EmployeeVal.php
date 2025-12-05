@@ -4,14 +4,19 @@ namespace SDK\Dtos\Accounts;
 
 use SDK\Core\Dtos\Factories\CompanyRoleHeaderFactory;
 use SDK\Core\Dtos\Traits\IdentifiableElementTrait;
-use SDK\Enums\MasterType;
 
 /**
- * Represents an account employee.
- * 
- * @see CompanyRole
+ * This is the employee value main class.
+ * The employee value information will be stored in this class and will remain immutable (only get methods are available).
+ *
+ * @see EmployeeVal::getJob()
+ * @see EmployeeVal::getRole()
+ *
+ * @see MasterVal
  * @see IdentifiableElementTrait
- * 
+ * @see CompanyRoleHeader
+ * @see CompanyRoleHeaderFactory
+ *
  * @package SDK\Dtos\Accounts
  */
 class EmployeeVal extends MasterVal {

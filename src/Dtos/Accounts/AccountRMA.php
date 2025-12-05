@@ -8,18 +8,22 @@ use SDK\Enums\RMAStatus;
 use SDK\Enums\DocumentType;
 
 /**
- * This is the account returns request main class.
- * The account returns request information will be stored in that class and will remain immutable (only get methods are available)
+ * This is the account RMA main class.
+ * The account RMA information will be stored in this class and will remain immutable (only get methods are available).
  *
  * @see AccountRMA::getShipments()
  * @see AccountRMA::getStatus()
  * @see AccountRMA::getSubstatus()
  * @see AccountRMA::getDocumentType()
  * @see AccountRMA::getReturns()
- * 
+ *
  * @see AccountDocument
- * @uses ElementTrait
- * @uses EnumResolverTrait
+ * @see ElementTrait
+ * @see EnumResolverTrait
+ * @see AccountDocumentShipment
+ * @see AccountReturn
+ * @see RMAStatus
+ * @see DocumentType
  *
  * @package SDK\Dtos\Accounts
  */

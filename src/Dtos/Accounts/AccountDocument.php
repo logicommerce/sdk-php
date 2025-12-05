@@ -8,19 +8,21 @@ use SDK\Core\Dtos\Traits\IdentifiableElementTrait;
 use SDK\Core\Dtos\Traits\IntegrableElementTrait;
 
 /**
- * This is the account base document main class.
- * The account base document information will be stored in that class and will remain immutable (only get methods are available)
+ * This is the base account document main abstract class.
+ * The account document information will be stored in this class and will remain immutable (only get methods are available).
  *
  * @see AccountDocument::getDocumentNumber()
  * @see AccountDocument::getDate()
  * @see AccountDocument::getDeliveryDate()
  *
  * @see Element
- * @uses IdentifiableElementTrait
- * @uses IntegrableElementTrait
+ * @see Date
+ * @see IdentifiableElementTrait
+ * @see IntegrableElementTrait
  *
  * @package SDK\Dtos\Accounts
  */
+
 abstract class AccountDocument extends Element {
     use IdentifiableElementTrait, IntegrableElementTrait;
 

@@ -64,6 +64,7 @@ use SDK\Core\Dtos\Factories\PageFactory;
 use SDK\Core\Dtos\Factories\PaymentSystemFactory;
 use SDK\Core\Dtos\Factories\PluginPropertiesFactory;
 use SDK\Core\Dtos\Factories\SalesAgentCustomerFactory;
+use SDK\Core\Dtos\Factories\SettingsBasketStockLockingFactory;
 use SDK\Core\Dtos\Factories\UserPluginPaymentTokenFactory;
 use SDK\Dtos\Accounts\AccountHeader;
 use SDK\Dtos\Accounts\AccountInvoicingAddress;
@@ -93,7 +94,6 @@ use SDK\Dtos\PayResponse;
 use SDK\Dtos\PostalCode;
 use SDK\Dtos\QueryMotive;
 use SDK\Dtos\SessionAggregateData;
-use SDK\Dtos\Settings\BasketStockLockingSettings;
 use SDK\Dtos\Settings\BlogSettings;
 use SDK\Dtos\Settings\CatalogSettings;
 use SDK\Dtos\Settings\CountryLink;
@@ -170,6 +170,8 @@ abstract class Resource extends Enum {
 
     public const ACCOUNTS = '/accounts';
 
+    public const ACCOUNTS_REGISTERED_USERS_ME = self::ACCOUNTS . '/used/registeredUsers/me';
+
     public const ACCOUNTS_ADDRESSES_ID = self::ACCOUNTS . '/addresses' . self::ID_WILDCARD;
 
     public const ACCOUNTS_COMPANY_ROLE = self::ACCOUNTS . '/company/roles' . self::ID_WILDCARD;
@@ -180,15 +182,23 @@ abstract class Resource extends Enum {
 
     public const ACCOUNTS_COMPANY_DIVISIONS = self::ACCOUNTS . self::ID_WILDCARD . '/companyDivisions';
 
-    public const ACCOUNTS_ORDERS = self::ACCOUNTS . self::ID_USED_WILDCARD . '/orders';
-
-    public const ACCOUNTS_ORDERS_APPROVAL_DECISION = self::ORDERS_ID . '/approvalDecision';
-
     public const ACCOUNTS_DELETE = self::ACCOUNTS . self::ID_USED_WILDCARD . '/delete';
 
     public const ACCOUNTS_INVOICING_ADDRESSES = self::ACCOUNTS . self::ID_USED_WILDCARD . '/invoicingAddresses';
 
     public const ACCOUNTS_INVOICING_ADDRESSES_UPDATE = self::ACCOUNTS . '/invoicingAddresses' . self::ID_WILDCARD;
+
+    public const ACCOUNTS_ORDERS = self::ACCOUNTS . self::ID_USED_WILDCARD . '/orders';
+
+    public const ACCOUNTS_ORDERS_APPROVAL_DECISION = self::ORDERS_ID . '/approvalDecision';
+
+    public const ACCOUNTS_PLUGIN_PROPERTIES = self::ACCOUNTS_REGISTERED_USERS_ME . self::PLUGINS . self::PROPERTIES;
+
+    public const ACCOUNTS_PLUGIN_PROPERTIES_ID = self::ACCOUNTS_PLUGIN_PROPERTIES . self::ID_WILDCARD;
+
+    public const ACCOUNTS_PLUGIN_ID_PAYMENT_TOKENS = self::ACCOUNTS_REGISTERED_USERS_ME . self::PLUGINS_ID . '/paymentTokens';
+
+    public const ACCOUNTS_PLUGIN_ID_PAYMENT_DELETE_TOKEN = self::ACCOUNTS_REGISTERED_USERS_ME . self::PLUGINS_ID . '/paymentTokens' . self::TOKEN_WILDCARD;
 
     public const ACCOUNTS_REGISTERED_USERS = self::ACCOUNTS . self::ID_USED_WILDCARD . '/registeredUsers';
 
@@ -196,11 +206,11 @@ abstract class Resource extends Enum {
 
     public const ACCOUNTS_REGISTERED_USERS_SEARCH = self::ACCOUNTS . self::ID_USED_WILDCARD . '/registeredUsers/search';
 
-    public const ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS = self::ACCOUNTS . '/used/registeredUsers/me/stockAlerts';
+    public const ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS = self::ACCOUNTS_REGISTERED_USERS_ME . '/stockAlerts';
 
     public const ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS_ID = self::ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS . self::ID_WILDCARD;
 
-    public const ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS = self::ACCOUNTS . '/used/registeredUsers/me/subscriptions';
+    public const ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS = self::ACCOUNTS_REGISTERED_USERS_ME . '/subscriptions';
 
     public const ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS_VERIFY_TOKEN = self::ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS . '/verify' . self::TOKEN_WILDCARD;
 
@@ -212,9 +222,27 @@ abstract class Resource extends Enum {
 
     public const ACCOUNTS_REGISTERED_USERS_WITH_REGISTERED_ID_PENDING_APPROVAL = self::ACCOUNTS . self::ID_WILDCARD . '/registeredUsers' . self::REGISTERED_USER_ID_WILDCARD . '/pendingApproval';
 
+    public const ACCOUNTS_RELATED = self::ACCOUNTS_REGISTERED_USERS_ME . self::RELATED;
+
+    public const ACCOUNTS_RELATED_TYPE = self::ACCOUNTS_RELATED . self::TYPE_WILDCARD;
+
+    public const ACCOUNTS_REWARD_POINTS = self::ACCOUNTS . '/used/rewardPoints';
+
+    public const ACCOUNTS_RMAS = self::ACCOUNTS . '/used/rmas';
+
+    public const ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS = self::ACCOUNTS_REGISTERED_USERS_ME . '/saveForLaterList/rows';
+
+    public const ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS_ID = self::ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS . self::ID_WILDCARD;
+
+    public const ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS_ID_TRANSFER_TO_BASKET = self::ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS_ID . '/transferToBasket';
+
     public const ACCOUNTS_SHIPPING_ADDRESSES = self::ACCOUNTS . self::ID_USED_WILDCARD . '/shippingAddresses';
 
     public const ACCOUNTS_SHIPPING_ADDRESSES_UPDATE = self::ACCOUNTS . '/shippingAddresses' . self::ID_WILDCARD;
+
+    public const ACCOUNTS_SHOPPING_LISTS = self::ACCOUNTS_REGISTERED_USERS_ME . '/shoppingLists';
+
+    public const ACCOUNTS_VOUCHERS = self::ACCOUNTS . '/used/vouchers';
 
     public const ACCOUNTS_WITH_ID = self::ACCOUNTS . self::ID_USED_WILDCARD;
 
@@ -235,6 +263,14 @@ abstract class Resource extends Enum {
     public const ACCOUNT_SALES_AGENT_LOGOUT = self::ACCOUNT_SALES_AGENT . '/logout';
 
     public const ACCOUNT_SALES_AGENT_SALES = self::ACCOUNT_SALES_AGENT . '/sales';
+
+    public const SHOPPING_LISTS_ID = '/shoppingLists' . self::ID_WILDCARD;
+
+    public const SHOPPING_LISTS_ID_ROWS = self::SHOPPING_LISTS_ID . '/rows';
+
+    public const SHOPPING_LISTS_ID_ROWS_DELETE = self::SHOPPING_LISTS_ID_ROWS . '/delete';
+
+    public const SHOPPING_LISTS_ROWS_ID = '/shoppingLists/rows' . self::ID_WILDCARD;
 
     public const ADDRESS_VALIDATE = '/address/validate';
 
@@ -270,14 +306,12 @@ abstract class Resource extends Enum {
 
     public const BASKET_COMMENT = self::BASKET . '/comment';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const BASKET_CUSTOM_TAGS = self::BASKET . '/customTags';
 
     public const BASKET_CUSTOMER = self::BASKET . '/customer';
 
-    /*
-    * @deprecated 2404-001
-    */
+    /** @deprecated 2404-001*/
     public const BASKET_DELIVERIES = self::BASKET . '/deliveries';
 
     public const BASKET_PHYSICAL_LOCATION_PICKING_DELIVERIES = self::BASKET . '/physicalLocationPickingDeliveries'; // '/physicalLocationPickingDeliveries'
@@ -506,9 +540,7 @@ abstract class Resource extends Enum {
 
     public const KIMERA_DATA = self::KIMERA . '/data';
 
-    /*
-    * @deprecated
-    */
+    /** @deprecated*/
     public const ORDERS_BASKET_RECOVERY = self::BASKET . '/recovery';
 
     public const ORDERS_ID = self::ORDERS . self::ID_WILDCARD;
@@ -621,6 +653,7 @@ abstract class Resource extends Enum {
 
     public const SETTINGS_BLOG = self::SETTINGS . '/blog';
 
+    /** @deprecated*/
     public const SETTINGS_CATALOG = self::SETTINGS . '/catalog';
 
     public const SETTINGS_COUNTRIES = self::SETTINGS . '/countries';
@@ -629,24 +662,33 @@ abstract class Resource extends Enum {
 
     public const SETTINGS_CURRENCIES = self::SETTINGS . '/currencies';
 
+    /** @deprecated*/
     public const SETTINGS_GENERAL = self::SETTINGS . '/general';
 
+    /** @deprecated*/
     public const SETTINGS_GEO_IP = self::SETTINGS . '/geoIp';
 
     public const SETTINGS_LANGUAGES = self::SETTINGS . '/languages';
 
+    /** @deprecated*/
     public const SETTINGS_LEGAL = self::SETTINGS . '/legal';
 
+    /** @deprecated*/
     public const SETTINGS_ORDERS = self::SETTINGS . self::ORDERS_RESOURCE;
 
+    /** @deprecated*/
     public const SETTINGS_SEO = self::SETTINGS . '/seo';
 
+    /** @deprecated*/
     public const SETTINGS_SITEMAP = self::SETTINGS . '/sitemap';
 
+    /** @deprecated*/
     public const SETTINGS_STOCK = self::SETTINGS . '/stock';
 
+    /** @deprecated*/
     public const SETTINGS_TAX = self::SETTINGS . '/tax';
 
+    /** @deprecated*/
     public const SETTINGS_USER_ACCOUNTS = self::SETTINGS . '/userAccounts';
 
     public const SITEMAP = '/sitemap';
@@ -659,23 +701,23 @@ abstract class Resource extends Enum {
 
     public const USER_ADDRESSES = self::USER . '/addresses';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_ADDRESSES_ID = self::USER_ADDRESSES . self::ID_WILDCARD;
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_BILLING_ADDRESSES = self::USER . '/billingAddresses';
 
     public const USER_BILLING_ADDRESSES_ID = self::USER_BILLING_ADDRESSES . self::ID_WILDCARD;
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_CUSTOM_TAGS = self::USER . '/customTags';
 
     public const USER_EXISTS_VALUE = self::USER . '/exists/{value}';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_LOGIN = self::USER . '/login';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_LOGOUT = self::USER . '/logout';
 
     public const USER_OAUTH = self::USER . self::OAUTH;
@@ -694,77 +736,93 @@ abstract class Resource extends Enum {
 
     public const USER_PASSWORD_HASH_VALIDATE = self::USER_PASSWORD . self::HASH_WILDCARD . '/validate';
 
+    /** @deprecated*/
     public const USER_PLUGIN_PROPERTIES = self::USER . self::PLUGINS . self::PROPERTIES;
 
+    /** @deprecated*/
     public const USER_PLUGIN_PROPERTIES_ID = self::USER_PLUGIN_PROPERTIES . self::ID_WILDCARD;
 
+    /** @deprecated*/
     public const USER_PLUGIN_ID_PAYMENT_TOKENS = self::USER . self::PLUGINS_ID . '/paymentTokens';
 
+    /** @deprecated*/
     public const USER_PLUGIN_ID_PAYMENT_DELETE_TOKEN = self::USER . self::PLUGINS_ID . '/paymentTokens' . self::TOKEN_WILDCARD;
 
+    /** @deprecated*/
     public const USER_RELATED = self::USER . self::RELATED;
 
+    /** @deprecated*/
     public const USER_RELATED_TYPE = self::USER_RELATED . self::TYPE_WILDCARD;
 
+    /** @deprecated*/
     public const USER_REWARD_POINTS = self::USER . '/rewardPoints';
 
+    /** @deprecated*/
     public const USER_RMAS = self::USER . '/rmas';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_SALES_AGENT = self::USER . '/salesAgent';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_SALES_AGENT_CUSTOMERS = self::USER_SALES_AGENT . '/customers';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_SALES_AGENT_CUSTOMERS_ID_ORDERS = self::USER_SALES_AGENT_CUSTOMERS . self::CUSTOMER_ID_WILDCARD . '/orders';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_SALES_AGENT_SALES = self::USER_SALES_AGENT . '/sales';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_SALES_AGENT_LOGIN = self::USER_SALES_AGENT . '/login';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_SALES_AGENT_LOGOUT = self::USER_SALES_AGENT . '/logout';
 
+    /** @deprecated*/
     public const USER_SAVE_FOR_LATER_LIST_ROWS = self::USER . '/saveForLaterList/rows';
 
+    /** @deprecated*/
     public const USER_SAVE_FOR_LATER_LIST_ROWS_ID = self::USER_SAVE_FOR_LATER_LIST_ROWS . self::ID_WILDCARD;
 
+    /** @deprecated*/
     public const USER_SAVE_FOR_LATER_LIST_ROWS_ID_TRANSFER_TO_BASKET = self::USER_SAVE_FOR_LATER_LIST_ROWS_ID . '/transferToBasket';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_SHIPPING_ADDRESSES = self::USER . '/shippingAddresses';
 
     public const USER_SHIPPING_ADDRESSES_ID = self::USER_SHIPPING_ADDRESSES . self::ID_WILDCARD;
 
+    /** @deprecated*/
     public const USER_SHOPPING_LISTS = self::USER . '/shoppingLists';
 
+    /** @deprecated*/
     public const USER_SHOPPING_LISTS_ID = self::USER_SHOPPING_LISTS . self::ID_WILDCARD;
 
+    /** @deprecated*/
     public const USER_SHOPPING_LISTS_ID_ROWS = self::USER_SHOPPING_LISTS_ID . '/rows';
 
+    /** @deprecated*/
     public const USER_SHOPPING_LISTS_ID_ROWS_DELETE = self::USER_SHOPPING_LISTS_ID_ROWS . '/delete';
 
+    /** @deprecated*/
     public const USER_SHOPPING_LISTS_ROWS_ID = self::USER_SHOPPING_LISTS . '/rows' . self::ID_WILDCARD;
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_STOCK_ALERTS = self::USER . '/stockAlerts';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_STOCK_ALERTS_ID = self::USER_STOCK_ALERTS . self::ID_WILDCARD;
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_SUBSCRIPTIONS = self::USER . '/subscriptions';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_SUBSCRIPTIONS_VERIFY_TOKEN = self::USER_SUBSCRIPTIONS . '/verify' . self::TOKEN_WILDCARD;
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_SUBSCRIPTIONS_UNSUBSCRIBE = self::USER_SUBSCRIPTIONS . '/unsubscribe';
 
-    /**@deprecated*/
+    /** @deprecated*/
     public const USER_UNSUBSCRIBE_TOKEN = self::USER_SUBSCRIPTIONS . '/unsubscribe' . self::TOKEN_WILDCARD;
 
     private const USER_VERIFY = self::USER . '/verify';
@@ -773,6 +831,7 @@ abstract class Resource extends Enum {
 
     public const USER_VERIFY_UNIQUEID = self::USER_VERIFY . '/{uniqueId}';
 
+    /** @deprecated*/
     public const USER_VOUCHERS = self::USER . '/vouchers';
 
     public const USER_WISHLIST = self::USER . '/wishlist';
@@ -889,6 +948,12 @@ abstract class Resource extends Enum {
                 } elseif ($resource === 'ACCOUNTS_REGISTERED_USERS_WITH_REGISTERED_ID_PENDING_APPROVAL') {
                     $class = MasterValFactory::class;
                     break;
+                } elseif ($resource === 'ACCOUNTS_REWARD_POINTS') {
+                    $class = RewardPointsBalance::class;
+                    break;
+                } elseif ($resource === 'ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS') {
+                    $class = SaveForLaterListRow::class;
+                    break;
                 } elseif ($resource === 'ACCOUNTS_SHIPPING_ADDRESSES') {
                     if (!$isMapping) {
                         $class = AccountShippingAddress::class;
@@ -896,8 +961,14 @@ abstract class Resource extends Enum {
                         $class = AccountShippingAddressToShippingAddressFactory::class;
                     }
                     break;
+                } elseif ($resource === 'ACCOUNTS_SHOPPING_LISTS') {
+                    $class = ShoppingList::class;
+                    break;
                 } elseif ($resource === 'ACCOUNTS_SHIPPING_ADDRESSES_UPDATE') {
                     $class = AccountShippingAddress::class;
+                    break;
+                } elseif ($resource === 'ACCOUNTS_VOUCHERS') {
+                    $class = Voucher::class;
                     break;
                 } elseif ($resource === 'ACCOUNTS_WITH_ID') {
                     $class = AccountFactory::class;
@@ -938,6 +1009,11 @@ abstract class Resource extends Enum {
                 break;
             case 'SETTINGS':
                 $class = self::getSettingsClass($resource);
+                break;
+            case 'SHOPPING':
+                if ($resource == 'SHOPPING_LISTS_ID_ROWS') {
+                    $class = ShoppingListRow::class;
+                }
                 break;
             case 'TRACKERS':
                 $class = Tracker::class;
@@ -1012,11 +1088,19 @@ abstract class Resource extends Enum {
                 'ACCOUNTS_COMPANY_ROLES',
                 'ACCOUNTS_INVOICING_ADDRESSES',
                 'ACCOUNTS_ORDERS',
+                'ACCOUNTS_PLUGIN_PROPERTIES',
+                'ACCOUNTS_PLUGIN_ID_PAYMENT_TOKENS',
                 'ACCOUNTS_REGISTERED_USERS',
                 'ACCOUNTS_REGISTERED_USERS_SEARCH',
                 'ACCOUNTS_REGISTERED_USERS_STOCK_ALERTS',
                 'ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS',
+                'ACCOUNTS_RELATED_TYPE',
+                'ACCOUNTS_REWARD_POINTS',
+                'ACCOUNTS_RMAS',
+                'ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS',
                 'ACCOUNTS_SHIPPING_ADDRESSES',
+                'ACCOUNTS_SHOPPING_LISTS',
+                'ACCOUNTS_VOUCHERS',
                 'ACCOUNT_REGISTERED_USERS_ME_ACCOUNTS',
                 'ACCOUNT_SALES_AGENT_CUSTOMERS',
                 'ACCOUNT_SALES_AGENT_CUSTOMERS_ID_ORDERS',
@@ -1086,6 +1170,7 @@ abstract class Resource extends Enum {
                 'SETTINGS_COUNTRIES_LINKS',
                 'SETTINGS_CURRENCIES',
                 'SETTINGS_LANGUAGES',
+                'SHOPPING_LISTS_ID_ROWS',
                 'TRACKERS',
                 'USER_BILLING_ADDRESSES',
                 'USER_SHIPPING_ADDRESSES',
@@ -1130,9 +1215,9 @@ abstract class Resource extends Enum {
             $class = DataFile::class;
         } elseif (strpos($resource, 'LEGAL_TEXTS') !== false) {
             $class = DataText::class;
-        } elseif ($resource === 'USER_PLUGIN_PROPERTIES') {
+        } elseif ($resource === 'USER_PLUGIN_PROPERTIES' || $resource === 'ACCOUNTS_PLUGIN_PROPERTIES') {
             $class = UserPlugin::class;
-        } elseif ($resource === 'USER_PLUGIN_ID_PAYMENT_TOKENS') {
+        } elseif ($resource === 'USER_PLUGIN_ID_PAYMENT_TOKENS' || $resource === 'ACCOUNTS_PLUGIN_ID_PAYMENT_TOKENS') {
             $class = UserPluginPaymentTokenFactory::class;
         } elseif ($resource === 'PLUGINS') {
             $class = Plugin::class;
@@ -1191,7 +1276,10 @@ abstract class Resource extends Enum {
             $class = PickupPointProvider::class;
         } elseif ($resource === 'OMS_RMAS_REASONS') {
             $class = RMAReason::class;
-        } elseif (strpos($resource, 'USER_RMAS') !== false) {
+        } elseif (
+            strpos($resource, 'USER_RMAS') !== false ||
+            strpos($resource, 'ACCOUNTS_RMAS') !== false
+        ) {
             $class = UserRMA::class;
         }
         return $class;
@@ -1343,7 +1431,7 @@ abstract class Resource extends Enum {
                 $class = TaxSettings::class;
                 break;
             case 'SETTINGS_BASKET_STOCK_LOCKING':
-                $class = BasketStockLockingSettings::class;
+                $class = SettingsBasketStockLockingFactory::class;
                 break;
             case 'SETTINGS_BLOG':
                 $class = BlogSettings::class;

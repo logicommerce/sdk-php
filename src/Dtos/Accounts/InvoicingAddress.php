@@ -6,19 +6,18 @@ use SDK\Core\Enums\Traits\EnumResolverTrait;
 use SDK\Enums\CustomerType;
 
 /**
- * Represents an invoicing address.
- * 
- * @see PurchaseAddress
+ * This is the invoicing address main class.
+ * The invoicing address information will be stored in this class and will remain immutable (only get methods are available).
+ *
  * @see InvoicingAddress::isTax()
  * @see InvoicingAddress::isRe()
  * @see InvoicingAddress::isReverseChargeVat()
  * @see InvoicingAddress::getCustomerType()
- * 
- * @property bool $tax
- * @property bool $re
- * @property bool $reverseChargeVat
- * @property string $customerType
- * 
+ *
+ * @see PurchaseAddress
+ * @see EnumResolverTrait
+ * @see CustomerType
+ *
  * @package SDK\Dtos\Accounts
  */
 class InvoicingAddress extends PurchaseAddress {
