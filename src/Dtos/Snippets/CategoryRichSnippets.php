@@ -11,17 +11,21 @@ use SDK\Core\Dtos\Traits\ElementTrait;
  * @see CategoryRichSnippets::getUrl()
  * @see CategoryRichSnippets::getOffers()
  *
- * @see ElementRichSnippets
+ * @see RichSnippets
  * @see ElementTrait
  *
  * @package SDK\Dtos\Snippets
  */
-class CategoryRichSnippets extends ElementRichSnippets {
+class CategoryRichSnippets extends RichSnippets {
     use ElementTrait;
 
     protected string $url = '';
 
+    protected array $images = [];
+
     protected ?AggregateOffer $offers = null;
+
+    protected ?AggregateRating $aggregateRating = null;
 
     /**
      * Returns the category url rich snippet.
@@ -30,6 +34,15 @@ class CategoryRichSnippets extends ElementRichSnippets {
      */
     public function getUrl(): string {
         return $this->url;
+    }
+
+    /**
+     * Returns the images rich snippet.
+     *
+     * @return string[]
+     */
+    public function getImages(): array {
+        return $this->images;
     }
 
     /**
@@ -43,5 +56,20 @@ class CategoryRichSnippets extends ElementRichSnippets {
 
     protected function setOffers(array $offers): void {
         $this->offers = new AggregateOffer($offers);
+    }
+
+    /**
+     * Returns the aggregate rating rich snippet.
+     *
+     * @return AggregateRating|NULL
+     */
+    public function getAggregateRating(): ?AggregateRating
+    {
+        return $this->aggregateRating;
+    }
+
+    protected function setAggregateRating(array $aggregateRating): void
+    {
+        $this->aggregateRating = new AggregateRating($aggregateRating);
     }
 }

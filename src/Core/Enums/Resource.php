@@ -242,6 +242,12 @@ abstract class Resource extends Enum {
 
     public const ACCOUNTS_SHOPPING_LISTS = self::ACCOUNTS_REGISTERED_USERS_ME . '/shoppingLists';
 
+    private const ACCOUNTS_VERIFY = self::ACCOUNTS . '/verify';
+
+    public const ACCOUNTS_VERIFY_RESEND = self::ACCOUNTS_VERIFY . '/resend';
+
+    public const ACCOUNTS_VERIFY_UNIQUEID = self::ACCOUNTS_VERIFY;
+
     public const ACCOUNTS_VOUCHERS = self::ACCOUNTS . '/used/vouchers';
 
     public const ACCOUNTS_WITH_ID = self::ACCOUNTS . self::ID_USED_WILDCARD;
@@ -722,6 +728,7 @@ abstract class Resource extends Enum {
 
     public const USER_OAUTH = self::USER . self::OAUTH;
 
+    /** @deprecated*/
     public const USER_ORDERS = self::USER . self::ORDERS_RESOURCE;
 
     public const USER_ORDERS_ID = self::USER_ORDERS . self::ID_WILDCARD;
@@ -825,10 +832,13 @@ abstract class Resource extends Enum {
     /** @deprecated*/
     public const USER_UNSUBSCRIBE_TOKEN = self::USER_SUBSCRIPTIONS . '/unsubscribe' . self::TOKEN_WILDCARD;
 
+    /** @deprecated*/
     private const USER_VERIFY = self::USER . '/verify';
 
+    /** @deprecated*/
     public const USER_VERIFY_RESEND = self::USER_VERIFY . '/resend';
 
+    /** @deprecated*/
     public const USER_VERIFY_UNIQUEID = self::USER_VERIFY . '/{uniqueId}';
 
     /** @deprecated*/
@@ -865,7 +875,7 @@ abstract class Resource extends Enum {
     }
 
     private static function getClassFQN(string $resource, string $objectType, bool $isMapping = false): string {
-        $class = self::getResourceClass($resource);
+        $class = self::getResourceClass($resource, $isMapping);
         if (!is_null($class)) {
             return $class;
         }
@@ -1195,7 +1205,7 @@ abstract class Resource extends Enum {
         );
     }
 
-    private static function getResourceClass(string $resource): ?string {
+    private static function getResourceClass(string $resource, bool $isMapping = false): ?string {
         $class = null;
         if ($resource === 'ASSETS') {
             $class = Asset::class;
@@ -1247,12 +1257,12 @@ abstract class Resource extends Enum {
             $class = KimeraDataRequest::class;
         }
         if (is_null($class)) {
-            $class = self::getDocumentClass($resource);
+            $class = self::getDocumentClass($resource, $isMapping);
         }
         return $class;
     }
 
-    private static function getDocumentClass(string $resource): ?string {
+    private static function getDocumentClass(string $resource, bool $isMapping = false): ?string {
         $class = null;
         if (strpos($resource, '_PDF') !== false) {
             $class = PDFDocument::class;
@@ -1263,7 +1273,7 @@ abstract class Resource extends Enum {
         } elseif (strpos($resource, 'INVOICES') !== false) {
             $class = Invoice::class;
         } elseif (strpos($resource, 'ACCOUNTS_ORDERS') !== false) {
-            $class = AccountOrder::class;
+            $isMapping ? $class = UserOrder::class : $class = AccountOrder::class;
         } elseif (strpos($resource, 'USER_ORDERS') !== false) {
             $class = UserOrder::class;
         } elseif (strpos($resource, 'ORDERS') !== false) {

@@ -2,12 +2,15 @@
 
 namespace SDK\Dtos\Snippets;
 
+use PhpParser\Node\Scalar\String_;
+use SDK\Core\Dtos\Traits\ElementDescriptionTrait;
 use SDK\Core\Dtos\Traits\ElementTrait;
 
 /**
  * This is the product rich snippets class.
  * The product rich snippets will be stored in that class and will remain immutable (only get methods are available)
  *
+ * @see ProductRichSnippets::getProductGroupId()
  * @see ProductRichSnippets::getBrand()
  * @see ProductRichSnippets::getSku()
  * @see ProductRichSnippets::getGtin8()
@@ -18,31 +21,36 @@ use SDK\Core\Dtos\Traits\ElementTrait;
  * @see ProductRichSnippets::getReview()
  * @see ProductRichSnippets::getOffers()
  *
- * @see ElementRichSnippets
- * @see ElementTrait
+ * @see ProductBaseRichSnippets
  *
  * @package SDK\Dtos\Snippets
  */
-class ProductRichSnippets extends ElementRichSnippets {
-    use ElementTrait;
+class ProductRichSnippets extends ProductBaseRichSnippets {
+    use ElementDescriptionTrait;
 
-    protected string $brand = '';
-
-    protected string $sku = '';
-
-    protected string $gtin8 = '';
-
-    protected string $gtin13 = '';
-
-    protected string $gtin14 = '';
+    protected string $productGroupId = '';
 
     protected string $mpn = '';
 
-    protected string $isbn = '';
+    protected string $brand = '';
+  
+    protected array $variesBy = [];
 
+    protected array $variants = [];
+    
+    protected ?AggregateRating $aggregateRating = null;
+    
     protected array $review = [];
 
-    protected ?Offer $offers = null;
+
+    /**
+     * Returns the product productGroupId rich snippet.
+     *
+     * @return string
+     */
+    public function getProductGroupId(): string {
+        return $this->productGroupId;
+    }
 
     /**
      * Returns the product brand rich snippet.
@@ -51,42 +59,6 @@ class ProductRichSnippets extends ElementRichSnippets {
      */
     public function getBrand(): string {
         return $this->brand;
-    }
-
-    /**
-     * Returns the product sku rich snippet.
-     *
-     * @return string
-     */
-    public function getSku(): string {
-        return $this->sku;
-    }
-
-    /**
-     * Returns the product gtin8 rich snippet.
-     *
-     * @return string
-     */
-    public function getGtin8(): string {
-        return $this->gtin8;
-    }
-
-    /**
-     * Returns the product gtin13 rich snippet.
-     *
-     * @return string
-     */
-    public function getGtin13(): string {
-        return $this->gtin13;
-    }
-
-    /**
-     * Returns the product gtin14 rich snippet.
-     *
-     * @return string
-     */
-    public function getGtin14(): string {
-        return $this->gtin14;
     }
 
     /**
@@ -99,12 +71,54 @@ class ProductRichSnippets extends ElementRichSnippets {
     }
 
     /**
-     * Returns the product isbn rich snippet.
+     * Returns the product variesBy rich snippet.
      *
-     * @return string
+     * @return array
      */
-    public function getIsbn(): string {
-        return $this->isbn;
+    public function getVariesBy(): array {
+        return $this->variesBy;
+    }
+
+    /***
+     * Sets the product variesBy rich snippet.
+     * @param array $variesBy
+     */
+    public function setVariesBy(array $variesBy): void
+    {
+        $this->variesBy = $variesBy;
+    }
+
+    /**
+     * Returns the product variants rich snippet.
+     *
+     * @return array
+     */
+    public function getVariants(): array {
+        return $this->variants;
+    }
+             
+    /***
+     * Sets the product variants rich snippet.
+     * @param array $variants
+     */
+    protected function setVariants(array $variants): void
+    {
+        $this->variants = $this->setArrayField($variants, ProductVariantRichSnippets::class);
+    }
+
+    /**
+     * Returns the aggregate rating rich snippet.
+     *
+     * @return AggregateRating|NULL
+     */
+    public function getAggregateRating(): ?AggregateRating
+    {
+        return $this->aggregateRating;
+    }
+
+    protected function setAggregateRating(array $aggregateRating): void
+    {
+        $this->aggregateRating = new AggregateRating($aggregateRating);
     }
 
     /**
@@ -112,24 +126,18 @@ class ProductRichSnippets extends ElementRichSnippets {
      *
      * @return Review[]
      */
-    public function getReview(): array {
+    public function getReview(): array
+    {
         return $this->review;
     }
 
-    protected function setReview(array $review): void {
-        $this->review = $this->setArrayField($review, Review::class);
-    }
-
     /**
-     * Returns the product offers rich snippet.
-     *
-     * @return Offer|NULL
+     * Sets the product review rich snippet.
+     * @param array $review
+     * 
      */
-    public function getOffers(): ?Offer {
-        return $this->offers;
-    }
-
-    protected function setOffers(array $offers): void {
-        $this->offers = new Offer($offers);
+    protected function setReview(array $review): void
+    {
+        $this->review = $this->setArrayField($review, Review::class);
     }
 }

@@ -433,7 +433,7 @@ class UserService extends Service {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())
-                    ->path(Resource::USER_VERIFY_UNIQUEID)->method(self::POST)->pathParams($this->getVerifyParams($uniqueId))
+                    ->path(Resource::ACCOUNTS_VERIFY_UNIQUEID)->method(self::POST)->body($this->getVerifyParams($uniqueId))
                     ->build()
             ),
             Status::class
@@ -457,7 +457,7 @@ class UserService extends Service {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())
-                    ->path(Resource::USER_VERIFY_RESEND)->method(self::POST)->body(['userIdentifier' => $userIdentifier])
+                    ->path(Resource::ACCOUNTS_VERIFY_RESEND)->method(self::POST)->body(['masterIdentifier' => $userIdentifier])
                     ->build()
             ),
             Status::class
@@ -663,11 +663,12 @@ class UserService extends Service {
      *            object with the needed filters to send to the API user orders resource
      *
      * @return void
-     * deprecated
+     * @deprecated
      */
     public function addGetOrders(BatchRequests $batchRequests, string $batchName, OrderParametersGroup $params = null): void {
         $batchRequests->addRequest(
-            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::USER_ORDERS)->urlParams($params)->build()
+            (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_ORDERS)->pathParams(['idUsed' => AccountKey::USED])->urlParams($params)->build(),
+            true
         );
     }
 
