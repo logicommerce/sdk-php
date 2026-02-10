@@ -155,7 +155,7 @@ abstract class UserToAccountFactory {
         return $createAccount;
     }
 
-    public static function mapCreateUserToUpdateOmsBasketCustomer(?CreateUserParametersGroup $createUser, string $generalRestriction = GeneralRestriction::ONLY_GENERAL): UpdateOmsBasketCustomerParametersGroup {
+    public static function mapCreateUserToUpdateOmsBasketCustomer(?CreateUserParametersGroup $createUser): UpdateOmsBasketCustomerParametersGroup {
         $createUser = $createUser?->toArray();
         if (is_null($createUser)) {
             return new UpdateOmsBasketCustomerParametersGroup();
@@ -165,7 +165,7 @@ abstract class UserToAccountFactory {
         if (!isset($createUser['billingAddress']['userType'])) {
             $createUser['billingAddress']['userType'] = UserType::INDIVIDUAL;
         }
-        $accountType = AccountType::fromUserType($createUser['billingAddress']['userType'], $generalRestriction);
+        $accountType = CustomerType::fromUserType($createUser['billingAddress']['userType']);
 
         $updateCustomer->setType($accountType);
         /*if (in_array($accountType, AccountType::getCompanyTypes())) {
