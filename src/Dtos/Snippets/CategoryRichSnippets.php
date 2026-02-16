@@ -2,6 +2,7 @@
 
 namespace SDK\Dtos\Snippets;
 
+use SDK\Core\Dtos\Traits\ElementNameTrait;
 use SDK\Core\Dtos\Traits\ElementTrait;
 
 /**
@@ -17,7 +18,7 @@ use SDK\Core\Dtos\Traits\ElementTrait;
  * @package SDK\Dtos\Snippets
  */
 class CategoryRichSnippets extends RichSnippets {
-    use ElementTrait;
+    use ElementTrait, ElementNameTrait;
 
     protected string $url = '';
 
@@ -63,13 +64,11 @@ class CategoryRichSnippets extends RichSnippets {
      *
      * @return AggregateRating|NULL
      */
-    public function getAggregateRating(): ?AggregateRating
-    {
+    public function getAggregateRating(): ?AggregateRating {
         return $this->aggregateRating;
     }
 
-    protected function setAggregateRating(array $aggregateRating): void
-    {
+    protected function setAggregateRating(array $aggregateRating): void {
         $this->aggregateRating = new AggregateRating($aggregateRating);
     }
 }
