@@ -48,6 +48,7 @@ use SDK\Services\Parameters\Groups\Basket\EditProductParametersGroup;
 use SDK\Services\Parameters\Groups\Basket\EditShipmentsParametersGroup;
 use SDK\Services\Parameters\Groups\Basket\ExpressCheckoutValidateParametersGroup;
 use SDK\Services\Parameters\Groups\Basket\LockedStocksAggregateDataParametersGroup;
+use SDK\Services\Parameters\Groups\Basket\MassiveProductRowPinnedParametersGroup;
 use SDK\Services\Parameters\Groups\Basket\ProductRowPinnedRequestParametersGroup;
 use SDK\Services\Parameters\Groups\Basket\ProviderPickupPointPickingDeliveriesParametersGroup;
 use SDK\Services\Parameters\Groups\Basket\RewardPointsRedeemParametersGroup;
@@ -215,6 +216,24 @@ class BasketService extends Service {
             Basket::class
         );
     }
+
+    /**
+     * Pin the indicated attributes of the product rows with the specified values.
+     *
+     * @param MassiveProductRowPinnedParametersGroup $params
+     *            object with the needed data to send to the API basket resource
+     *
+     * @return Basket|NULL
+     */
+    public function massPinProductAttributes(MassiveProductRowPinnedParametersGroup $params = null): ?Basket {
+        return $this->prepareElement(
+            $this->call(
+                (new RequestBuilder())->path(Resource::BASKET_PRODUCTS_PIN)->method(self::PUT)->body($params)->build()
+            ),
+            Basket::class
+        );
+    }
+
 
     /**
      * Add products to basket

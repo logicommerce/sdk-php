@@ -342,6 +342,8 @@ abstract class Resource extends Enum {
 
     public const BASKET_PRODUCTS = self::BASKET . '/products';
 
+    public const BASKET_PRODUCTS_PIN = self::BASKET_PRODUCTS . '/pin';
+
     public const BASKET_PROVIDER_PICKUP_POINT_PICKING_DELIVERIES = self::BASKET . '/providerPickupPointPickingDeliveries';
 
     public const BASKET_PROVIDER_PICKUP_POINT_PICKING_DELIVERIES_SELECTED_PICKUP_POINT = self::BASKET_PROVIDER_PICKUP_POINT_PICKING_DELIVERIES . '/selectedPickupPoint';
