@@ -33,6 +33,8 @@ abstract class PluginConnectorType extends Enum {
 
     public const EXPRESS_CHECKOUT = 'EXPRESS_CHECKOUT';
 
+    public const KIMERA = 'KIMERA';
+
     public const MAILING_SYSTEM = 'MAILING_SYSTEM';
 
     public const MAPS = 'MAPS';
@@ -42,6 +44,8 @@ abstract class PluginConnectorType extends Enum {
     public const MARKETPLACE = 'MARKETPLACE';
 
     public const NONE = 'NONE';
+
+    public const MAGIC_FRONT = 'MAGIC_FRONT';
 
     public const OAUTH = 'OAUTH';
 

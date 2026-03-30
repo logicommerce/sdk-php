@@ -201,7 +201,7 @@ trait AddressTrait {
      */
     public function addressValidate(AddressValidateParametersGroup $data): ?AddressValidated {
         $params = new PluginConnectorTypeParametersGroup();
-        $params->setType(PluginConnectorType::TAXES);
+        $params->setConnectorType(PluginConnectorType::TAXES);
         if (count($data->toArray()) === 0) {
             return new AddressValidated(['valid' => true]);
         }

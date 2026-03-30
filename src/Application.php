@@ -93,7 +93,7 @@ final class Application extends CoreApplication {
         /** @var \SDK\Services\PluginService  */
         $pluginService = PluginService::getInstance();
         $params = new PluginConnectorTypeParametersGroup();
-        $params->setType(PluginConnectorType::NONE);
+        $params->setConnectorType(PluginConnectorType::NONE);
         $params->setNavigationHash($navigationHash);
         return $pluginService->getPlugins($params);
     }

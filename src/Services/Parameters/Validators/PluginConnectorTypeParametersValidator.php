@@ -16,10 +16,10 @@ use SDK\Enums\PluginConnectorType;
  */
 class PluginConnectorTypeParametersValidator extends ParametersValidator {
 
-    protected const REQUIRED_PARAMS = ['type'];
+    protected const REQUIRED_PARAMS = ['connectorType'];
 
-    protected function validateType($type): ?bool {
-        return $this->validateEnumerateValue($type, PluginConnectorType::class);
+    protected function validateConnectorType($connectorType): ?bool {
+        return $this->validateEnumerateValue($connectorType, PluginConnectorType::class);
     }
 
     protected function validateNavigationHash($navigationHash): ?bool {

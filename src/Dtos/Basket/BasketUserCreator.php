@@ -37,6 +37,7 @@ class BasketUserCreator {
             $lastVisit = $basket->getAccountRegisteredUser()->getLastVisit();
             $basketUser->setLastVisitFromDate($lastVisit);
         }
+        $basketUser->setSessionType($basket->getType()->value);
         $basketUser->setReferer($basket->getReferer() ?? '');
         $basketUser->setUserAgent($basket->getUserAgent() ?? '');
         $basketUser->setNavigationHash($basket->getNavigationHash());
@@ -98,7 +99,6 @@ class BasketUserCreator {
                 ];
             }
         }
-
         $user = [
             ...$user,
             'userAdditionalInformation' => [

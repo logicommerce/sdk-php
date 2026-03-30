@@ -31,7 +31,9 @@ use SDK\Dtos\User\UserOrder;
 use SDK\Dtos\User\UserRMA;
 use SDK\Enums\AccountKey;
 use SDK\Enums\RelatedItemsType;
+use SDK\Enums\UserKeyCriteria;
 use SDK\Services\Parameters\Groups\Account\DeleteAccountParametersGroup;
+use SDK\Services\Parameters\Groups\Account\RegisteredUserExistsParametersGroup;
 use SDK\Services\Parameters\Groups\CustomTagsParametersGroup;
 use SDK\Services\Parameters\Groups\RelatedItemsParametersGroup;
 use SDK\Services\Parameters\Groups\User\CreateUserParametersGroup;
@@ -328,10 +330,10 @@ class UserService extends Service {
      *            object with the needed filters to send to the API user orders resource
      *
      * @return ElementCollection|NULL
-     * deprecated
+     * @deprecated
      */
     public function getOrders(OrderParametersGroup $params = null): ?ElementCollection {
-        return $this->getElements(UserOrder::class, Resource::USER_ORDERS, $params);
+        return $this->getElements(UserOrder::class, $this->replaceWildcards(Resource::ACCOUNTS_ORDERS, ['idUsed' => AccountKey::USED]), $params);
     }
 
     /**
@@ -353,7 +355,7 @@ class UserService extends Service {
      */
     public function updatePassword(UpdatePasswordParametersGroup $data = null): ?Status {
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path(Resource::USER_PASSWORD)->method(self::PUT)->body($data)->build()),
+            $this->call((new RequestBuilder())->path(Resource::REGISTERED_USERS_ME_PASSWORD)->method(self::PUT)->body($data)->build()),
             Status::class
         );
     }
@@ -369,7 +371,7 @@ class UserService extends Service {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())
-                    ->path(Resource::USER_PASSWORD_RECOVER)->method(self::POST)->body($this->getRecoverPasswordParams($email))
+                    ->path(Resource::REGISTERED_USERS_PASSWORD_RECOVER)->method(self::POST)->body($this->getRecoverPasswordParams($email))
                     ->build()
             ),
             Status::class
@@ -391,7 +393,7 @@ class UserService extends Service {
      */
     public function validateRecoverPasswordHash(string $hash): ?Status {
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path(Resource::USER_PASSWORD_HASH_VALIDATE)->pathParams(['hash' => $hash])->build()),
+            $this->call((new RequestBuilder())->path(Resource::REGISTERED_USERS_PASSWORD_VALIDATE)->method(self::POST)->body(['hash' => urldecode($hash)])->build()),
             Status::class
         );
     }
@@ -408,7 +410,7 @@ class UserService extends Service {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())
-                    ->path(Resource::USER_PASSWORD_HASH)->method(self::PUT)->body($this->getSetNewPasswordParams($password, $hash))
+                    ->path(Resource::REGISTERED_USERS_PASSWORD)->method(self::PUT)->body($this->getSetNewPasswordParams($password, $hash))
                     ->build()
             ),
             Status::class
@@ -533,12 +535,35 @@ class UserService extends Service {
      *
      * @param string $userIdentifier
      *            this parameter can match the email or the public id of the user. Depends on the ecommerce settings.
-     *
+     * @deprecated
      * @return UserExists|NULL
      */
     public function getUserExists(string $userIdentifier): ?UserExists {
+        $params = new RegisteredUserExistsParametersGroup();
+
+        $userKeyCriteria = Application::getInstance()->getEcommerceSettings()->getUserAccountsSettings()->getUserKeyCriteria();
+
+        switch ($userKeyCriteria) {
+            case UserKeyCriteria::PID:
+                $params->setPId($userIdentifier);
+                break;
+
+            case UserKeyCriteria::EMAIL:
+                $params->setEmail($userIdentifier);
+                break;
+
+            case UserKeyCriteria::USERNAME:
+                $params->setUsername($userIdentifier);
+                break;
+        }
+
         return $this->prepareElement(
-            $this->call((new RequestBuilder())->path(Resource::USER_EXISTS_VALUE)->pathParams(['value' => $userIdentifier])->build()),
+            $this->call(
+                (new RequestBuilder())
+                    ->path(Resource::ACCOUNT_REGISTERED_USERS_EXISTS)
+                    ->urlParams($params)
+                    ->build()
+            ),
             UserExists::class
         );
     }
@@ -574,7 +599,7 @@ class UserService extends Service {
      *            object with the needed filters to send to the API user sales agent customers resource
      *
      * @return ElementCollection|NULL
-     * deprecated
+     * @deprecated
      */
     public function getSalesAgentCustomers(SalesAgentCustomersParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(SalesAgentCustomerFactory::class, Resource::ACCOUNT_SALES_AGENT_CUSTOMERS, $params);

@@ -270,14 +270,6 @@ abstract class Resource extends Enum {
 
     public const ACCOUNT_SALES_AGENT_SALES = self::ACCOUNT_SALES_AGENT . '/sales';
 
-    public const SHOPPING_LISTS_ID = '/shoppingLists' . self::ID_WILDCARD;
-
-    public const SHOPPING_LISTS_ID_ROWS = self::SHOPPING_LISTS_ID . '/rows';
-
-    public const SHOPPING_LISTS_ID_ROWS_DELETE = self::SHOPPING_LISTS_ID_ROWS . '/delete';
-
-    public const SHOPPING_LISTS_ROWS_ID = '/shoppingLists/rows' . self::ID_WILDCARD;
-
     public const ADDRESS_VALIDATE = '/address/validate';
 
     public const AREAS = '/areas';
@@ -641,6 +633,14 @@ abstract class Resource extends Enum {
 
     public const REFRESH_TOKEN = self::AUTH . '/refreshToken';
 
+    public const REGISTERED_USERS_ME_PASSWORD = '/registeredUsers/me/password';
+
+    public const REGISTERED_USERS_PASSWORD = '/registeredUsers/password';
+
+    public const REGISTERED_USERS_PASSWORD_RECOVER = self::REGISTERED_USERS_PASSWORD . '/recover';
+
+    public const REGISTERED_USERS_PASSWORD_VALIDATE = self::REGISTERED_USERS_PASSWORD . '/validate';
+
     public const RICH = '/rich';
 
     public const ROUTE = '/route';
@@ -701,6 +701,14 @@ abstract class Resource extends Enum {
 
     public const SITEMAP = '/sitemap';
 
+    public const SHOPPING_LISTS_ID = '/shoppingLists' . self::ID_WILDCARD;
+
+    public const SHOPPING_LISTS_ID_ROWS = self::SHOPPING_LISTS_ID . '/rows';
+
+    public const SHOPPING_LISTS_ID_ROWS_DELETE = self::SHOPPING_LISTS_ID_ROWS . '/delete';
+
+    public const SHOPPING_LISTS_ROWS_ID = '/shoppingLists/rows' . self::ID_WILDCARD;
+
     public const TRACKERS = '/trackers';
 
     public const USED_ACCOUNT = '/usedAccount';
@@ -737,12 +745,16 @@ abstract class Resource extends Enum {
 
     public const USER_PASSWORD_DELETE = self::USER . '/{password}';
 
+    /** @deprecated*/
     public const USER_PASSWORD = self::USER . '/password';
 
+    /** @deprecated*/
     public const USER_PASSWORD_HASH = self::USER_PASSWORD . '/hash';
 
+    /** @deprecated*/
     public const USER_PASSWORD_RECOVER = self::USER_PASSWORD . '/recover';
 
+    /** @deprecated*/
     public const USER_PASSWORD_HASH_VALIDATE = self::USER_PASSWORD . self::HASH_WILDCARD . '/validate';
 
     /** @deprecated*/

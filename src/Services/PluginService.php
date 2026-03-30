@@ -100,7 +100,7 @@ class PluginService extends Service {
         $plugins = null;
         if (
             $params === PluginConnectorType::NONE
-            || ($params instanceof PluginConnectorTypeParametersGroup && $params->getType() === PluginConnectorType::NONE)
+            || ($params instanceof PluginConnectorTypeParametersGroup && $params->getConnectorType() === PluginConnectorType::NONE)
         ) {
             $plugins = Application::getInstance()->getEcommercePlugins();
         }
@@ -352,7 +352,7 @@ class PluginService extends Service {
      */
     public function addGetPlugins(BatchRequests $batchRequests, string $batchName, PluginConnectorTypeParametersGroup|string $params = PluginConnectorType::NONE): void {
         if ($params instanceof PluginConnectorTypeParametersGroup) {
-            $pluginConnectorTypeParametersGroup = $this->getPluginsTypeParams($params->getType());
+            $pluginConnectorTypeParametersGroup = $this->getPluginsTypeParams($params->getConnectorType());
         } else {
             $pluginConnectorTypeParametersGroup = $this->getPluginsTypeParams($params);
         }
@@ -436,9 +436,51 @@ class PluginService extends Service {
         );
     }
 
+    /**
+     * Returns the plugin for the given connector type.
+     * If $module is provided, returns the plugin matching that module; otherwise returns the first one found.
+     *
+     * @param PluginConnectorTypeParametersGroup|string $params
+     * @param string|null $module
+     *
+     * @return Plugin|NULL
+     */
+    public function getPluginByConnectorType(PluginConnectorTypeParametersGroup|string $params, ?string $module = null): ?Plugin {
+        $plugins = $this->getPlugins($params);
+        if (empty($plugins?->getItems())) {
+            return null;
+        }
+        if ($module === null) {
+            return $plugins->getItems()[0];
+        }
+        foreach ($plugins->getItems() as $plugin) {
+            if ($plugin->getModule() === $module) {
+                return $plugin;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the plugin properties for the given connector type.
+     * If $module is provided, returns properties for the plugin matching that module; otherwise returns the first one found.
+     *
+     * @param PluginConnectorTypeParametersGroup|string $params
+     * @param string|null $module
+     *
+     * @return PluginProperties|NULL
+     */
+    public function getPluginPropertiesByConnectorType(PluginConnectorTypeParametersGroup|string $params, ?string $module = null): ?PluginProperties {
+        $plugin = $this->getPluginByConnectorType($params, $module);
+        if ($plugin !== null) {
+            return $this->getPluginPropertiesByModule($plugin->getModule());
+        }
+        return null;
+    }
+
     private function getPluginsTypeParams(string $type): PluginConnectorTypeParametersGroup {
         $params = new PluginConnectorTypeParametersGroup();
-        $params->setType($type);
+        $params->setConnectorType($type);
         return $params;
     }
 

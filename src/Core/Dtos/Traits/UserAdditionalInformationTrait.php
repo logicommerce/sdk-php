@@ -135,7 +135,7 @@ trait UserAdditionalInformationTrait {
         return  $this->sessionType;
     }
 
-    protected function setSessionType(string $sessionType): void {
+    public function setSessionType(string $sessionType): void {
         $this->sessionType = SessionType::from($sessionType);
     }
 }

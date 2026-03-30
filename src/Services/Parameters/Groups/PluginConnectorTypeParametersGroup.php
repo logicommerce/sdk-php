@@ -14,21 +14,21 @@ use SDK\Services\Parameters\Validators\PluginConnectorTypeParametersValidator;
  */
 class PluginConnectorTypeParametersGroup extends ParametersGroup {
 
-    protected string $type;
+    protected string $connectorType;
 
     protected ?string $navigationHash;
 
     protected ?string $countryCode;
 
     /**
-     * Sets the type parameter for this parameters group.
+     * Sets the connectorType parameter for this parameters group.
      *
-     * @param string $type
+     * @param string $connectorType
      *
      * @return void
      */
-    public function setType(string $type): void {
-        $this->type = $type;
+    public function setConnectorType(string $connectorType): void {
+        $this->connectorType = $connectorType;
     }
 
     /**
@@ -36,8 +36,8 @@ class PluginConnectorTypeParametersGroup extends ParametersGroup {
      *
      * @return string
      */
-    public function getType(): string {
-        return $this->type;
+    public function getConnectorType(): string {
+        return $this->connectorType;
     }
 
     /**
