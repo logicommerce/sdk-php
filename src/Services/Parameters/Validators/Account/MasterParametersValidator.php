@@ -34,8 +34,8 @@ class MasterParametersValidator extends ParametersValidator {
         return $this->validateString($defaultCurrency);
     }
 
-    protected function validateDefaultLanguange($defaultLanguange): ?bool {
-        return $this->validateString($defaultLanguange);
+    protected function validateDefaultLanguage($defaultLanguage): ?bool {
+        return $this->validateString($defaultLanguage);
     }
 
     protected function validateJob($job): ?bool {

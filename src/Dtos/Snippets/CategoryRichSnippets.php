@@ -2,6 +2,7 @@
 
 namespace SDK\Dtos\Snippets;
 
+use SDK\Core\Dtos\Traits\ElementDescriptionTrait;
 use SDK\Core\Dtos\Traits\ElementNameTrait;
 use SDK\Core\Dtos\Traits\ElementTrait;
 
@@ -18,7 +19,7 @@ use SDK\Core\Dtos\Traits\ElementTrait;
  * @package SDK\Dtos\Snippets
  */
 class CategoryRichSnippets extends RichSnippets {
-    use ElementTrait, ElementNameTrait;
+    use ElementTrait, ElementNameTrait, ElementDescriptionTrait;
 
     protected string $url = '';
 

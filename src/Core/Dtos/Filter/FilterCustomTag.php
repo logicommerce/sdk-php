@@ -11,6 +11,8 @@ use SDK\Core\Dtos\Traits\CustomTagsBaseDataTrait;
  * This is the Custom Tag filter class.
  *
  * @see FilterCustomTag::getValues()
+ * @see FilterCustomTag::getFilterValues()
+ * @see FilterCustomTag::getNameValues()
  *
  * @see FilterBasic
  * @see ElementTrait
@@ -24,6 +26,11 @@ class FilterCustomTag extends FilterBasic {
     private array $values = [];
 
     private array $filterValues = [];
+
+    /**
+     * @deprecated Transitional backend field; will be replaced.
+     */
+    private array $nameValues = [];
 
     private int $position = 0;
 
@@ -47,6 +54,17 @@ class FilterCustomTag extends FilterBasic {
      */
     public function getFilterValues(): array {
         return $this->filterValues;
+    }
+
+    /**
+     * Per-value display names for image filters; index aligns with values/filterValues.
+     *
+     * @deprecated Transitional backend field; will be replaced.
+     *
+     * @return string[]
+     */
+    public function getNameValues(): array {
+        return $this->nameValues;
     }
 
     /**

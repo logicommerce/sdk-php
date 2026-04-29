@@ -43,4 +43,12 @@ class UpdateAccountRegisteredUsersParametersValidator extends ParametersValidato
     protected function validateUseShippingAddress($useShippingAddress): ?bool {
         return $this->validateBoolean($useShippingAddress);
     }
+
+    protected function validateDefaultCurrency($defaultCurrency): ?bool {
+        return $this->validateString($defaultCurrency);
+    }
+
+    protected function validateDefaultLanguage($defaultLanguage): ?bool {
+        return $this->validateString($defaultLanguage);
+    }
 }

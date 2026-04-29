@@ -186,9 +186,9 @@ class AccountService extends Service {
      * @param AccountOrderParametersGroup $params
      *            object with the needed filters to send to the API account orders resource
      *
-     * @return AccountOrderCollection|NULL
+     * @return ElementCollection|NULL
      */
-    public function getOrders(string $idUsed = AccountKey::USED, AccountOrderParametersGroup $params = null): ?AccountOrderCollection {
+    public function getOrders(string $idUsed = AccountKey::USED, AccountOrderParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(AccountOrder::class, $this->replaceWildcards(Resource::ACCOUNTS_ORDERS, ['idUsed' => $idUsed]), $params);
     }
 

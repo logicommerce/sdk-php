@@ -7,11 +7,12 @@ use SDK\Core\Dtos\Traits\IdentifiableElementTrait;
 use SDK\Core\Dtos\Traits\IntegrableElementTrait;
 
 /**
- * This is the Custom Tag Selectable Value class.
- * The custom tags selectable values information of API elements will be stored in that class and will remain immutable (only get methods are available)
+ * This is the Custom Tag Selected Value class.
+ * Represents a single selected value on a product/document for multi-selection custom tags
+ * (MULTIPLE_SELECTION, MULTIPLE_SELECTION_IMAGE).
  *
- * @see CustomTagSelectableValue::getValue()
- * @see CustomTagSelectableValue::getImage()
+ * @see CustomTagSelectedValue::getValue()
+ * @see CustomTagSelectedValue::getImage()
  *
  * @see ElementTrait
  * @see IdentifiableElementTrait
@@ -19,7 +20,7 @@ use SDK\Core\Dtos\Traits\IntegrableElementTrait;
  *
  * @package SDK\Core\Dtos
  */
-class CustomTagSelectableValue {
+class CustomTagSelectedValue {
     use ElementTrait, IdentifiableElementTrait, IntegrableElementTrait;
 
     protected string $value = '';
@@ -27,7 +28,7 @@ class CustomTagSelectableValue {
     protected string $image = '';
 
     /**
-     * Returns the custom tag value.
+     * Returns the selected value text.
      *
      * @return string
      */
@@ -36,7 +37,7 @@ class CustomTagSelectableValue {
     }
 
     /**
-     * Returns the image path associated with this selectable value.
+     * Returns the image path associated with this selected value (empty for non-image selections).
      *
      * @return string
      */

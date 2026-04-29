@@ -26,4 +26,10 @@ abstract class CustomTagControlType extends Enum {
     public const LONG_TEXT = 'LONG_TEXT';
 
     public const ATTACHMENT = 'ATTACHMENT';
+
+    public const MULTIPLE_SELECTION = 'MULTIPLE_SELECTION';
+
+    public const SINGLE_SELECTION_IMAGE = 'SINGLE_SELECTION_IMAGE';
+
+    public const MULTIPLE_SELECTION_IMAGE = 'MULTIPLE_SELECTION_IMAGE';
 }

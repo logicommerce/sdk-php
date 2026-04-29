@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SDK\Services;
 
@@ -32,12 +34,12 @@ class LmsService extends Service {
 
     use CacheTrait {
         call as cacheTraitCall;
-     }
+    }
 
     private const REGISTRY_KEY = Registry::LMS_MODEL;
-    
-    private function getCacheTtl(): int{
-        return defined('LIFE_TIME_CACHE_APPLICATION')?LIFE_TIME_CACHE_APPLICATION:5*60;
+
+    private function getCacheTtl(): int {
+        return defined('LIFE_TIME_CACHE_APPLICATION') ? LIFE_TIME_CACHE_APPLICATION : 5 * 60;
     }
 
     private ?string $apiUrl = null;
@@ -78,5 +80,4 @@ class LmsService extends Service {
     public function getAllLicenses(): ?Licenses {
         return $this->getElement(Licenses::class, Resource::LICENSES_ALL);
     }
-
 }

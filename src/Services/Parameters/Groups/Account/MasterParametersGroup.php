@@ -22,7 +22,7 @@ class MasterParametersGroup extends ParametersGroup {
 
     protected string $defaultCurrency;
 
-    protected string $defaultLanguange;
+    protected string $defaultLanguage;
 
     protected string $job;
 
@@ -72,14 +72,14 @@ class MasterParametersGroup extends ParametersGroup {
     }
 
     /**
-     * Sets the default languange ISO code parameter for this parameters group.
+     * Sets the default language ISO code parameter for this parameters group.
      *
-     * @param string $defaultLanguange
+     * @param string $defaultLanguage
      *
      * @return void
      */
-    public function setDefaultLanguange(string $defaultLanguange): void {
-        $this->defaultLanguange = $defaultLanguange;
+    public function setDefaultLanguage(string $defaultLanguage): void {
+        $this->defaultLanguage = $defaultLanguage;
     }
 
     /**

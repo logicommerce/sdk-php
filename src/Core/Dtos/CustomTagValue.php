@@ -12,6 +12,8 @@ use SDK\Core\Dtos\Traits\ElementNameTrait;
  *
  * @see CustomTagValue::getCustomTagId()
  * @see CustomTagValue::getValue()
+ * @see CustomTagValue::getValues()
+ * @see CustomTagValue::getImage()
  *
  * @see ElementTrait
  * @see ElementNameTrait
@@ -28,6 +30,10 @@ class CustomTagValue {
     protected string $value = '';
 
     protected string $customTagPId = '';
+
+    protected array $values = [];
+
+    protected string $image = '';
 
     /**
      * Returns the custom tag internal identifier.
@@ -48,7 +54,7 @@ class CustomTagValue {
     }
 
     /**
-     * Returns the value of the custom tag value.
+     * Returns the single value of the custom tag (used by all control types except MULTIPLE_SELECTION and MULTIPLE_SELECTION_IMAGE).
      *
      * @return string
      */
@@ -63,5 +69,29 @@ class CustomTagValue {
      */
     public function getCustomTagPId(): string {
         return $this->customTagPId;
+    }
+
+    /**
+     * Returns the selected values for multi-selection custom tags (MULTIPLE_SELECTION, MULTIPLE_SELECTION_IMAGE).
+     * Empty for single-value control types.
+     *
+     * @return CustomTagSelectedValue[]
+     */
+    public function getValues(): array {
+        return $this->values;
+    }
+
+    protected function setValues(array $values): void {
+        $this->values = $this->setArrayField($values, CustomTagSelectedValue::class);
+    }
+
+    /**
+     * Returns the image path associated with single image-selection control types (SINGLE_SELECTION_IMAGE).
+     * Empty for non-image control types.
+     *
+     * @return string
+     */
+    public function getImage(): string {
+        return $this->image;
     }
 }

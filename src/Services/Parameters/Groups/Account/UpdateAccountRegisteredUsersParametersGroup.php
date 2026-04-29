@@ -28,6 +28,10 @@ class UpdateAccountRegisteredUsersParametersGroup extends ParametersGroup {
 
     protected bool $useShippingAddress;
 
+    protected string $defaultCurrency;
+
+    protected string $defaultLanguage;
+
     /**
      * Sets the account identifier parameter for this parameters group.
      *
@@ -103,6 +107,28 @@ class UpdateAccountRegisteredUsersParametersGroup extends ParametersGroup {
      */
     public function setUseShippingAddress(bool $useShippingAddress): void {
         $this->useShippingAddress = $useShippingAddress;
+    }
+
+    /**
+     * Sets the default currency (ISO 4217) for the relationship.
+     *
+     * @param string $defaultCurrency
+     *
+     * @return void
+     */
+    public function setDefaultCurrency(string $defaultCurrency): void {
+        $this->defaultCurrency = $defaultCurrency;
+    }
+
+    /**
+     * Sets the default language (ISO 639-1) for the relationship.
+     *
+     * @param string $defaultLanguage
+     *
+     * @return void
+     */
+    public function setDefaultLanguage(string $defaultLanguage): void {
+        $this->defaultLanguage = $defaultLanguage;
     }
 
     /**

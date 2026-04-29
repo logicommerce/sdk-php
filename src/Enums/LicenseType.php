@@ -136,5 +136,8 @@ enum LicenseType {
     case RVWREVI;
     case PAYSTRP;
     case MSLGN;
+    case ADVCAG;
+    case ADVCAB;
+    case ADVCA;
 
 }
