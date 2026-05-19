@@ -5,7 +5,9 @@ namespace SDK\Dtos\Basket;
 use SDK\Core\Dtos\CustomTagValue;
 use SDK\Dtos\Accounts\AccountShippingAddress;
 use SDK\Dtos\Accounts\AcountLinkedTypes\CustomerAccountLinked;
+use SDK\Dtos\Accounts\InvoicingAddress;
 use SDK\Dtos\Accounts\PurchaseAddress;
+use SDK\Dtos\Accounts\ShippingAddress;
 use SDK\Dtos\Location;
 use SDK\Dtos\User\User;
 use SDK\Enums\AccountStatus;
@@ -154,7 +156,10 @@ class BasketUserCreator {
 
     private static function getBillingAddresses(Basket $basket): array {
         if (is_null($basket->getAccount())) {
-            return []; // return billing address from customer
+            // Guest checkout: fall back to customer.invoicingAddress so
+            // Session->user->defaultBillingAddress still resolves.
+            $invoicing = $basket->getCustomer()?->getInvoicingAddress();
+            return is_null($invoicing) ? [] : [self::getGuestInvoicingAddress($invoicing)];
         }
         $billingAddresses = [];
         foreach ($basket->getAccount()->getInvoicingAddresses() as $address) {
@@ -165,13 +170,59 @@ class BasketUserCreator {
 
     private static function getShippingAddresses(Basket $basket): array {
         if (is_null($basket->getAccount())) {
-            return []; // return shiiping address from customer
+            $shipping = $basket->getCustomer()?->getShippingAddress();
+            return is_null($shipping) ? [] : [self::getGuestShippingAddress($shipping)];
         }
         $shippinhAddresses = [];
         foreach ($basket->getAccount()->getShippingAddresses() as $address) {
             $shippinhAddresses[] = self::getAddress($address, false);
         }
         return $shippinhAddresses;
+    }
+
+    /** Customer's InvoicingAddress → legacy billing-address array. */
+    private static function getGuestInvoicingAddress(InvoicingAddress $address): array {
+        return [
+            ...self::getGuestAddressBase($address),
+            'tax' => $address->isTax(),
+            're' => $address->isRe(),
+            'reverseChargeVat' => $address->isReverseChargeVat(),
+            'userType' => $address->getCustomerType(),
+        ];
+    }
+
+    /** Customer's ShippingAddress → legacy shipping-address array. */
+    private static function getGuestShippingAddress(ShippingAddress $address): array {
+        return [...self::getGuestAddressBase($address), 'tax' => false];
+    }
+
+    /**
+     * Shared fields between guest invoicing/shipping addresses. id/pId/type/defaultOne
+     * are AccountAddress-only — guest addresses get neutral defaults.
+     */
+    private static function getGuestAddressBase(PurchaseAddress $address): array {
+        return [
+            'id' => 0,
+            'pId' => '',
+            'alias' => $address->getAlias(),
+            'firstName' => $address->getFirstName(),
+            'lastName' => $address->getLastName(),
+            'company' => $address->getCompany(),
+            'address' => $address->getAddress(),
+            'addressAdditionalInformation' => $address->getAddressAdditionalInformation(),
+            'number' => $address->getNumber(),
+            'city' => $address->getCity(),
+            'state' => $address->getState(),
+            'postalCode' => $address->getPostalCode(),
+            'vat' => $address->getVat(),
+            'nif' => $address->getNif(),
+            'location' => self::getLocation($address->getLocation()),
+            'phone' => $address->getPhone(),
+            'mobile' => $address->getMobile(),
+            'fax' => $address->getFax(),
+            'type' => '',
+            'defaultAddress' => true,
+        ];
     }
 
     private static function getAddress(PurchaseAddress $address, bool $invoice): array {
