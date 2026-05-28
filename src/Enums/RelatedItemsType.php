@@ -25,6 +25,8 @@ abstract class RelatedItemsType extends Enum {
 
     public const POSTS = 'POSTS';
 
+    public const BRANDS = 'BRANDS';
+
     public static function isValid(string $value): bool {
         return parent::isValid(strtoupper($value));
     }

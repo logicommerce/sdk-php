@@ -198,20 +198,16 @@ class UserService extends Service {
      *            Data validatior PId to apply
      *
      * @return Basket|NULL
-     * deprecated
+     * @deprecated use AccountService::updateUsedAccount instead
      */
     public function updateUser(UpdateUserParametersGroup $data = null, string $dataValidatior = ''): ?Basket {
-        if (!Application::getInstance()->getEcommerceSettings()->getAccountRegisteredUsersSettings()->getCardinalityPlus()) {
-            return $this->modifyUser($data, $dataValidatior);
-        } else {
-            $accountParams = UserToAccountFactory::mapUpdateUserToUpdateAccount($data);
-            return $this->prepareElement(
-                $this->call((new RequestBuilder())->path($this->replaceWildcards(Resource::ACCOUNTS_WITH_ID, ['idUsed' => AccountKey::USED]))->method(self::PUT)
-                    ->headers(strlen($dataValidatior) ? [FormService::DATA_VALIDATOR_HEADER => $dataValidatior] : [])
-                    ->body($accountParams)->build()),
-                Basket::class
-            );
-        }
+        $accountParams = UserToAccountFactory::mapUpdateUserToUpdateAccount($data);
+        return $this->prepareElement(
+            $this->call((new RequestBuilder())->path($this->replaceWildcards(Resource::ACCOUNTS_WITH_ID, ['idUsed' => AccountKey::USED]))->method(self::PUT)
+                ->headers(strlen($dataValidatior) ? [FormService::DATA_VALIDATOR_HEADER => $dataValidatior] : [])
+                ->body($accountParams)->build()),
+            Basket::class
+        );
     }
 
     /**
@@ -222,32 +218,31 @@ class UserService extends Service {
      *            Data validatior PId to apply
      *
      * @return Basket|NULL
-     * deprecated
+     * @deprecated use AccountService::createAccount instead (or BasketService::updateOmsBasketCustomer when createAccount is false)
      */
     public function createUser(CreateUserParametersGroup $data = null, string $dataValidatior = ''): ?Basket {
-        if (!Application::getInstance()->getEcommerceSettings()->getAccountRegisteredUsersSettings()->getCardinalityPlus()) {
-            return $this->modifyUser($data, $dataValidatior);
+        if (isset($data->toArray()['createAccount']) && $data->toArray()['createAccount'] == true) {
+            $accountParams = UserToAccountFactory::mapCreateUserToCreateAccount($data);
+            return $this->prepareElement(
+                $this->call((new RequestBuilder())->path(Resource::ACCOUNTS)->method(self::POST)
+                    ->headers(strlen($dataValidatior) ? [FormService::DATA_VALIDATOR_HEADER => $dataValidatior] : [])
+                    ->body($accountParams)->build()),
+                Basket::class
+            );
         } else {
-            if (isset($data->toArray()['createAccount']) && $data->toArray()['createAccount'] == true) {
-                $accountParams = UserToAccountFactory::mapCreateUserToCreateAccount($data);
-                return $this->prepareElement(
-                    $this->call((new RequestBuilder())->path(Resource::ACCOUNTS)->method(self::POST)
-                        ->headers(strlen($dataValidatior) ? [FormService::DATA_VALIDATOR_HEADER => $dataValidatior] : [])
-                        ->body($accountParams)->build()),
-                    Basket::class
-                );
-            } else {
-                $accountParams = UserToAccountFactory::mapCreateUserToUpdateOmsBasketCustomer($data);
-                return $this->prepareElement(
-                    $this->call((new RequestBuilder())->path(Resource::BASKET_CUSTOMER)->method(self::PUT)
-                        ->headers(strlen($dataValidatior) ? [FormService::DATA_VALIDATOR_HEADER => $dataValidatior] : [])
-                        ->body($accountParams)->build()),
-                    Basket::class
-                );
-            }
+            $accountParams = UserToAccountFactory::mapCreateUserToUpdateOmsBasketCustomer($data);
+            return $this->prepareElement(
+                $this->call((new RequestBuilder())->path(Resource::BASKET_CUSTOMER)->method(self::PUT)
+                    ->headers(strlen($dataValidatior) ? [FormService::DATA_VALIDATOR_HEADER => $dataValidatior] : [])
+                    ->body($accountParams)->build()),
+                Basket::class
+            );
         }
     }
 
+    /**
+     * @deprecated calls POST /user (legacy endpoint); use AccountService::updateUsedAccount or AccountService::createAccount instead.
+     */
     private function modifyUser(?UserParametersGroup $data, string $dataValidatior = ''): ?Basket {
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path(Resource::USER)->method(self::POST)

@@ -21,7 +21,7 @@ use SDK\Core\Services\ServiceTrait;
 use SDK\Dtos\Accounts\Account;
 use SDK\Dtos\Accounts\AccountOrder;
 use SDK\Dtos\Accounts\AccountTypes\CompanyDivision;
-use SDK\Dtos\Accounts\CompanyStructureTreeNode;
+use SDK\Dtos\Accounts\BaseCompanyStructureTreeNode;
 use SDK\Dtos\Accounts\CustomCompanyRole;
 use SDK\Dtos\Accounts\RegisteredUser;
 use SDK\Dtos\Accounts\Master;
@@ -143,15 +143,18 @@ class AccountService extends Service {
     }
 
     /**
-     * Returns the company structure filtered with the given parameters for the current account
+     * Returns the company structure filtered with the given parameters for the current account.
+     * The factory returns CompanyStructureTreeNode for fully loaded nodes (master users) or
+     * CompanyStructureTreeNodeSubCompanyDivisionsToLoad for nodes whose children are lazy
+     * (non-master users), so the actual return type is the shared abstract base.
      *
      * @param string $idUsed
      * @param CompanyStructureParametersGroup $params
      *            object with the needed filters to send to the API account company structure resource
      *
-     * @return CompanyStructureTreeNode|NULL
+     * @return BaseCompanyStructureTreeNode|NULL
      */
-    public function getCompanyStructure(string $idUsed = AccountKey::USED, CompanyStructureParametersGroup $params = null): ?CompanyStructureTreeNode {
+    public function getCompanyStructure(string $idUsed = AccountKey::USED, CompanyStructureParametersGroup $params = null): ?BaseCompanyStructureTreeNode {
         return $this->getResourceElement(BaseCompanyStructureTreeNodeFactory::class, $this->replaceWildcards(Resource::ACCOUNTS_COMPANY_STRUCTURE, ['idUsed' => $idUsed]), $params);
     }
 

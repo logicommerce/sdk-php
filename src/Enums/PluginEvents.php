@@ -17,4 +17,8 @@ abstract class PluginEvents extends Enum {
 
     public const LOGIN_EVENT = "LOGIN_EVENT";
 
+    public const SETTINGS = "SETTINGS";
+
+    public const CUSTOMER = "CUSTOMER";
+
 }

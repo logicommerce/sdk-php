@@ -23,6 +23,7 @@ use SDK\Enums\RelatedType;
  * @see RelatedItems::getPages()
  * @see RelatedItems::getProducts()
  * @see RelatedItems::getPosts()
+ * @see RelatedItems::getBrands()
  *
  * @see Element
  * @see ElementTrait
@@ -50,6 +51,8 @@ class RelatedItems extends Element {
     protected array $products = [];
 
     protected array $posts = [];
+
+    protected array $brands = [];
 
     /**
      * Returns the related section image.
@@ -154,5 +157,18 @@ class RelatedItems extends Element {
 
     protected function setPosts(array $posts): void {
         $this->posts = $this->setArrayField($posts, BlogPost::class);
+    }
+
+    /**
+     * Returns the brands into the related section.
+     *
+     * @return Brand[]
+     */
+    public function getBrands(): array {
+        return $this->brands;
+    }
+
+    protected function setBrands(array $brands): void {
+        $this->brands = $this->setArrayField($brands, Brand::class);
     }
 }

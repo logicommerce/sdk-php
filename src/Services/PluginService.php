@@ -288,7 +288,7 @@ class PluginService extends Service {
                 $class = $this->getActionParametersGroupClass($module, $action, 'SDK\Core\Interfaces\PluginActionSelectPaymentSystemInterface');
                 return (new $class($data))->getParametersGroup();
                 break;
-            case PluginEvents::LOGIN_EVENT:
+            case PluginEvents::LOGIN_EVENT || PluginEvents::SETTINGS || PluginEvents::CUSTOMER:
                 $class = $this->getActionParametersGroupClass($module, $action);
                 return (new $class($data))->getParametersGroup();
                 break;

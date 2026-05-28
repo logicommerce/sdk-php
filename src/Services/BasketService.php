@@ -530,7 +530,7 @@ class BasketService extends Service {
     public function addVoucherCode(string $code): ?Basket {
         return $this->prepareElement(
             $this->call(
-                (new RequestBuilder())->path(Resource::BASKET_VOUCHER_CODE)->method(self::POST)->pathParams(['code' => $code])->build()
+                (new RequestBuilder())->path(Resource::BASKET_VOUCHER_CODE)->method(self::POST)->pathParams(['code' => rawurlencode($code)])->build()
             ),
             Basket::class
         );
@@ -544,7 +544,7 @@ class BasketService extends Service {
     public function deleteVoucherCode(string $code): ?Basket {
         return $this->prepareElement(
             $this->call(
-                (new RequestBuilder())->path(Resource::BASKET_VOUCHER_CODE)->method(self::DELETE)->pathParams(['code' => $code])->build()
+                (new RequestBuilder())->path(Resource::BASKET_VOUCHER_CODE)->method(self::DELETE)->pathParams(['code' => rawurlencode($code)])->build()
             ),
             Basket::class
         );

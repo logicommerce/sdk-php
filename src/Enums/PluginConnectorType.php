@@ -59,11 +59,15 @@ abstract class PluginConnectorType extends Enum {
 
     public const RELATED_DEFINITION = 'RELATED_DEFINITION';
 
+    public const REWARD_POINTS = 'REWARD_POINTS';
+
     public const RMA = 'RMA';
 
     public const ROUTE = 'ROUTE';
 
     public const SEARCH_ENGINE = 'SEARCH_ENGINE';
+
+    public const SITE_BUILDER = 'SITE_BUILDER';
 
     public const SHIPMENT = 'SHIPMENT';
 
