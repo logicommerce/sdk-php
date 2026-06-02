@@ -390,6 +390,22 @@ class ProductsParametersGroup extends ParametersGroup {
     }
 
     /**
+     * Sets a new custom tag range interval filter for this parameters group.
+     *
+     * @param int $customTagId
+     * @param string $intervalId
+     *
+     * @return void
+     */
+    public function addFilterCustomTagRange(int $customTagId, string $intervalId): void {
+        $this->addFilter('filterCustomTagRange', $customTagId, $intervalId);
+    }
+
+    public function addFilterCustomTagRangeInterval(int $customTagId, string $intervalId): void {
+        $this->addFilter('filterCustomTagRangeInterval', $customTagId, $intervalId);
+    }
+
+    /**
      * Sets a new custom tag interval filter for this parameters group.
      *
      * @param int $customTagId

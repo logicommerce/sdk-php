@@ -38,6 +38,8 @@ class FilterCustomTag extends FilterBasic {
 
     private string $maxValue = '';
 
+    private array $ranges = [];
+
     /**
      * Returns the array of values for this custom tag.
      *
@@ -92,5 +94,18 @@ class FilterCustomTag extends FilterBasic {
      */
     public function getMaxValue(): string {
         return $this->maxValue;
+    }
+
+    /**
+     * Returns the range intervals for this custom tag filter.
+     *
+     * @return FilterCustomTagRangeInterval[]
+     */
+    public function getRanges(): array {
+        return $this->ranges;
+    }
+
+    private function setRanges(array $ranges): void {
+        $this->ranges = $this->setArrayField($ranges, FilterCustomTagRangeInterval::class);
     }
 }
