@@ -24,6 +24,8 @@ use SDK\Enums\PageType;
  * @see Page::getPosition()
  * @see Page::getPriority()
  * @see Page::getActive()
+ * @see Page::getPluginAccountId()
+ * @see Page::getPluginAccountModule()
  *
  * @see Element
  * @see ElementTrait
@@ -56,6 +58,10 @@ class Page extends Element {
     protected bool $active = false;
 
     protected array $subpages = [];
+
+    protected ?int $pluginAccountId = null;
+
+    protected ?string $pluginAccountModule = null;
 
     /**
      * Returns the page priority.
@@ -156,6 +162,24 @@ class Page extends Element {
 
     protected function setSubpages(array $subpages): void {
         $this->subpages = $this->setArrayField($subpages, PageFactory::class);
+    }
+
+    /**
+     * Returns the plugin account id of the page.
+     *
+     * @return int|NULL
+     */
+    public function getPluginAccountId(): ?int {
+        return $this->pluginAccountId;
+    }
+
+    /**
+     * Returns the plugin account module of the page.
+     *
+     * @return string|NULL
+     */
+    public function getPluginAccountModule(): ?string {
+        return $this->pluginAccountModule;
     }
 
     /**

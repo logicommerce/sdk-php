@@ -6,10 +6,12 @@ namespace SDK\Core\Dtos\Filter;
 
 use SDK\Core\Dtos\Traits\ElementTrait;
 use SDK\Core\Dtos\Traits\CustomTagsBaseDataTrait;
+use SDK\Core\Dtos\Filter\FilterCustomTagValue;
 
 /**
  * This is the Custom Tag filter class.
  *
+ * @see FilterCustomTag::getCustomTagValues()
  * @see FilterCustomTag::getValues()
  * @see FilterCustomTag::getFilterValues()
  * @see FilterCustomTag::getNameValues()
@@ -23,12 +25,20 @@ use SDK\Core\Dtos\Traits\CustomTagsBaseDataTrait;
 class FilterCustomTag extends FilterBasic {
     use ElementTrait, CustomTagsBaseDataTrait;
 
+    private array $customTagValues = [];
+
+    /**
+     * @deprecated Replaced by customTagValues.
+     */
     private array $values = [];
 
+    /**
+     * @deprecated Replaced by customTagValues.
+     */
     private array $filterValues = [];
 
     /**
-     * @deprecated Transitional backend field; will be replaced.
+     * @deprecated Replaced by customTagValues.
      */
     private array $nameValues = [];
 
@@ -41,7 +51,27 @@ class FilterCustomTag extends FilterBasic {
     private array $ranges = [];
 
     /**
+     * Returns the selectable values for this custom tag filter, each bundling
+     * value, filterValue and optional name.
+     *
+     * @return FilterCustomTagValue[]
+     */
+    public function getCustomTagValues(): array {
+        return $this->customTagValues;
+    }
+
+    private function setCustomTagValues(array $customTagValues): void {
+        $this->customTagValues = $this->setArrayField($customTagValues, FilterCustomTagValue::class);
+        $this->values = array_map(fn ($customTagValue) => $customTagValue->getValue(), $this->customTagValues);
+        $this->filterValues = array_map(fn ($customTagValue) => $customTagValue->getFilterValue(), $this->customTagValues);
+        $names = array_map(fn ($customTagValue) => $customTagValue->getName(), $this->customTagValues);
+        $this->nameValues = array_filter($names, fn ($name) => $name !== null) === [] ? [] : $names;
+    }
+
+    /**
      * Returns the array of values for this custom tag.
+     *
+     * @deprecated Derived from getCustomTagValues(); kept for backward compatibility.
      *
      * @return int[]
      */
@@ -52,6 +82,8 @@ class FilterCustomTag extends FilterBasic {
     /**
      * Returns the array of filterValues for this custom tag.
      *
+     * @deprecated Derived from getCustomTagValues(); kept for backward compatibility.
+     *
      * @return int[]
      */
     public function getFilterValues(): array {
@@ -61,7 +93,7 @@ class FilterCustomTag extends FilterBasic {
     /**
      * Per-value display names for image filters; index aligns with values/filterValues.
      *
-     * @deprecated Transitional backend field; will be replaced.
+     * @deprecated Derived from getCustomTagValues(); kept for backward compatibility.
      *
      * @return string[]
      */
