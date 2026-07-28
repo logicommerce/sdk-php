@@ -42,9 +42,10 @@ class LanguageRoute extends Language {
         $host = Environment::get('COMMERCE_HOST') ?: '';
         $protocol = Environment::get('COMMERCE_PROTOCOL') ?: '';
         $storeUrl = Environment::get('COMMERCE_STORE_URL');
+        $url = $this->url;
         if (!empty($host) && !empty($protocol) && !empty($storeUrl)) {
-            return str_replace($protocol . '://' . $host, $storeUrl, $this->url);
+            $url = str_replace($protocol . '://' . $host, $storeUrl, $url);
         }
-        return $this->url;
+        return explode('?', $url, 2)[0];
     }
 }
