@@ -864,6 +864,10 @@ abstract class Resource extends Enum {
 
     public const USER_WISHLIST_SEND = self::USER_WISHLIST . '/send';
 
+    public const VALIDATIONS = '/validations';
+
+    public const VALIDATIONS_TAX_ID = self::VALIDATIONS . '/taxId';
+
     public const VERSION = '/version';
 
     public static function getConstantResource(string $resourcePath): ?string {

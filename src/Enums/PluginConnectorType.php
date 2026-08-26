@@ -77,6 +77,8 @@ abstract class PluginConnectorType extends Enum {
 
     public const TAXES = 'TAXES';
 
+    public const TAX_ID_VALIDATOR = 'TAX_ID_VALIDATOR';
+
     public const TRACKER = 'TRACKER';
 
     public const UNKNOWN = 'UNKNOWN';

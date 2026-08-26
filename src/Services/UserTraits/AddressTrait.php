@@ -18,11 +18,14 @@ use SDK\Dtos\User\Address;
 use SDK\Dtos\User\AddressValidated;
 use SDK\Dtos\User\BillingAddress;
 use SDK\Dtos\User\ShippingAddress;
+use SDK\Dtos\Validation\TaxIdValidated;
 use SDK\Enums\AccountKey;
 use SDK\Enums\PluginConnectorType;
+use SDK\Enums\ValidationResult;
 use SDK\Services\FormService;
 use SDK\Services\PluginService;
 use SDK\Services\Parameters\Groups\PluginConnectorTypeParametersGroup;
+use SDK\Services\Parameters\Groups\TaxIdValidateParametersGroup;
 use SDK\Services\Parameters\Groups\User\Addresses\AddressParametersGroup;
 use SDK\Services\Parameters\Groups\User\Addresses\AddressValidateParametersGroup;
 use SDK\Services\Parameters\Groups\User\Addresses\BillingAddressParametersGroup;
@@ -230,6 +233,32 @@ trait AddressTrait {
         } else {
             return new AddressValidated(['valid' => true]);
         }
+    }
+
+    /**
+     * Validates the given taxId (nif/vat). The validation is done by the taxId validator plugin configured in the Commerce.
+     * If no taxId validator plugin is configured for the given country, the validation is skipped (no blocking).
+     *
+     * @param TaxIdValidateParametersGroup $data
+     *
+     * @return TaxIdValidated|NULL
+     */
+    public function taxIdValidate(TaxIdValidateParametersGroup $data): ?TaxIdValidated {
+        $params = new PluginConnectorTypeParametersGroup();
+        $params->setConnectorType(PluginConnectorType::TAX_ID_VALIDATOR);
+        $params->setCountryCode($data->getCountryCode());
+        /** @var \SDK\Services\PluginService */
+        $pluginService = PluginService::getInstance();
+        $taxIdPlugins = $pluginService->getPlugins($params);
+        if (empty($taxIdPlugins->getItems())) {
+            return new TaxIdValidated(['status' => ValidationResult::SKIPPED]);
+        }
+        return $this->prepareElement(
+            $this->call(
+                (new RequestBuilder())->path(Resource::VALIDATIONS_TAX_ID)->method(self::POST)->body($data)->build()
+            ),
+            TaxIdValidated::class
+        );
     }
 
     /**
