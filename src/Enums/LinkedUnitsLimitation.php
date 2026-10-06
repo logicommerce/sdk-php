@@ -17,4 +17,6 @@ abstract class LinkedUnitsLimitation extends Enum {
 
     public const BY_PRODUCT = 'BY_PRODUCT';
 
+    public const WITHOUT_LIMITATION = 'WITHOUT_LIMITATION';
+
 }

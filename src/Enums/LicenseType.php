@@ -124,6 +124,12 @@ enum LicenseType {
     case APISGRW;
     case FOLYRG;
     case LCOMMB;
+    case MFAIB;
+    case MFAIB2B;
+    case MFAIES;
+    case MFAIES2B;
+    case MFAIG;
+    case MFAIG2B;
     case FOLYRB;
     case TAXAVA;
     case PAYSPRQ;

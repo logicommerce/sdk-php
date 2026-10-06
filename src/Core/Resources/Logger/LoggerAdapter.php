@@ -36,6 +36,8 @@ abstract class LoggerAdapter implements LoggerInterface, ResettableInterface {
 
     private array $additionalData;
 
+    private static bool $logging = false;
+
     private bool $logEnabled = true;
 
     private array $requiredParams;
@@ -264,11 +266,15 @@ abstract class LoggerAdapter implements LoggerInterface, ResettableInterface {
         if ($this->logEnabled !== true) {
             return;
         }
-        $this->setLogPartition();
-        if (is_array($message)) {
-            $message = json_encode($message);
+        if (self::$logging) {
+            return;
         }
+        self::$logging = true;
         try {
+            $this->setLogPartition();
+            if (is_array($message)) {
+                $message = json_encode($message);
+            }
             $microtime = explode(' ', microtime());
             $this->additionalData['microtime'] = $microtime[1] . ' ' . $microtime[0];
             $data = $this->additionalData + ['level' => $level] + $this->getLogData($context);
@@ -276,8 +282,10 @@ abstract class LoggerAdapter implements LoggerInterface, ResettableInterface {
                 return;
             }
             $this->logger->log($level, $message, $data);
-        } catch (\Exception $e) {
-            throw new LoggerException($e->getMessage(), LoggerException::LOGGING_ERROR);
+        } catch (\Throwable $e) {
+            error_log(static::class . ': logging failed: ' . $e->getMessage());
+        } finally {
+            self::$logging = false;
         }
     }
 
