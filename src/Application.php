@@ -116,7 +116,7 @@ final class Application extends CoreApplication {
      *
      * @return ElementCollection|NULL
      */
-    public function getCountriesSettings(string $languageCode = null, string $countryCode = null): ?ElementCollection {
+    public function getCountriesSettings(?string $languageCode = null, ?string $countryCode = null): ?ElementCollection {
         $key = 'countries';
         if (!is_null($languageCode)) {
             $key .= '_' . $languageCode;
@@ -147,7 +147,7 @@ final class Application extends CoreApplication {
      *
      * @return ElementCollection|NULL
      */
-    public function getCurrenciesSettings(string $countryCode = null): ?ElementCollection {
+    public function getCurrenciesSettings(?string $countryCode = null): ?ElementCollection {
         $country = [];
         $settingsCountryCurrencies = $this->getSetting('currencies', fn() => SettingsService::getInstance()->getCurrencies());
         if (method_exists($settingsCountryCurrencies, 'getCountries')) {

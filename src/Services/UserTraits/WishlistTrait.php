@@ -83,7 +83,7 @@ trait WishlistTrait {
      * @return Status|NULL
      * @deprecated
      */
-    public function sendWishlist(SendWishlistParametersGroup $params = null): ?Status {
+    public function sendWishlist(?SendWishlistParametersGroup $params = null): ?Status {
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path(Resource::USER_WISHLIST_SEND)->method(self::POST)->body($params)->build()),
             Status::class

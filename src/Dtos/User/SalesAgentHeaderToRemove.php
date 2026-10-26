@@ -2,7 +2,6 @@
 
 namespace SDK\Dtos\User;
 
-use Deprecated;
 use SDK\Core\Dtos\Traits\ElementTrait;
 use SDK\Core\Dtos\Traits\IdentifiableElementTrait;
 use SDK\Core\Dtos\Traits\IntegrableElementTrait;
@@ -18,8 +17,9 @@ use SDK\Core\Dtos\Traits\IntegrableElementTrait;
  * @see IntegrableElementTrait
  *
  * @package SDK\Dtos\User
+ *
+ * @deprecated This class is deprecated and must be replaced by future SalesAgentHeader
  */
-#[Deprecated('This class is deprecated and must be replaced by future SalesAgentHeader')]
 class SalesAgentHeaderToRemove {
     use ElementTrait, IdentifiableElementTrait, IntegrableElementTrait;
 

@@ -52,7 +52,7 @@ class PageService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getPages(PageParametersGroup $params = null): ?ElementCollection {
+    public function getPages(?PageParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Page::class, Resource::PAGES, $params);
     }
 
@@ -83,7 +83,7 @@ class PageService extends Service {
      *
      * @return void
      */
-    public function addGetPages(BatchRequests $batchRequests, string $batchName, PageParametersGroup $params = null): void {
+    public function addGetPages(BatchRequests $batchRequests, string $batchName, ?PageParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::PAGES)->urlParams($params)->build()
         );

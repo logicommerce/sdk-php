@@ -93,7 +93,7 @@ final class Connection {
      * @return array
      * @throws ConnectionException
      */
-    public function doRequest(Request $request, string $apiUrl = null): array {
+    public function doRequest(Request $request, ?string $apiUrl = null): array {
         $timerFlag = $apiUrl;
         if (is_null($timerFlag) || !strlen($timerFlag)) {
             $timerFlag = $request->getPath();

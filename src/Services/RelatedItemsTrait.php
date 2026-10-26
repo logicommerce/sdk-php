@@ -38,7 +38,7 @@ trait RelatedItemsTrait {
      * @return ElementCollection|NULL
      * @throws InvalidParameterException
      */
-    public function getRelatedItems(int $id = 0, string $type = '', RelatedItemsParametersGroup $params = null): ?ElementCollection {
+    public function getRelatedItems(int $id = 0, string $type = '', ?RelatedItemsParametersGroup $params = null): ?ElementCollection {
         if ($id <= 0) {
             return null;
         }
@@ -71,7 +71,7 @@ trait RelatedItemsTrait {
      * @throws InvalidParameterException
      */
     public function addGetRelatedItems(
-        BatchRequests $batchRequests, string $batchName, int $id, string $type = '', RelatedItemsParametersGroup $params = null
+        BatchRequests $batchRequests, string $batchName, int $id, string $type = '', ?RelatedItemsParametersGroup $params = null
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())

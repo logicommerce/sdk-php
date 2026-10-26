@@ -40,7 +40,7 @@ trait ShoppingListsTrait {
      *
      * @return ElementCollection|NULL
      */
-    public function getShoppingLists(ShoppingListsParametersGroup $params = null): ?ElementCollection {
+    public function getShoppingLists(?ShoppingListsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(ShoppingList::class, Resource::ACCOUNTS_SHOPPING_LISTS, $params);
     }
 
@@ -91,7 +91,7 @@ trait ShoppingListsTrait {
      *
      * @return ElementCollection|NULL
      */
-    public function getShoppingListRows(int $id, ShoppingListRowsParametersGroup $params = null): ?ElementCollection {
+    public function getShoppingListRows(int $id, ?ShoppingListRowsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(ShoppingListRow::class,  $this->replaceWildcards(Resource::SHOPPING_LISTS_ID_ROWS, ['id' => $id]), $params);
     }
 
@@ -160,7 +160,7 @@ trait ShoppingListsTrait {
      *
      * @return void
      */
-    public function addGetShoppingLists(BatchRequests $batchRequests, string $batchName, ShoppingListsParametersGroup $params = null): void {
+    public function addGetShoppingLists(BatchRequests $batchRequests, string $batchName, ?ShoppingListsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_SHOPPING_LISTS)->urlParams($params)->build()
         );
@@ -171,7 +171,7 @@ trait ShoppingListsTrait {
      *
      * @return ElementCollection|NULL
      */
-    public function addGetShoppingListRows(BatchRequests $batchRequests, string $batchName, int $id, ShoppingListRowsParametersGroup $params = null): void {
+    public function addGetShoppingListRows(BatchRequests $batchRequests, string $batchName, int $id, ?ShoppingListRowsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::SHOPPING_LISTS_ID_ROWS)->pathParams(['id' => $id])->urlParams($params)->build()
         );

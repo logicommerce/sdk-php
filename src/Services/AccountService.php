@@ -154,7 +154,7 @@ class AccountService extends Service {
      *
      * @return BaseCompanyStructureTreeNode|NULL
      */
-    public function getCompanyStructure(string $idUsed = AccountKey::USED, CompanyStructureParametersGroup $params = null): ?BaseCompanyStructureTreeNode {
+    public function getCompanyStructure(string $idUsed = AccountKey::USED, ?CompanyStructureParametersGroup $params = null): ?BaseCompanyStructureTreeNode {
         return $this->getResourceElement(BaseCompanyStructureTreeNodeFactory::class, $this->replaceWildcards(Resource::ACCOUNTS_COMPANY_STRUCTURE, ['idUsed' => $idUsed]), $params);
     }
 
@@ -167,7 +167,7 @@ class AccountService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getCompanyRoles(string $idUsed = AccountKey::USED, CompanyRolesParametersGroup $params = null): ?ElementCollection {
+    public function getCompanyRoles(string $idUsed = AccountKey::USED, ?CompanyRolesParametersGroup $params = null): ?ElementCollection {
         return $this->getResourceElement(ElementCollection::class, $this->replaceWildcards(Resource::ACCOUNTS_COMPANY_ROLES, ['idUsed' => $idUsed]), $params);
     }
 
@@ -191,7 +191,7 @@ class AccountService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getOrders(string $idUsed = AccountKey::USED, AccountOrderParametersGroup $params = null): ?ElementCollection {
+    public function getOrders(string $idUsed = AccountKey::USED, ?AccountOrderParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(AccountOrder::class, $this->replaceWildcards(Resource::ACCOUNTS_ORDERS, ['idUsed' => $idUsed]), $params);
     }
 
@@ -204,7 +204,7 @@ class AccountService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getRegisteredUsers(string $idUsed = AccountKey::USED, AccountRegisteredUsersParametersGroup $params = null): ?ElementCollection {
+    public function getRegisteredUsers(string $idUsed = AccountKey::USED, ?AccountRegisteredUsersParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(MasterFactory::class, $this->replaceWildcards(Resource::ACCOUNTS_REGISTERED_USERS, ['idUsed' => $idUsed]), $params);
     }
 
@@ -233,7 +233,7 @@ class AccountService extends Service {
      * 
      * @return MasterVal|NULL
      */
-    public function getRegisteredUsersPendingApproval(string $id, int $registeredUserId, AccountRegisteredUsersPendingApprovalParametersGroup $params = null): ?MasterVal {
+    public function getRegisteredUsersPendingApproval(string $id, int $registeredUserId, ?AccountRegisteredUsersPendingApprovalParametersGroup $params = null): ?MasterVal {
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path(Resource::ACCOUNTS_REGISTERED_USERS_WITH_REGISTERED_ID_PENDING_APPROVAL)->pathParams(['id' => $id, 'registeredUserId' => $registeredUserId])->urlParams($params)->build()),
             MasterValFactory::class
@@ -260,7 +260,7 @@ class AccountService extends Service {
      *
      * @return RegisteredUserSimpleProfile|NULL
      */
-    public function getRegisteredUserSearch(string $idUsed = AccountKey::USED, SearchAccountRegisteredUserParametersGroup $params = null): ?ElementCollection {
+    public function getRegisteredUserSearch(string $idUsed = AccountKey::USED, ?SearchAccountRegisteredUserParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(RegisteredUserSimpleProfile::class, $this->replaceWildcards(Resource::ACCOUNTS_REGISTERED_USERS_SEARCH, ['idUsed' => $idUsed]), $params);
     }
 
@@ -284,7 +284,7 @@ class AccountService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getRegisteredUsersMeAccounts(RegisteredUsersMeAccountsParametersGroup $params = null): ?ElementCollection {
+    public function getRegisteredUsersMeAccounts(?RegisteredUsersMeAccountsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(RegisteredUserAccount::class, Resource::ACCOUNT_REGISTERED_USERS_ME_ACCOUNTS, $params);
     }
 
@@ -296,7 +296,7 @@ class AccountService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getSalesAgentCustomers(SalesAgentCustomersParametersGroup $params = null): ?ElementCollection {
+    public function getSalesAgentCustomers(?SalesAgentCustomersParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(SalesAgentCustomerData::class, Resource::ACCOUNT_SALES_AGENT_CUSTOMERS, $params);
     }
 
@@ -308,7 +308,7 @@ class AccountService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getSalesAgentSales(SalesAgentSalesParametersGroup $params = null): ?ElementCollection {
+    public function getSalesAgentSales(?SalesAgentSalesParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(SalesAgentSales::class, Resource::ACCOUNT_SALES_AGENT_SALES, $params);
     }
 
@@ -321,7 +321,7 @@ class AccountService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getSalesAgentOrders(int $customerId, SalesAgentOrdersParametersGroup $params = null): ?ElementCollection {
+    public function getSalesAgentOrders(int $customerId, ?SalesAgentOrdersParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(UserOrder::class, $this->replaceWildcards(Resource::ACCOUNT_SALES_AGENT_CUSTOMERS_ID_ORDERS, ['customerId' => $customerId]), $params);
     }
 
@@ -364,7 +364,7 @@ class AccountService extends Service {
      *
      * @return void
      */
-    public function addGetCompanyRoles(BatchRequests $batchRequests, string $batchName, CompanyRolesParametersGroup $params = null): void {
+    public function addGetCompanyRoles(BatchRequests $batchRequests, string $batchName, ?CompanyRolesParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_COMPANY_ROLES)->urlParams($params)->build()
         );
@@ -399,7 +399,7 @@ class AccountService extends Service {
      *
      * @return void
      */
-    public function addGetCompanyStructure(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, CompanyStructureParametersGroup $params = null): void {
+    public function addGetCompanyStructure(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, ?CompanyStructureParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_COMPANY_STRUCTURE)->pathParams(['idUsed' => $idUsed])->urlParams($params)->build()
         );
@@ -417,7 +417,7 @@ class AccountService extends Service {
      *
      * @return void
      */
-    public function addGetOrders(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, AccountOrderParametersGroup $params = null): void {
+    public function addGetOrders(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, ?AccountOrderParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_ORDERS)->pathParams(['idUsed' => $idUsed])->urlParams($params)->build()
         );
@@ -434,7 +434,7 @@ class AccountService extends Service {
      *            object with the needed filters to send to the API account registered user resource
      * @return void
      */
-    public function addGetRegisteredUsers(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, AccountRegisteredUsersParametersGroup $params = null): void {
+    public function addGetRegisteredUsers(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, ?AccountRegisteredUsersParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::ACCOUNTS_REGISTERED_USERS)->pathParams(['idUsed' => $idUsed])->urlParams($params)
@@ -452,7 +452,7 @@ class AccountService extends Service {
      *            object with the needed filters to send to the API account registered user exists resource
      * @return void
      */
-    public function addGetRegisteredUsersExists(BatchRequests $batchRequests, string $batchName, RegisteredUserExistsParametersGroup $params = null): void {
+    public function addGetRegisteredUsersExists(BatchRequests $batchRequests, string $batchName, ?RegisteredUserExistsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::ACCOUNT_REGISTERED_USERS_EXISTS)->urlParams($params)
@@ -471,7 +471,7 @@ class AccountService extends Service {
      *            object with the needed filters to send to the API account registered user exists resource
      * @return void
      */
-    public function addGetRegisteredUsersSearch(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, SearchAccountRegisteredUserParametersGroup $params = null): void {
+    public function addGetRegisteredUsersSearch(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, ?SearchAccountRegisteredUserParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::ACCOUNTS_REGISTERED_USERS_SEARCH)
@@ -507,7 +507,7 @@ class AccountService extends Service {
      *
      * @return void
      */
-    public function addGetRegisteredUsersMeAccounts(BatchRequests $batchRequests, string $batchName, RegisteredUsersMeAccountsParametersGroup $params = null): void {
+    public function addGetRegisteredUsersMeAccounts(BatchRequests $batchRequests, string $batchName, ?RegisteredUsersMeAccountsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::ACCOUNT_REGISTERED_USERS_ME_ACCOUNTS)->urlParams($params)
@@ -546,7 +546,7 @@ class AccountService extends Service {
      *
      * @return void
      */
-    public function addGetRegisteredUsersPendingApproval(BatchRequests $batchRequests, string $batchName, string $id, int $registeredUserId, AccountRegisteredUsersPendingApprovalParametersGroup $params = null): void {
+    public function addGetRegisteredUsersPendingApproval(BatchRequests $batchRequests, string $batchName, string $id, int $registeredUserId, ?AccountRegisteredUsersPendingApprovalParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::ACCOUNTS_REGISTERED_USERS_WITH_REGISTERED_ID_PENDING_APPROVAL)
@@ -567,7 +567,7 @@ class AccountService extends Service {
      *
      * @return void
      */
-    public function addGetSalesAgentCustomers(BatchRequests $batchRequests, string $batchName, SalesAgentCustomersParametersGroup $params = null): void {
+    public function addGetSalesAgentCustomers(BatchRequests $batchRequests, string $batchName, ?SalesAgentCustomersParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::ACCOUNT_SALES_AGENT_CUSTOMERS)->urlParams($params)
@@ -586,7 +586,7 @@ class AccountService extends Service {
      *
      * @return void
      */
-    public function addGetSalesAgentOrders(BatchRequests $batchRequests, string $batchName, int $customerId, SalesAgentOrdersParametersGroup $params = null): void {
+    public function addGetSalesAgentOrders(BatchRequests $batchRequests, string $batchName, int $customerId, ?SalesAgentOrdersParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)
                 ->path(Resource::ACCOUNT_SALES_AGENT_CUSTOMERS_ID_ORDERS)->pathParams(['customerId' => $customerId])->urlParams($params)->build()
@@ -603,7 +603,7 @@ class AccountService extends Service {
      *
      * @return void
      */
-    public function addGetSalesAgentSales(BatchRequests $batchRequests, string $batchName, SalesAgentSalesParametersGroup $params = null): void {
+    public function addGetSalesAgentSales(BatchRequests $batchRequests, string $batchName, ?SalesAgentSalesParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNT_SALES_AGENT_SALES)->urlParams($params)
                 ->build()

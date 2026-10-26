@@ -45,7 +45,7 @@ class BrandService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getBrands(BrandParametersGroup $params = null): ?ElementCollection {
+    public function getBrands(?BrandParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Brand::class, Resource::BRANDS, $params);
     }
 
@@ -71,7 +71,7 @@ class BrandService extends Service {
      *
      * @return void
      */
-    public function addGetBrands(BatchRequests $batchRequests, string $batchName, BrandParametersGroup $params = null): void {
+    public function addGetBrands(BatchRequests $batchRequests, string $batchName, ?BrandParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::BRANDS)->urlParams($params)->build()
         );

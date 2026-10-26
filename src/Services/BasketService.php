@@ -172,7 +172,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function redeemRewardPoints(RewardPointsRedeemParametersGroup $params = null): ?Basket {
+    public function redeemRewardPoints(?RewardPointsRedeemParametersGroup $params = null): ?Basket {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_REWARD_POINTS_REDEEM)->method(self::POST)->body($params)->build()
@@ -189,7 +189,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function addProduct(AddProductParametersGroup $params = null): ?Basket {
+    public function addProduct(?AddProductParametersGroup $params = null): ?Basket {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_PRODUCT)->method(self::POST)->body($params)->build()
@@ -208,7 +208,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function pinProductAttributes(string $hash, ProductRowPinnedRequestParametersGroup $params = null): ?Basket {
+    public function pinProductAttributes(string $hash, ?ProductRowPinnedRequestParametersGroup $params = null): ?Basket {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_PRODUCT_HASH_PIN)->method(self::PUT)->pathParams(['hash' => $hash])->body($params)->build()
@@ -225,7 +225,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function massPinProductAttributes(MassiveProductRowPinnedParametersGroup $params = null): ?Basket {
+    public function massPinProductAttributes(?MassiveProductRowPinnedParametersGroup $params = null): ?Basket {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_PRODUCTS_PIN)->method(self::PUT)->body($params)->build()
@@ -243,7 +243,7 @@ class BasketService extends Service {
      *
      * @return ResponseAddFillProductCollection|NULL
      */
-    public function addProducts(AddProductsParametersGroup $params = null): ?ResponseAddFillProductCollection {
+    public function addProducts(?AddProductsParametersGroup $params = null): ?ResponseAddFillProductCollection {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_PRODUCTS)->method(self::POST)->body($params)->build()
@@ -260,7 +260,7 @@ class BasketService extends Service {
      * 
      * @return ResponseSetRows|NULL
      */
-    public function setRows(SetRowsParametersGroup $params = null): ?ResponseSetRows {
+    public function setRows(?SetRowsParametersGroup $params = null): ?ResponseSetRows {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_SET_ROWS)->method(self::POST)->body($params)->build()
@@ -277,7 +277,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function addBundle(AddBundleParametersGroup $params = null): ?Basket {
+    public function addBundle(?AddBundleParametersGroup $params = null): ?Basket {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_BUNDLE)->method(self::POST)->body($params)->build()
@@ -295,7 +295,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function addLinked(AddLinkedParametersGroup $params = null): ?Basket {
+    public function addLinked(?AddLinkedParametersGroup $params = null): ?Basket {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_LINKED)->method(self::POST)->body($params)->build()
@@ -312,7 +312,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function addGift(AddGiftParametersGroup $params = null): ?Basket {
+    public function addGift(?AddGiftParametersGroup $params = null): ?Basket {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_GIFT)->method(self::POST)->body($params)->build()
@@ -329,7 +329,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function editProduct(string $hash, EditProductParametersGroup $params = null): ?Basket {
+    public function editProduct(string $hash, ?EditProductParametersGroup $params = null): ?Basket {
         (new HashParametersValidator())->validate(['hash' => $hash]);
         return $this->prepareElement(
             $this->call(
@@ -349,7 +349,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function editBundle(string $hash, EditBundleParametersGroup $params = null): ?Basket {
+    public function editBundle(string $hash, ?EditBundleParametersGroup $params = null): ?Basket {
         (new HashParametersValidator())->validate(['hash' => $hash]);
         return $this->prepareElement(
             $this->call(
@@ -369,7 +369,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function editLinked(string $hash, EditLinkedParametersGroup $params = null): ?Basket {
+    public function editLinked(string $hash, ?EditLinkedParametersGroup $params = null): ?Basket {
         (new HashParametersValidator())->validate(['hash' => $hash]);
         return $this->prepareElement(
             $this->call(
@@ -404,7 +404,7 @@ class BasketService extends Service {
      * 
      * @return Basket|NULL
      */
-    public function deleteRows(DeleteRowsParametersGroup $params = null): ?Basket {
+    public function deleteRows(?DeleteRowsParametersGroup $params = null): ?Basket {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_ROWS_DELETE)->method(self::POST)->body($params)->build()
@@ -432,7 +432,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function setPaymentSystem(EditPaymentSystemParametersGroup $params = null): ?Basket {
+    public function setPaymentSystem(?EditPaymentSystemParametersGroup $params = null): ?Basket {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_PAYMENT_SYSTEMS)->method(self::POST)->body($params)->build()
@@ -458,7 +458,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function setShippings(EditShipmentsParametersGroup $params = null): ?Basket {
+    public function setShippings(?EditShipmentsParametersGroup $params = null): ?Basket {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_SHIPPINGS)->method(self::POST)->body($params)->build()
@@ -476,7 +476,7 @@ class BasketService extends Service {
      * @return ElementCollection|NULL
      * @deprecated 2404-001
      */
-    public function getDeliveries(DeliveriesParametersGroup $params = null): ?ElementCollection {
+    public function getDeliveries(?DeliveriesParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(BasketDeliveryFactory::class, Resource::BASKET_DELIVERIES, $params);
     }
 
@@ -488,7 +488,7 @@ class BasketService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getPhysicalLocationPickingDeliveries(DeliveriesParametersGroup $params = null): ?ElementCollection {
+    public function getPhysicalLocationPickingDeliveries(?DeliveriesParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(BasketPickingDelivery::class, Resource::BASKET_PHYSICAL_LOCATION_PICKING_DELIVERIES, $params);
     }
 
@@ -500,7 +500,7 @@ class BasketService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getProviderPickupPointPickingDeliveries(ProviderPickupPointPickingDeliveriesParametersGroup $params = null): ?ElementCollection {
+    public function getProviderPickupPointPickingDeliveries(?ProviderPickupPointPickingDeliveriesParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(BasketPickingDelivery::class, Resource::BASKET_PROVIDER_PICKUP_POINT_PICKING_DELIVERIES, $params);
     }
 
@@ -574,7 +574,7 @@ class BasketService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getRelatedItems(string $type = '', RelatedItemsParametersGroup $params = null): ?ElementCollection {
+    public function getRelatedItems(string $type = '', ?RelatedItemsParametersGroup $params = null): ?ElementCollection {
         return $this->getResponse(
             ['items' => $this->getConnection()->doRequest(
                 (new RequestBuilder())
@@ -602,7 +602,7 @@ class BasketService extends Service {
      *
      * @return Basket|NULL
      */
-    public function setCustomTags(EditBasketCustomTagsParametersGroup $params = null): ?Basket {
+    public function setCustomTags(?EditBasketCustomTagsParametersGroup $params = null): ?Basket {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::BASKET_CUSTOM_TAGS)->method(self::POST)->body($params)->build()
@@ -619,7 +619,7 @@ class BasketService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getLinkedProducts(LinkedParametersGroup $params = null): ?ElementCollection {
+    public function getLinkedProducts(?LinkedParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(
             Linked::class,
             Resource::BASKET_LINKED,
@@ -633,7 +633,7 @@ class BasketService extends Service {
      * @return Basket|NULL
      * @deprecated use BasketService::updateOmsBasketCustomer
      */
-    public function setAddressesBook(SetBasketAddressesBookParametersGroup $params = null): ?Basket {
+    public function setAddressesBook(?SetBasketAddressesBookParametersGroup $params = null): ?Basket {
         if (!Application::getInstance()->getEcommerceSettings()->getAccountRegisteredUsersSettings()->getCardinalityPlus()) {
             return $this->prepareElement(
                 $this->call(
@@ -700,7 +700,7 @@ class BasketService extends Service {
      * @return void
      * @deprecated 2404-001
      */
-    public function addGetDeliveries(BatchRequests $batchRequests, string $batchName, DeliveriesParametersGroup $params = null): void {
+    public function addGetDeliveries(BatchRequests $batchRequests, string $batchName, ?DeliveriesParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::BASKET_DELIVERIES)->urlParams($params)->build()
         );
@@ -717,7 +717,7 @@ class BasketService extends Service {
      *
      * @return void
      */
-    public function addGetPhysicalLocationPickingDeliveries(BatchRequests $batchRequests, string $batchName, DeliveriesParametersGroup $params = null): void {
+    public function addGetPhysicalLocationPickingDeliveries(BatchRequests $batchRequests, string $batchName, ?DeliveriesParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::BASKET_PHYSICAL_LOCATION_PICKING_DELIVERIES)->urlParams($params)->build()
         );
@@ -734,7 +734,7 @@ class BasketService extends Service {
      *
      * @return void
      */
-    public function addGetProviderPickupPointPickingDeliveries(BatchRequests $batchRequests, string $batchName, ProviderPickupPointPickingDeliveriesParametersGroup $params = null): void {
+    public function addGetProviderPickupPointPickingDeliveries(BatchRequests $batchRequests, string $batchName, ?ProviderPickupPointPickingDeliveriesParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::BASKET_PROVIDER_PICKUP_POINT_PICKING_DELIVERIES)->urlParams($params)->build()
         );
@@ -781,7 +781,7 @@ class BasketService extends Service {
      *
      * @return void
      */
-    public function addGetRelatedItems(BatchRequests $batchRequests, string $batchName, string $type = '', RelatedItemsParametersGroup $params = null): void {
+    public function addGetRelatedItems(BatchRequests $batchRequests, string $batchName, string $type = '', ?RelatedItemsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)
@@ -800,7 +800,7 @@ class BasketService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function addGetLinkedProducts(BatchRequests $batchRequests, string $batchName, LinkedParametersGroup $params = null): void {
+    public function addGetLinkedProducts(BatchRequests $batchRequests, string $batchName, ?LinkedParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::BASKET_LINKED)->urlParams($params)
@@ -816,7 +816,7 @@ class BasketService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function addGetLockedStocksAggregateData(BatchRequests $batchRequests, string $batchName, LockedStocksAggregateDataParametersGroup $params = null): void {
+    public function addGetLockedStocksAggregateData(BatchRequests $batchRequests, string $batchName, ?LockedStocksAggregateDataParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::OMS_LOCKED_STOCKS_AGGREGATE_DATA)->urlParams($params)
@@ -871,7 +871,7 @@ class BasketService extends Service {
      *
      * @return array
      */
-    public function getExpressCheckoutUrl(PluginAccountIdParametersGroup $params = null): UrlResponse {
+    public function getExpressCheckoutUrl(?PluginAccountIdParametersGroup $params = null): UrlResponse {
         return $this->prepareElement($this->call(
             (new RequestBuilder())
                 ->path(Resource::EXPRESS_CHECKOUT)
@@ -892,7 +892,7 @@ class BasketService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function addGetExpressCheckoutUrl(BatchRequests $batchRequests, string $batchName, PluginAccountIdParametersGroup $params = null): void {
+    public function addGetExpressCheckoutUrl(BatchRequests $batchRequests, string $batchName, ?PluginAccountIdParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)
@@ -909,7 +909,7 @@ class BasketService extends Service {
      * 
      * @return Basket
      */
-    public function validateExpressCheckout(ExpressCheckoutValidateParametersGroup $params = null): Basket {
+    public function validateExpressCheckout(?ExpressCheckoutValidateParametersGroup $params = null): Basket {
         if (is_null($params)) {
             $params = $this->getExpressCheckoutValidateParametersGroup();
         }

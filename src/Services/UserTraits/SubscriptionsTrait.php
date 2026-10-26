@@ -83,7 +83,7 @@ trait SubscriptionsTrait {
      *
      * @return ElementCollection|NULL
      */
-    public function getSubscriptions(SubscriptionsParametersGroup $params = null): ?ElementCollection {
+    public function getSubscriptions(?SubscriptionsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Subscription::class, Resource::ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS, $params);
     }
 
@@ -98,7 +98,7 @@ trait SubscriptionsTrait {
      *
      * @return void
      */
-    public function addGetSubscriptions(BatchRequests $batchRequests, string $batchName, SubscriptionsParametersGroup $params = null): void {
+    public function addGetSubscriptions(BatchRequests $batchRequests, string $batchName, ?SubscriptionsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::ACCOUNTS_REGISTERED_USERS_SUBSCRIPTIONS)->urlParams($params)

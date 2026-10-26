@@ -246,7 +246,7 @@ class Request {
         return $request;
     }
 
-    private function paramsToArray(ParametersGroup $parameters = null): ?array {
+    private function paramsToArray(?ParametersGroup $parameters = null): ?array {
         if (is_null($parameters)) {
             return null;
         }

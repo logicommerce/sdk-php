@@ -60,7 +60,7 @@ class CategoryService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getCategories(CategoryParametersGroup $params = null): ?ElementCollection {
+    public function getCategories(?CategoryParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Category::class, Resource::CATEGORIES, $params);
     }
 
@@ -72,7 +72,7 @@ class CategoryService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getCategoriesTree(CategoriesTreeParametersGroup $params = null): ?ElementCollection {
+    public function getCategoriesTree(?CategoriesTreeParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(CategoryTree::class, Resource::CATEGORIES_TREE, $params);
     }
 
@@ -109,7 +109,7 @@ class CategoryService extends Service {
      *
      * @return void
      */
-    public function addGetCategories(BatchRequests $batchRequests, string $batchName, CategoryParametersGroup $params = null): void {
+    public function addGetCategories(BatchRequests $batchRequests, string $batchName, ?CategoryParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::CATEGORIES)->urlParams($params)->build()
         );
@@ -126,7 +126,7 @@ class CategoryService extends Service {
      *
      * @return void
      */
-    public function addGetCategoriesTree(BatchRequests $batchRequests, string $batchName, CategoriesTreeParametersGroup $params = null): void {
+    public function addGetCategoriesTree(BatchRequests $batchRequests, string $batchName, ?CategoriesTreeParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::CATEGORIES_TREE)->urlParams($params)->build()
         );

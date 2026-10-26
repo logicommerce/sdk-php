@@ -83,7 +83,7 @@ class FormService extends Service {
      *
      * @return Status|NULL
      */
-    public function customFormSendData(CustomFormSendDataParametersGroup $params = null): ?Status {
+    public function customFormSendData(?CustomFormSendDataParametersGroup $params = null): ?Status {
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path(Resource::CUSTOM_FORM_SEND_DATA)->method(self::POST)->body($params)->build()),
             Status::class
@@ -98,7 +98,7 @@ class FormService extends Service {
      *
      * @return Status|NULL
      */
-    public function customFormSendMail(CustomFormSendMailParametersGroup $params = null, string $dataValidatior = ''): ?Status {
+    public function customFormSendMail(?CustomFormSendMailParametersGroup $params = null, string $dataValidatior = ''): ?Status {
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path(Resource::CUSTOM_FORM_SEND_MAIL)->method(self::POST)->body($params)->build()),
             Status::class

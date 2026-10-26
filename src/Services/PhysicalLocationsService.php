@@ -46,7 +46,7 @@ class PhysicalLocationsService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getPhysicalLocations(PhysicalLocationParametersGroup $params = null): ?ElementCollection {
+    public function getPhysicalLocations(?PhysicalLocationParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(PhysicalLocation::class, Resource::PHYSICAL_LOCATIONS, $params);
     }
 
@@ -64,7 +64,7 @@ class PhysicalLocationsService extends Service {
     public function addGetPhysicalLocations(
         BatchRequests $batchRequests,
         string $batchName,
-        PhysicalLocationParametersGroup $params = null
+        ?PhysicalLocationParametersGroup $params = null
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::PHYSICAL_LOCATIONS)->urlParams($params)->build()

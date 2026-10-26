@@ -45,7 +45,7 @@ class GeolocationService extends Service {
 
     private ?string $apiUrl = null;
 
-    protected function call(Request $request, string $apiUrl = null): array {
+    protected function call(Request $request, ?string $apiUrl = null): array {
         return parent::call($request, $this->getApiURL());
     }
 
@@ -68,7 +68,7 @@ class GeolocationService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getCountries(string $languageCode = null): ?ElementCollection {
+    public function getCountries(?string $languageCode = null): ?ElementCollection {
         return $this->getElements(Country::class, Resource::COUNTRIES, $this->getCountriesParams($languageCode));
     }
 
@@ -89,7 +89,7 @@ class GeolocationService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getLocations(LocationParametersGroup $params = null): ?ElementCollection {
+    public function getLocations(?LocationParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(CountryLocation::class, Resource::LOCATIONS, $params);
     }
 
@@ -101,7 +101,7 @@ class GeolocationService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getLocalities(LocalitiesParametersGroup $params = null): ?ElementCollection {
+    public function getLocalities(?LocalitiesParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(PostalCode::class, Resource::LOCATIONS_LOCALITIES, $params);
     }
 
@@ -113,7 +113,7 @@ class GeolocationService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getLocationPath(LocationPathParametersGroup $params = null): ?ElementCollection {
+    public function getLocationPath(?LocationPathParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(CountryLocation::class, Resource::LOCATIONS_PATH, $params);
     }
 }

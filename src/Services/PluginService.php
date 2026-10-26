@@ -84,7 +84,7 @@ class PluginService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getAssets(AssetParametersGroup $params = null): ?ElementCollection {
+    public function getAssets(?AssetParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Asset::class, Resource::ASSETS, $params);
     }
 
@@ -333,7 +333,7 @@ class PluginService extends Service {
      *
      * @return void
      */
-    public function addGetAssets(BatchRequests $batchRequests, string $batchName, AssetParametersGroup $params = null): void {
+    public function addGetAssets(BatchRequests $batchRequests, string $batchName, ?AssetParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ASSETS)->urlParams($params)->build()
         );

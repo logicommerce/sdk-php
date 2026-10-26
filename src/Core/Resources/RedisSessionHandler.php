@@ -39,7 +39,7 @@ final class RedisSessionHandler implements \SessionHandlerInterface {
      * @param Client $db
      *            The PRedis Client we're going to use on this session
      */
-    public function __construct(Client $db = null) {
+    public function __construct(?Client $db = null) {
         $this->db = $this->getRedisConnection($db);
         $this->prefix = Redis::getKeyPrefix() . RedisKey::SESSION . ':';
         if (defined("REQUEST_HEADERS") &&  isset(REQUEST_HEADERS['X-IS-BOT']) && REQUEST_HEADERS['X-IS-BOT'] === '1') {

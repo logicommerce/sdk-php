@@ -10,8 +10,9 @@ use SDK\Dtos\Accounts\RegisteredUserHeader;
  * @see IntegrableElementTrait
  *
  * @package SDK\Dtos\User
+ *
+ * @deprecated This class is deprecated and must be removed when remove SalesAgentHeaderToRemove
  */
-#[\Deprecated('This class is deprecated and must be removed when remove SalesAgentHeaderToRemove')]
 class SalesAgentRegisteredToRemove extends RegisteredUserHeader {
 
 

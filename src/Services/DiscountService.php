@@ -44,7 +44,7 @@ class DiscountService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getDiscounts(DiscountsParametersGroup $params = null): ?ElementCollection {
+    public function getDiscounts(?DiscountsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Discount::class, Resource::DISCOUNTS, $params);
     }
 
@@ -56,7 +56,7 @@ class DiscountService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getDiscountSelectableGiftsIdProducts(int $id, DiscountSelectableGiftsParametersGroup $params = null): ?ElementCollection {
+    public function getDiscountSelectableGiftsIdProducts(int $id, ?DiscountSelectableGiftsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Product::class, $this->replaceWildcards(Resource::DISCOUNT_SELECTABLE_GIFTS_ID_PRODUCTS, ['id' => $id]), $params);
     }
 
@@ -71,7 +71,7 @@ class DiscountService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function addGetDiscounts(BatchRequests $batchRequests, string $batchName, DiscountsParametersGroup $params = null): void {
+    public function addGetDiscounts(BatchRequests $batchRequests, string $batchName, ?DiscountsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::DISCOUNTS)->urlParams($params)->build()
         );
@@ -85,7 +85,7 @@ class DiscountService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function addGetDiscountSelectableGiftsIdProducts(BatchRequests $batchRequests, string $batchName, int $id = 0, DiscountSelectableGiftsParametersGroup $params = null): void {
+    public function addGetDiscountSelectableGiftsIdProducts(BatchRequests $batchRequests, string $batchName, int $id = 0, ?DiscountSelectableGiftsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::DISCOUNT_SELECTABLE_GIFTS_ID_PRODUCTS)->pathParams(['id' => $id])

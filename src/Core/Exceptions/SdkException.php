@@ -38,7 +38,7 @@ abstract class SdkException extends \Exception {
      *
      * @see \Exception
      */
-    public function __construct(string $message = null, string $code = '', \Exception $previous = null, ?Error $error = null) {
+    public function __construct(?string $message = null, string $code = '', ?\Exception $previous = null, ?Error $error = null) {
         if ($code === '') {
             $code = self::UNEXPECTED_ERROR;
         }

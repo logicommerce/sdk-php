@@ -45,7 +45,7 @@ class NewsService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getNews(NewsParametersGroup $params = null): ?ElementCollection {
+    public function getNews(?NewsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(News::class, Resource::NEWS, $params);
     }
 
@@ -71,7 +71,7 @@ class NewsService extends Service {
      *
      * @return void
      */
-    public function addGetNews(BatchRequests $batchRequests, string $batchName, NewsParametersGroup $params = null): void {
+    public function addGetNews(BatchRequests $batchRequests, string $batchName, ?NewsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::NEWS)->urlParams($params)->build()
         );

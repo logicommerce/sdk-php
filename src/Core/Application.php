@@ -92,7 +92,7 @@ abstract class Application {
      * @return void
      * @throws ApplicationException
      */
-    public function startApplication(callable $setConstants = null): void {
+    public function startApplication(?callable $setConstants = null): void {
         $this->prepareResponseHeaders();
         if ($this->hasInValidData()) {
             $this->setToken();

@@ -109,7 +109,7 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getProducts(ProductsParametersGroup $params = null): ?ElementCollection {
+    public function getProducts(?ProductsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Product::class, Resource::PRODUCTS, $params);
     }
 
@@ -120,7 +120,7 @@ class ProductService extends Service {
      *
      * @return Product|NULL
      */
-    public function getProduct(int $id = 0, ProductParametersGroup $params = null): ?Product {
+    public function getProduct(int $id = 0, ?ProductParametersGroup $params = null): ?Product {
         return $this->getElement(Product::class, Resource::PRODUCTS_ID, $id, $params);
     }
 
@@ -131,7 +131,7 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getProductRewardPoints(int $id = 0, ProductRewardPointsParametersGroup $params = null): ?ElementCollection {
+    public function getProductRewardPoints(int $id = 0, ?ProductRewardPointsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(ProductRewardPoints::class, $this->replaceWildcards(Resource::PRODUCTS_ID_REWARD_POINTS, ['id' => $id]), $params);
     }
 
@@ -163,7 +163,7 @@ class ProductService extends Service {
      *
      * @return Status|NULL
      */
-    public function addProductComparison(AddComparisonProductParametersGroup $addComparisonProduct = null): ?Status {
+    public function addProductComparison(?AddComparisonProductParametersGroup $addComparisonProduct = null): ?Status {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())
@@ -200,7 +200,7 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getProductsDiscounts(ProductsDiscountsParametersGroup $params = null): ?ElementCollection {
+    public function getProductsDiscounts(?ProductsDiscountsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(ProductsDiscounts::class, Resource::PRODUCTS_DISCOUNTS, $params);
     }
 
@@ -212,7 +212,7 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getProductDiscounts(int $id = 0, ProductDiscountsParametersGroup $params = null): ?ElementCollection {
+    public function getProductDiscounts(int $id = 0, ?ProductDiscountsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Discount::class, $this->replaceWildcards(Resource::PRODUCTS_ID_DISCOUNTS, ['id' => $id]), $params);
     }
 
@@ -224,7 +224,7 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getTopSellers(TopSellersParametersGroup $params = null): ?ElementCollection {
+    public function getTopSellers(?TopSellersParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Product::class, Resource::PRODUCTS_TOP_SELLERS, $params);
     }
 
@@ -237,7 +237,7 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getComments(int $id = 0, CommentsParametersGroup $params = null): ?ElementCollection {
+    public function getComments(int $id = 0, ?CommentsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(
             Comment::class,
             $this->replaceWildcards(Resource::PRODUCTS_ID_COMMENTS, ['id' => $id]),
@@ -254,7 +254,7 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getBundleDefinitions(int $id = 0, BundleDefinitionsParametersGroup $params = null): ?ElementCollection {
+    public function getBundleDefinitions(int $id = 0, ?BundleDefinitionsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(
             BundleDefinition::class,
             $this->replaceWildcards(Resource::PRODUCTS_ID_BUNDLE_DEFINITIONS, ['id' => $id]),
@@ -272,7 +272,7 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getBundleDefinitionsGroupings(int $id = 0, int $bundleDefinitionId = 0, BundleDefinitionsGroupingsParametersGroup $params = null): ?ElementCollection {
+    public function getBundleDefinitionsGroupings(int $id = 0, int $bundleDefinitionId = 0, ?BundleDefinitionsGroupingsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(
             BundleGrouping::class,
             $this->replaceWildcards(Resource::PRODUCTS_ID_BUNDLE_DEFINITIONS_BUNDLE_ID_GROUPINGS, ['id' => $id, 'bundleDefinitionId' => $bundleDefinitionId]),
@@ -289,7 +289,7 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getLinkedProducts(int $id = 0, LinkedParametersGroup $params = null): ?ElementCollection {
+    public function getLinkedProducts(int $id = 0, ?LinkedParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(
             Linked::class,
             $this->replaceWildcards(Resource::PRODUCTS_ID_LINKED, ['id' => $id]),
@@ -306,7 +306,7 @@ class ProductService extends Service {
      *
      * @return Comment|NULL
      */
-    public function addComment(int $id = 0, AddCommentParametersGroup $comment = null): ?Comment {
+    public function addComment(int $id = 0, ?AddCommentParametersGroup $comment = null): ?Comment {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())
@@ -372,7 +372,7 @@ class ProductService extends Service {
      *
      * @return Status|NULL
      */
-    public function recommend(RecommendParametersGroup $data = null): ?Status {
+    public function recommend(?RecommendParametersGroup $data = null): ?Status {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())
@@ -394,7 +394,7 @@ class ProductService extends Service {
      *
      * @return Status|NULL
      */
-    public function query(int $id = 0, QueryParametersGroup $data = null, string $dataValidatior = ''): ?Status {
+    public function query(int $id = 0, ?QueryParametersGroup $data = null, string $dataValidatior = ''): ?Status {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())
@@ -418,7 +418,7 @@ class ProductService extends Service {
      *
      * @return void
      */
-    public function addGetProducts(BatchRequests $batchRequests, string $batchName, ProductsParametersGroup $params = null): void {
+    public function addGetProducts(BatchRequests $batchRequests, string $batchName, ?ProductsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::PRODUCTS)->urlParams($params)->build()
         );
@@ -434,7 +434,7 @@ class ProductService extends Service {
      *
      * @return void
      */
-    public function addGetProduct(BatchRequests $batchRequests, string $batchName, int $id, ProductParametersGroup $params = null): void {
+    public function addGetProduct(BatchRequests $batchRequests, string $batchName, int $id, ?ProductParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::PRODUCTS_ID)->pathParams(['id' => $id])->urlParams($params)->build()
         );
@@ -451,7 +451,7 @@ class ProductService extends Service {
      *
      * @return void
      */
-    public function addGetProductRewardPoints(BatchRequests $batchRequests, string $batchName, int $id, ProductRewardPointsParametersGroup $params = null): void {
+    public function addGetProductRewardPoints(BatchRequests $batchRequests, string $batchName, int $id, ?ProductRewardPointsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::PRODUCTS_ID_REWARD_POINTS)->pathParams(['id' => $id])->urlParams($params)->build()
         );
@@ -486,7 +486,7 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function addGetProductsDiscounts(BatchRequests $batchRequests, string $batchName, ProductsDiscountsParametersGroup $params = null): void {
+    public function addGetProductsDiscounts(BatchRequests $batchRequests, string $batchName, ?ProductsDiscountsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::PRODUCTS_DISCOUNTS)->urlParams($params)->build()
         );
@@ -503,7 +503,7 @@ class ProductService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function addGetProductDiscounts(BatchRequests $batchRequests, string $batchName, int $id = 0, ProductsDiscountsParametersGroup $params = null): void {
+    public function addGetProductDiscounts(BatchRequests $batchRequests, string $batchName, int $id = 0, ?ProductsDiscountsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::PRODUCTS_ID_DISCOUNTS)->pathParams(['id' => $id])->urlParams($params)->build()
         );
@@ -520,7 +520,7 @@ class ProductService extends Service {
      *
      * @return void
      */
-    public function addGetTopSellers(BatchRequests $batchRequests, string $batchName, TopSellersParametersGroup $params = null): void {
+    public function addGetTopSellers(BatchRequests $batchRequests, string $batchName, ?TopSellersParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::PRODUCTS_TOP_SELLERS)->urlParams($params)->build()
         );
@@ -542,7 +542,7 @@ class ProductService extends Service {
         BatchRequests $batchRequests,
         string $batchName,
         int $id,
-        CommentsParametersGroup $params = null
+        ?CommentsParametersGroup $params = null
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
@@ -567,7 +567,7 @@ class ProductService extends Service {
         BatchRequests $batchRequests,
         string $batchName,
         int $id,
-        BundleDefinitionsParametersGroup $params = null
+        ?BundleDefinitionsParametersGroup $params = null
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
@@ -594,7 +594,7 @@ class ProductService extends Service {
         string $batchName,
         int $id,
         int $bundleDefinitionId = 0,
-        BundleDefinitionsGroupingsParametersGroup $params = null
+        ?BundleDefinitionsGroupingsParametersGroup $params = null
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
@@ -619,7 +619,7 @@ class ProductService extends Service {
         BatchRequests $batchRequests,
         string $batchName,
         int $id,
-        LinkedParametersGroup $params = null
+        ?LinkedParametersGroup $params = null
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
@@ -648,7 +648,7 @@ class ProductService extends Service {
      *
      * @return ProductCombinationData|NULL
      */
-    public function getCombinationData(int $id, GetCombinationDataParametersGroup $params = null): ?ProductCombinationData {
+    public function getCombinationData(int $id, ?GetCombinationDataParametersGroup $params = null): ?ProductCombinationData {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::PRODUCTS_ID_COMBINATION_DATA)->method(self::POST)->pathParams(['id' => $id])->body($params)->build()
@@ -664,7 +664,7 @@ class ProductService extends Service {
      *
      * @return BundleCombinationData|NULL
      */
-    public function getBundleDefinitionsGroupingsCombinationData(GetBundleDefinitionsGroupingsCombinationDataParametersGroup $params = null): ?BundleCombinationData {
+    public function getBundleDefinitionsGroupingsCombinationData(?GetBundleDefinitionsGroupingsCombinationDataParametersGroup $params = null): ?BundleCombinationData {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())->path(Resource::PRODUCTS_BUNDLE_DEFINITIONS_GROUPINGS_COMBINATION_DATA)->method(self::POST)->body($params)->build()

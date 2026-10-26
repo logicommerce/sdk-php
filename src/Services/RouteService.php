@@ -43,7 +43,7 @@ class RouteService extends Service {
         return $route;
     }
 
-    protected function getParams(string $path = null, string $host = null, string $protocol = null) {
+    protected function getParams(?string $path = null, ?string $host = null, ?string $protocol = null) {
         if (is_null($path)) {
             $path = filter_input(INPUT_GET, URL_ROUTE, FILTER_SANITIZE_SPECIAL_CHARS, [FILTER_FLAG_STRIP_HIGH, FILTER_FLAG_STRIP_LOW]);
         }

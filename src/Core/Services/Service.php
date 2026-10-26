@@ -46,7 +46,7 @@ abstract class Service {
         // Prevent initialize this object
     }
 
-    protected function getElements(string $class, string $resource, ParametersGroup $parameters = null): ?ElementCollection {
+    protected function getElements(string $class, string $resource, ?ParametersGroup $parameters = null): ?ElementCollection {
         return $this->getResponse(
             $this->call((new RequestBuilder())->path($resource)->urlParams($parameters)->build()),
             $class
@@ -85,11 +85,11 @@ abstract class Service {
         return $elements;
     }
 
-    protected function getElement(string $class, string $resource, int $id = null, $params = null): ?Element {
+    protected function getElement(string $class, string $resource, ?int $id = null, $params = null): ?Element {
         return $this->getResourceElement($class, Url::replaceWildcards($resource, ['id' => $id]), $params);
     }
 
-    protected function call(Request $request, string $apiUrl = null): array {
+    protected function call(Request $request, ?string $apiUrl = null): array {
         return $this->getConnection()->doRequest($request, $apiUrl);
     }
 

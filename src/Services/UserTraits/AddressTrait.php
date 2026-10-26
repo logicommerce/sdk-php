@@ -81,7 +81,7 @@ trait AddressTrait {
      * @return Address|NULL
      * @deprecated use AccountService::updateAccountsInvoicingAddresses instead
      */
-    public function updateBillingAddress(int $id, BillingAddressParametersGroup $data = null, string $dataValidatior = ''): ?Address {
+    public function updateBillingAddress(int $id, ?BillingAddressParametersGroup $data = null, string $dataValidatior = ''): ?Address {
         $data = UserToAccountFactory::mapBillingAddressFromAccountInvoicingAddressCompatible($data);
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path(Resource::ACCOUNTS_INVOICING_ADDRESSES_UPDATE)->pathParams(['id' => $id])->method(self::PUT)
@@ -102,7 +102,7 @@ trait AddressTrait {
      * @return Address|NULL
      * @deprecated use AccountService::updateAccountsShippingAddresses instead
      */
-    public function updateShippingAddress(int $id, ShippingAddressParametersGroup $data = null, string $dataValidatior = ''): ?Address {
+    public function updateShippingAddress(int $id, ?ShippingAddressParametersGroup $data = null, string $dataValidatior = ''): ?Address {
         $data = UserToAccountFactory::mapShippingAddressFromAccountShippingAddress($data);
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path(Resource::ACCOUNTS_SHIPPING_ADDRESSES_UPDATE)->pathParams(['id' => $id])->method(self::PUT)
@@ -122,7 +122,7 @@ trait AddressTrait {
      * @return Address|NULL
      * @deprecated use AccountService::createAccountInvoicingAddresses instead
      */
-    public function createBillingAddress(BillingAddressParametersGroup $data = null, string $dataValidatior = ''): ?BillingAddress {
+    public function createBillingAddress(?BillingAddressParametersGroup $data = null, string $dataValidatior = ''): ?BillingAddress {
         $data = UserToAccountFactory::mapBillingAddressFromAccountInvoicingAddressCompatible($data);
         return $this->prepareElement(
             $this->call(
@@ -144,7 +144,7 @@ trait AddressTrait {
      * @return Address|NULL
      * @deprecated use AccountService::createAccountShippingAddresses instead
      */
-    public function createShippingAddress(ShippingAddressParametersGroup $data = null, string $dataValidatior = ''): ?ShippingAddress {
+    public function createShippingAddress(?ShippingAddressParametersGroup $data = null, string $dataValidatior = ''): ?ShippingAddress {
         $data = UserToAccountFactory::mapShippingAddressFromAccountShippingAddress($data);
         return $this->prepareElement(
             $this->call(
@@ -168,7 +168,7 @@ trait AddressTrait {
      * @return Address|NULL
      * deprecated
      */
-    private function createAddress(string $resource, string $class, AddressParametersGroup $data = null, string $dataValidatior = ''): ?Address {
+    private function createAddress(string $resource, string $class, ?AddressParametersGroup $data = null, string $dataValidatior = ''): ?Address {
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path($resource)->method(self::POST)
                 ->headers(strlen($dataValidatior) ? [FormService::DATA_VALIDATOR_HEADER => $dataValidatior] : [])

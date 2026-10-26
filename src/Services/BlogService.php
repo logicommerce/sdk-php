@@ -103,7 +103,7 @@ class BlogService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getBlogCategories(BlogCategoryParametersGroup $params = null): ?ElementCollection {
+    public function getBlogCategories(?BlogCategoryParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(BlogCategory::class, Resource::BLOG_CATEGORIES, $params);
     }
 
@@ -126,7 +126,7 @@ class BlogService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getBlogPosts(BlogPostParametersGroup $params = null): ?ElementCollection {
+    public function getBlogPosts(?BlogPostParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(BlogPost::class, Resource::BLOG_POSTS, $params);
     }
 
@@ -149,7 +149,7 @@ class BlogService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getBloggers(BloggerParametersGroup $params = null): ?ElementCollection {
+    public function getBloggers(?BloggerParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Blogger::class, Resource::BLOG_BLOGGERS, $params);
     }
 
@@ -172,7 +172,7 @@ class BlogService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getTags(BlogTagParametersGroup $params = null): ?ElementCollection {
+    public function getTags(?BlogTagParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(BlogTag::class, Resource::BLOG_TAGS, $params);
     }
 
@@ -195,7 +195,7 @@ class BlogService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getRss(BlogPostParametersGroup $params = null): ?DataFile {
+    public function getRss(?BlogPostParametersGroup $params = null): ?DataFile {
         return $this->getResourceElement(DataFile::class, Resource::BLOG_RSS, $params);
     }
 
@@ -208,7 +208,7 @@ class BlogService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getBlogPostComments(int $id = 0, BlogPostCommentsParametersGroup $params = null): ?ElementCollection {
+    public function getBlogPostComments(int $id = 0, ?BlogPostCommentsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(
             BlogPostComment::class,
             $this->replaceWildcards(Resource::BLOG_POSTS_ID_COMMENTS, ['id' => $id]),
@@ -225,7 +225,7 @@ class BlogService extends Service {
      *
      * @return BlogPostComment|NULL
      */
-    public function postAddComment(int $id = 0, AddBlogPostCommentParametersGroup $comment = null): ?BlogPostComment {
+    public function postAddComment(int $id = 0, ?AddBlogPostCommentParametersGroup $comment = null): ?BlogPostComment {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())
@@ -447,7 +447,7 @@ class BlogService extends Service {
      *
      * @return Status|NULL
      */
-    private function doSubscribe(string $resource, array $pathParams, ParametersGroup $body = null): ?Status {
+    private function doSubscribe(string $resource, array $pathParams, ?ParametersGroup $body = null): ?Status {
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path($resource)->pathParams($pathParams)->body($body)->method(self::POST)->build()),
             Status::class
@@ -482,7 +482,7 @@ class BlogService extends Service {
     public function addGetBlogCategories(
         BatchRequests $batchRequests,
         string $batchName,
-        BlogCategoryParametersGroup $params = null
+        ?BlogCategoryParametersGroup $params = null
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::BLOG_CATEGORIES)->urlParams($params)->build()
@@ -515,7 +515,7 @@ class BlogService extends Service {
      *
      * @return void
      */
-    public function addGetBlogPosts(BatchRequests $batchRequests, string $batchName, BlogPostParametersGroup $params = null): void {
+    public function addGetBlogPosts(BatchRequests $batchRequests, string $batchName, ?BlogPostParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::BLOG_POSTS)->urlParams($params)->build()
         );
@@ -547,7 +547,7 @@ class BlogService extends Service {
      *
      * @return void
      */
-    public function addGetBloggers(BatchRequests $batchRequests, string $batchName, BloggerParametersGroup $params = null): void {
+    public function addGetBloggers(BatchRequests $batchRequests, string $batchName, ?BloggerParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::BLOG_BLOGGERS)->urlParams($params)->build()
         );
@@ -579,7 +579,7 @@ class BlogService extends Service {
      *
      * @return void
      */
-    public function addGetTags(BatchRequests $batchRequests, string $batchName, BlogTagParametersGroup $params = null): void {
+    public function addGetTags(BatchRequests $batchRequests, string $batchName, ?BlogTagParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::BLOG_TAGS)->urlParams($params)->build()
         );
@@ -611,7 +611,7 @@ class BlogService extends Service {
      *
      * @return void
      */
-    public function addGetRss(BatchRequests $batchRequests, string $batchName, BlogPostParametersGroup $params = null): void {
+    public function addGetRss(BatchRequests $batchRequests, string $batchName, ?BlogPostParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::BLOG_RSS)->urlParams($params)->build()
         );
@@ -631,7 +631,7 @@ class BlogService extends Service {
         BatchRequests $batchRequests,
         string $batchName,
         int $id = 0,
-        BlogPostCommentsParametersGroup $params = null
+        ?BlogPostCommentsParametersGroup $params = null
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())

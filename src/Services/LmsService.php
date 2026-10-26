@@ -44,7 +44,7 @@ class LmsService extends Service {
 
     private ?string $apiUrl = null;
 
-    protected function call(Request $request, string $apiUrl = null): array {
+    protected function call(Request $request, ?string $apiUrl = null): array {
         return $this->cacheTraitCall($request, $this->getApiURL());
     }
 

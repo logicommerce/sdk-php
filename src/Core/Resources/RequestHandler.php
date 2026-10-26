@@ -83,7 +83,7 @@ final class RequestHandler {
      * @param LoggerAdapter $logger
      *            The logger used before/after the request
      */
-    public function __construct(string $url, string $method = 'get', LoggerAdapter $logger = null) {
+    public function __construct(string $url, string $method = 'get', ?LoggerAdapter $logger = null) {
         $this->url = $url;
         $this->method = $method;
         if (!isset(self::$timer)) {
@@ -398,7 +398,6 @@ final class RequestHandler {
         foreach ($this->curlInfo as $option) {
             $this->info[$option] = curl_getinfo($curl, $option);
         }
-        curl_close($curl);
     }
 
     /**

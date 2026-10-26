@@ -48,7 +48,7 @@ class BannerService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getBanners(BannerParametersGroup $params = null): ?ElementCollection {
+    public function getBanners(?BannerParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Banner::class, Resource::BANNERS, $params);
     }
 
@@ -90,7 +90,7 @@ class BannerService extends Service {
      *
      * @return void
      */
-    public function addGetBanners(BatchRequests $batchRequests, string $batchName, BannerParametersGroup $params = null): void {
+    public function addGetBanners(BatchRequests $batchRequests, string $batchName, ?BannerParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::BANNERS)->urlParams($params)->build()
         );

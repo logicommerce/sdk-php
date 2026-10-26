@@ -153,7 +153,7 @@ trait AccountAddressTrait {
      *
      * @return ElementCollection|NULL
      */
-    public function getInvoicingAddresses(string $idUsed = AccountKey::USED, GetAccountInvoicingAddressParametersGroup $params = null): ?ElementCollection {
+    public function getInvoicingAddresses(string $idUsed = AccountKey::USED, ?GetAccountInvoicingAddressParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(AccountInvoicingAddress::class, $this->replaceWildcards(Resource::ACCOUNTS_INVOICING_ADDRESSES, ['idUsed' => $idUsed]), $params);
     }
 
@@ -165,7 +165,7 @@ trait AccountAddressTrait {
      *
      * @return ElementCollection|NULL
      */
-    public function getShippingAddresses(string $idUsed = AccountKey::USED, GetAccountShippingAddressParametersGroup $params = null): ?ElementCollection {
+    public function getShippingAddresses(string $idUsed = AccountKey::USED, ?GetAccountShippingAddressParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(AccountShippingAddress::class, $this->replaceWildcards(Resource::ACCOUNTS_SHIPPING_ADDRESSES, ['idUsed' => $idUsed]), $params);
     }
 
@@ -196,7 +196,7 @@ trait AccountAddressTrait {
      *
      * @return void
      */
-    public function addGetInvoicingAddresses(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, GetAccountInvoicingAddressParametersGroup $params = null): void {
+    public function addGetInvoicingAddresses(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, ?GetAccountInvoicingAddressParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_INVOICING_ADDRESSES)->pathParams(['idUsed' => $idUsed])->urlParams($params)->build()
         );
@@ -213,7 +213,7 @@ trait AccountAddressTrait {
      *
      * @return void
      */
-    public function addGetShippingAddresses(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, GetAccountShippingAddressParametersGroup $params = null): void {
+    public function addGetShippingAddresses(BatchRequests $batchRequests, string $batchName, string $idUsed = AccountKey::USED, ?GetAccountShippingAddressParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_SHIPPING_ADDRESSES)->pathParams(['idUsed' => $idUsed])->urlParams($params)
                 ->build()

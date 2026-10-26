@@ -34,7 +34,7 @@ trait SaveForLaterListRowsTrait {
      *
      * @return ElementCollection|NULL
      */
-    public function getSaveForLaterListRows(SaveForLaterListRowsParametersGroup $params = null): ?ElementCollection {
+    public function getSaveForLaterListRows(?SaveForLaterListRowsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(SaveForLaterListRow::class, Resource::ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS, $params);
     }
 
@@ -75,7 +75,7 @@ trait SaveForLaterListRowsTrait {
      *
      * @return void
      */
-    public function addGetSaveForLaterListRows(BatchRequests $batchRequests, string $batchName, SaveForLaterListRowsParametersGroup $params = null): void {
+    public function addGetSaveForLaterListRows(BatchRequests $batchRequests, string $batchName, ?SaveForLaterListRowsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_SAVE_FOR_LATER_LIST_ROWS)->urlParams($params)->build()
         );

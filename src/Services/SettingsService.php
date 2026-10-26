@@ -255,7 +255,7 @@ class SettingsService extends Service {
      *
      * @return BlogSettings
      */
-    public function getBlogSettings(string $languageCode = null): BlogSettings {
+    public function getBlogSettings(?string $languageCode = null): BlogSettings {
         return $this->getSettingsElement(BlogSettings::class, 'blog', $this->getBlogSettingsParams($languageCode));
     }
 
@@ -278,7 +278,7 @@ class SettingsService extends Service {
      * 
      * @return ElementCollection|NULL
      */
-    public function getCountries(string $languageCode = null, string $countryCode = null): ?ElementCollection {
+    public function getCountries(?string $languageCode = null, ?string $countryCode = null): ?ElementCollection {
         return $this->getSettingsElements(CountrySettings::class, 'countries', $this->getCountriesParams($languageCode, $countryCode));
     }
 
@@ -325,7 +325,7 @@ class SettingsService extends Service {
         return $this->getSettingsElements(Language::class, 'languages');
     }
 
-    private function getSettingsElement(string $class, string $resource = '', ParametersGroup $params = null): ?Element {
+    private function getSettingsElement(string $class, string $resource = '', ?ParametersGroup $params = null): ?Element {
         $value = $this->getValueByResource($resource, $params);
         if (!is_null($value)) {
             return $value;
@@ -333,7 +333,7 @@ class SettingsService extends Service {
         return $this->getResourceElement($class, Resource::SETTINGS . '/' . $resource, $params);
     }
 
-    private function getValueByResource(string $resource, ParametersGroup $params = null) {
+    private function getValueByResource(string $resource, ?ParametersGroup $params = null) {
         $settings = Application::getInstance()->getEcommerceSettings();
         if (!is_null($settings) && method_exists($settings, 'get' . $resource . 'Settings')) {
             return $settings->{'get' . $resource . 'Settings'}($params);
@@ -341,7 +341,7 @@ class SettingsService extends Service {
         return null;
     }
 
-    private function getSettingsElements(string $class, string $resource = '', ParametersGroup $params = null): ?ElementCollection {
+    private function getSettingsElements(string $class, string $resource = '', ?ParametersGroup $params = null): ?ElementCollection {
         return $this->getElements($class, Resource::SETTINGS . '/' . $resource, $params);
     }
 
@@ -376,7 +376,7 @@ class SettingsService extends Service {
      *
      * @return void
      */
-    public function addGetBlogSettings(BatchRequests $batchRequests, string $batchName, string $languageCode = null): void {
+    public function addGetBlogSettings(BatchRequests $batchRequests, string $batchName, ?string $languageCode = null): void {
         $batchRequests->addRequest((new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::SETTINGS_BLOG)->urlParams($this->getBlogSettingsParams($languageCode))
                 ->build()
@@ -397,7 +397,7 @@ class SettingsService extends Service {
      *
      * @return void
      */
-    public function addGetCountries(BatchRequests $batchRequests, string $batchName, string $languageCode = null, string $countryCode = null): void {
+    public function addGetCountries(BatchRequests $batchRequests, string $batchName, ?string $languageCode = null, ?string $countryCode = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::SETTINGS_COUNTRIES)->urlParams($this->getCountriesParams($languageCode, $countryCode))

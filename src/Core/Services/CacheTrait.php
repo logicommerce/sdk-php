@@ -20,7 +20,7 @@ use SDK\Enums\RedisKey;
  */
 trait CacheTrait {
 
-    protected function call(Request $request, string $apiUrl = null): array {
+    protected function call(Request $request, ?string $apiUrl = null): array {
         $urlParams = $request->getUrlParams();
         if (
             $request->getMethod() !== self::GET

@@ -44,7 +44,7 @@ class TrackerService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getTrackers(TrackerParametersGroup $params = null): ?ElementCollection {
+    public function getTrackers(?TrackerParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Tracker::class, Resource::TRACKERS, $params);
     }
 
@@ -59,7 +59,7 @@ class TrackerService extends Service {
      *
      * @return void
      */
-    public function addGetTrackers(BatchRequests $batchRequests, string $batchName, TrackerParametersGroup $params = null): void {
+    public function addGetTrackers(BatchRequests $batchRequests, string $batchName, ?TrackerParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::TRACKERS)->urlParams($params)->build()
         );

@@ -200,7 +200,7 @@ class UserService extends Service {
      * @return Basket|NULL
      * @deprecated use AccountService::updateUsedAccount instead
      */
-    public function updateUser(UpdateUserParametersGroup $data = null, string $dataValidatior = ''): ?Basket {
+    public function updateUser(?UpdateUserParametersGroup $data = null, string $dataValidatior = ''): ?Basket {
         $accountParams = UserToAccountFactory::mapUpdateUserToUpdateAccount($data);
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path($this->replaceWildcards(Resource::ACCOUNTS_WITH_ID, ['idUsed' => AccountKey::USED]))->method(self::PUT)
@@ -220,7 +220,7 @@ class UserService extends Service {
      * @return Basket|NULL
      * @deprecated use AccountService::createAccount instead (or BasketService::updateOmsBasketCustomer when createAccount is false)
      */
-    public function createUser(CreateUserParametersGroup $data = null, string $dataValidatior = ''): ?Basket {
+    public function createUser(?CreateUserParametersGroup $data = null, string $dataValidatior = ''): ?Basket {
         if (isset($data->toArray()['createAccount']) && $data->toArray()['createAccount'] == true) {
             $accountParams = UserToAccountFactory::mapCreateUserToCreateAccount($data);
             return $this->prepareElement(
@@ -298,7 +298,7 @@ class UserService extends Service {
      *
      * @return Basket|NULL
      */
-    public function login(LoginParametersGroup $data = null): ?Basket {
+    public function login(?LoginParametersGroup $data = null): ?Basket {
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path(Resource::LOGIN)->method(self::POST)->body($data)->build()),
             Basket::class
@@ -327,7 +327,7 @@ class UserService extends Service {
      * @return ElementCollection|NULL
      * @deprecated
      */
-    public function getOrders(OrderParametersGroup $params = null): ?ElementCollection {
+    public function getOrders(?OrderParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(UserOrder::class, $this->replaceWildcards(Resource::ACCOUNTS_ORDERS, ['idUsed' => AccountKey::USED]), $params);
     }
 
@@ -348,7 +348,7 @@ class UserService extends Service {
      *
      * @return Status|NULL
      */
-    public function updatePassword(UpdatePasswordParametersGroup $data = null): ?Status {
+    public function updatePassword(?UpdatePasswordParametersGroup $data = null): ?Status {
         return $this->prepareElement(
             $this->call((new RequestBuilder())->path(Resource::REGISTERED_USERS_ME_PASSWORD)->method(self::PUT)->body($data)->build()),
             Status::class
@@ -471,7 +471,7 @@ class UserService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getRelatedItems(string $type = '', RelatedItemsParametersGroup $params = null): ?ElementCollection {
+    public function getRelatedItems(string $type = '', ?RelatedItemsParametersGroup $params = null): ?ElementCollection {
         return $this->getResponse(
             ['items' => $this->getConnection()->doRequest(
                 (new RequestBuilder())
@@ -571,7 +571,7 @@ class UserService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getRewardPoints(RewardPointsParametersGroup $params = null): ?ElementCollection {
+    public function getRewardPoints(?RewardPointsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(RewardPointsBalance::class, Resource::ACCOUNTS_REWARD_POINTS, $params);
     }
 
@@ -583,7 +583,7 @@ class UserService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getVouchers(UserVouchersParametersGroup $params = null): ?ElementCollection {
+    public function getVouchers(?UserVouchersParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Voucher::class, Resource::ACCOUNTS_VOUCHERS, $params);
     }
 
@@ -596,7 +596,7 @@ class UserService extends Service {
      * @return ElementCollection|NULL
      * @deprecated
      */
-    public function getSalesAgentCustomers(SalesAgentCustomersParametersGroup $params = null): ?ElementCollection {
+    public function getSalesAgentCustomers(?SalesAgentCustomersParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(SalesAgentCustomerFactory::class, Resource::ACCOUNT_SALES_AGENT_CUSTOMERS, $params);
     }
 
@@ -609,7 +609,7 @@ class UserService extends Service {
      * @return ElementCollection|NULL
      * deprecated
      */
-    public function getSalesAgentSales(SalesAgentSalesParametersGroup $params = null): ?ElementCollection {
+    public function getSalesAgentSales(?SalesAgentSalesParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(SalesAgentSales::class, Resource::ACCOUNT_SALES_AGENT_SALES, $params);
     }
 
@@ -623,7 +623,7 @@ class UserService extends Service {
      * @return ElementCollection|NULL
      * deprecated
      */
-    public function getSalesAgentOrders(int $customerId, SalesAgentOrdersParametersGroup $params = null): ?ElementCollection {
+    public function getSalesAgentOrders(int $customerId, ?SalesAgentOrdersParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(UserOrder::class, $this->replaceWildcards(Resource::ACCOUNT_SALES_AGENT_CUSTOMERS_ID_ORDERS, ['customerId' => $customerId]), $params);
     }
 
@@ -685,7 +685,7 @@ class UserService extends Service {
      * @return void
      * @deprecated
      */
-    public function addGetOrders(BatchRequests $batchRequests, string $batchName, OrderParametersGroup $params = null): void {
+    public function addGetOrders(BatchRequests $batchRequests, string $batchName, ?OrderParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNTS_ORDERS)->pathParams(['idUsed' => AccountKey::USED])->urlParams($params)->build(),
             true
@@ -724,7 +724,7 @@ class UserService extends Service {
         BatchRequests $batchRequests,
         string $batchName,
         string $type = '',
-        RelatedItemsParametersGroup $params = null
+        ?RelatedItemsParametersGroup $params = null
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
@@ -800,7 +800,7 @@ class UserService extends Service {
      *
      * @return void
      */
-    public function addGetRewardPoints(BatchRequests $batchRequests, string $batchName, RewardPointsParametersGroup $params = null): void {
+    public function addGetRewardPoints(BatchRequests $batchRequests, string $batchName, ?RewardPointsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::ACCOUNTS_REWARD_POINTS)->urlParams($params)
@@ -819,7 +819,7 @@ class UserService extends Service {
      *
      * @return void
      */
-    public function addGetVouchers(BatchRequests $batchRequests, string $batchName, UserVouchersParametersGroup $params = null): void {
+    public function addGetVouchers(BatchRequests $batchRequests, string $batchName, ?UserVouchersParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::ACCOUNTS_VOUCHERS)->urlParams($params)
@@ -839,7 +839,7 @@ class UserService extends Service {
      * @return void
      * deprecated
      */
-    public function addGetSalesAgentCustomers(BatchRequests $batchRequests, string $batchName, SalesAgentCustomersParametersGroup $params = null): void {
+    public function addGetSalesAgentCustomers(BatchRequests $batchRequests, string $batchName, ?SalesAgentCustomersParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
                 ->requestId($batchName)->path(Resource::ACCOUNT_SALES_AGENT_CUSTOMERS)->urlParams($params)
@@ -860,7 +860,7 @@ class UserService extends Service {
      * @return void
      * deprecated
      */
-    public function addGetSalesAgentOrders(BatchRequests $batchRequests, string $batchName, int $customerId, SalesAgentOrdersParametersGroup $params = null): void {
+    public function addGetSalesAgentOrders(BatchRequests $batchRequests, string $batchName, int $customerId, ?SalesAgentOrdersParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)
                 ->path(Resource::ACCOUNT_SALES_AGENT_CUSTOMERS_ID_ORDERS)->pathParams(['customerId' => $customerId])->urlParams($params)->build()
@@ -878,7 +878,7 @@ class UserService extends Service {
      * @return void
      * deprecated
      */
-    public function addGetSalesAgentSales(BatchRequests $batchRequests, string $batchName, SalesAgentSalesParametersGroup $params = null): void {
+    public function addGetSalesAgentSales(BatchRequests $batchRequests, string $batchName, ?SalesAgentSalesParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::ACCOUNT_SALES_AGENT_SALES)->urlParams($params)
                 ->build()

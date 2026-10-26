@@ -131,7 +131,7 @@ abstract class Redis {
      *
      * @return void
      */
-    public static function set(string $key, $value, int $ttl = null): void {
+    public static function set(string $key, $value, ?int $ttl = null): void {
         $redisConnection = self::getRedisConnection();
         $redisConnection->set(self::getKeyPrefix() . $key, $value);
         if (is_null($ttl)) {

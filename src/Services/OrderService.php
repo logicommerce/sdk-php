@@ -152,7 +152,7 @@ class OrderService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getReturnPoints(int $id, PaginableParametersGroup $params = null): ?ElementCollection {
+    public function getReturnPoints(int $id, ?PaginableParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(PhysicalLocation::class, $this->replaceWildcards(Resource::OMS_ORDER_ID_RMA_RETURNPOINTS, ['id' => $id]), $params);
     }
 
@@ -209,7 +209,7 @@ class OrderService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getPickupPointProviders(PickupPointProvidersParametersGroup $params = null): ?ElementCollection {
+    public function getPickupPointProviders(?PickupPointProvidersParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(PickupPointProvider::class, Resource::OMS_PICKUP_POINT_PROVIDERS, $params);
     }
 
@@ -265,7 +265,7 @@ class OrderService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getRMAReasons(RMAReasonsParametersGroup $params = null): ?ElementCollection {
+    public function getRMAReasons(?RMAReasonsParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(RMAReason::class, Resource::OMS_RMAS_REASONS, $params);
     }
 
@@ -323,7 +323,7 @@ class OrderService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function createReturnRequest(int $id, CreateReturnRequestParametersGroup $params = null): ?RMA {
+    public function createReturnRequest(int $id, ?CreateReturnRequestParametersGroup $params = null): ?RMA {
         return $this->prepareElement(
             $this->call(
                 (new RequestBuilder())
@@ -536,7 +536,7 @@ class OrderService extends Service {
      *
      * @return void
      */
-    public function addGetReturnPoints(BatchRequests $batchRequests, string $batchName, int $id, PaginableParametersGroup $params = null): void {
+    public function addGetReturnPoints(BatchRequests $batchRequests, string $batchName, int $id, ?PaginableParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::OMS_ORDER_ID_RMA_RETURNPOINTS)->pathParams(['id' => $id])->urlParams($params)->build()
         );
@@ -585,7 +585,7 @@ class OrderService extends Service {
      *
      * @return void
      */
-    public function addGetPickupPointProviders(BatchRequests $batchRequests, string $batchName, PickupPointProvidersParametersGroup $params = null): void {
+    public function addGetPickupPointProviders(BatchRequests $batchRequests, string $batchName, ?PickupPointProvidersParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::OMS_PICKUP_POINT_PROVIDERS)->urlParams($params)->build()
         );
@@ -715,7 +715,7 @@ class OrderService extends Service {
      *
      * @return void
      */
-    public function addGetRMAReasons(BatchRequests $batchRequests, string $batchName, RMAReasonsParametersGroup $params = null): void {
+    public function addGetRMAReasons(BatchRequests $batchRequests, string $batchName, ?RMAReasonsParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::OMS_RMAS_REASONS)->urlParams($params)->build()
         );

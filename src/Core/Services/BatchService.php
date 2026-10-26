@@ -63,7 +63,7 @@ final class BatchService extends Service {
         }
     }
 
-    protected function call(Request $request, string $apiUrl = null): array {
+    protected function call(Request $request, ?string $apiUrl = null): array {
         $result = [];
         $callResults = parent::call($request, $apiUrl);
         if (isset($callResults[self::STATUS]) && $callResults[self::STATUS] >= 400) {

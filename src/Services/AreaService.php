@@ -55,7 +55,7 @@ class AreaService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getAreas(AreaParametersGroup $params = null): ?ElementCollection {
+    public function getAreas(?AreaParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Area::class, Resource::AREAS, $params);
     }
 
@@ -87,7 +87,7 @@ class AreaService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getCategoriesAreaCategories(AreaCategoryParametersGroup $params = null): ?ElementCollection {
+    public function getCategoriesAreaCategories(?AreaCategoryParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(Category::class, Resource::AREAS_CATEGORY_ROLE_CATEGORIES, $params);
     }
 
@@ -99,7 +99,7 @@ class AreaService extends Service {
      *
      * @return ElementCollection|NULL
      */
-    public function getCategoriesAreaCategoriesTree(AreaCategoriesTreeParametersGroup $params = null): ?ElementCollection {
+    public function getCategoriesAreaCategoriesTree(?AreaCategoriesTreeParametersGroup $params = null): ?ElementCollection {
         return $this->getElements(CategoryTree::class, Resource::AREAS_CATEGORY_ROLE_CATEGORIES_TREE, $params);
     }
 
@@ -114,7 +114,7 @@ class AreaService extends Service {
      *
      * @return void
      */
-    public function addGetAreas(BatchRequests $batchRequests, string $batchName, AreaParametersGroup $params = null): void {
+    public function addGetAreas(BatchRequests $batchRequests, string $batchName, ?AreaParametersGroup $params = null): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())->requestId($batchName)->path(Resource::AREAS)->urlParams($params)->build()
         );
@@ -163,7 +163,7 @@ class AreaService extends Service {
      * @return void
      */
     public function addGetCategoriesAreaCategories(
-        BatchRequests $batchRequests, string $batchName, AreaCategoryParametersGroup $params = null
+        BatchRequests $batchRequests, string $batchName, ?AreaCategoryParametersGroup $params = null
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
@@ -183,7 +183,7 @@ class AreaService extends Service {
      * @return void
      */
     public function addGetCategoriesAreaCategoriesTree(
-        BatchRequests $batchRequests, string $batchName, AreaCategoriesTreeParametersGroup $params = null
+        BatchRequests $batchRequests, string $batchName, ?AreaCategoriesTreeParametersGroup $params = null
     ): void {
         $batchRequests->addRequest(
             (new BatchRequestBuilder())
