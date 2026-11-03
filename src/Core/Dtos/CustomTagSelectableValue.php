@@ -2,6 +2,7 @@
 
 namespace SDK\Core\Dtos;
 
+use SDK\Core\Dtos\Traits\CdnImageTrait;
 use SDK\Core\Dtos\Traits\ElementTrait;
 use SDK\Core\Dtos\Traits\IdentifiableElementTrait;
 use SDK\Core\Dtos\Traits\IntegrableElementTrait;
@@ -20,7 +21,7 @@ use SDK\Core\Dtos\Traits\IntegrableElementTrait;
  * @package SDK\Core\Dtos
  */
 class CustomTagSelectableValue {
-    use ElementTrait, IdentifiableElementTrait, IntegrableElementTrait;
+    use ElementTrait, IdentifiableElementTrait, IntegrableElementTrait, CdnImageTrait;
 
     protected string $value = '';
 

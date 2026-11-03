@@ -5,6 +5,7 @@ namespace SDK\Dtos\Basket;
 use SDK\Core\Dtos\CustomTagValue;
 use SDK\Dtos\Accounts\AccountShippingAddress;
 use SDK\Dtos\Accounts\AcountLinkedTypes\CustomerAccountLinked;
+use SDK\Dtos\Accounts\AcountLinkedTypes\CustomerNotAccountLinked;
 use SDK\Dtos\Accounts\InvoicingAddress;
 use SDK\Dtos\Accounts\PurchaseAddress;
 use SDK\Dtos\Accounts\ShippingAddress;
@@ -56,7 +57,13 @@ class BasketUserCreator {
     }
 
     private static function getUser(Basket $basket): User {
-        $user = [];
+        $customer = $basket->getCustomer();
+        $notLinked = $customer instanceof CustomerNotAccountLinked ? $customer : null;
+        $user = [
+            'pId' => $notLinked?->getPId() ?? '',
+            'nick' => $notLinked?->getName() ?? '',
+            'image' => $notLinked?->getImage() ?? '',
+        ];
         if (!is_null($basket->getAccountRegisteredUser())) {
             $user = [
                 ...$user,
@@ -148,7 +155,10 @@ class BasketUserCreator {
                 'position' => $customTagValue->getPosition(),
                 'customTagId' => $customTagValue->getCustomTagId(),
                 'customTagPId' => $customTagValue->getCustomTagPId(),
+                'controlType' => $customTagValue->getControlType(),
                 'value' => $customTagValue->getValue(),
+                'values' => array_map(fn($v) => $v->toArray(), $customTagValue->getValues()),
+                'image' => $customTagValue->getImage(),
             ];
         }
         return $customTagValuesArray;

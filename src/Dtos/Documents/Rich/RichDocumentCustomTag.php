@@ -2,7 +2,9 @@
 
 namespace SDK\Dtos\Documents\Rich;
 
+use SDK\Core\Dtos\CustomTagSelectedValue;
 use SDK\Core\Dtos\Element;
+use SDK\Core\Dtos\Traits\CdnImageTrait;
 use SDK\Core\Dtos\Traits\ElementTrait;
 use SDK\Core\Enums\CustomTagControlType;
 use SDK\Core\Enums\Traits\EnumResolverTrait;
@@ -13,6 +15,8 @@ use SDK\Core\Enums\Traits\EnumResolverTrait;
  *
  * @see RichDocumentCustomTag::getName()
  * @see RichDocumentCustomTag::getValue()
+ * @see RichDocumentCustomTag::getValues()
+ * @see RichDocumentCustomTag::getImage()
  * @see RichDocumentCustomTag::getPosition()
  * @see RichDocumentCustomTag::getControlType()
  *
@@ -22,7 +26,7 @@ use SDK\Core\Enums\Traits\EnumResolverTrait;
  * @package SDK\Dtos\Documents\Rich
  */
 class RichDocumentCustomTag extends Element{
-    use ElementTrait, EnumResolverTrait;
+    use ElementTrait, EnumResolverTrait, CdnImageTrait;
 
     protected string $name = '';
 
@@ -31,6 +35,10 @@ class RichDocumentCustomTag extends Element{
     protected int $position = 0;
 
     protected string $controlType = '';
+
+    protected array $values = [];
+
+    protected string $image = '';
 
     /**
      * Returns the rich document custom tag name.
@@ -49,6 +57,30 @@ class RichDocumentCustomTag extends Element{
      */
     public function getValue(): string {
         return $this->value;
+    }
+
+    /**
+     * Returns the selected values for multi-selection custom tags (MULTIPLE_SELECTION, MULTIPLE_SELECTION_IMAGE).
+     * Empty for single-value control types.
+     *
+     * @return CustomTagSelectedValue[]
+     */
+    public function getValues(): array {
+        return $this->values;
+    }
+
+    protected function setValues(array $values): void {
+        $this->values = $this->setArrayField($values, CustomTagSelectedValue::class);
+    }
+
+    /**
+     * Returns the image path associated with single image-selection control types (SINGLE_SELECTION_IMAGE).
+     * Empty for non-image control types.
+     *
+     * @return string
+     */
+    public function getImage(): string {
+        return $this->image;
     }
 
     /**

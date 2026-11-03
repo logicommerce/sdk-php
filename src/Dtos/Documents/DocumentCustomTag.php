@@ -2,7 +2,9 @@
 
 namespace SDK\Dtos\Documents;
 
+use SDK\Core\Dtos\CustomTagSelectedValue;
 use SDK\Core\Dtos\Element;
+use SDK\Core\Dtos\Traits\CdnImageTrait;
 use SDK\Core\Dtos\Traits\ElementTrait;
 use SDK\Core\Dtos\Traits\ElementNameTrait;
 use SDK\Core\Enums\CustomTagControlType;
@@ -14,6 +16,8 @@ use SDK\Core\Enums\Traits\EnumResolverTrait;
  *
  * @see AbstractDocumentCustomTag::getCustomTagId()
  * @see AbstractDocumentCustomTag::getValue()
+ * @see AbstractDocumentCustomTag::getValues()
+ * @see AbstractDocumentCustomTag::getImage()
  * @see AbstractDocumentCustomTag::getControlType()
  * @see AbstractDocumentCustomTag::getPosition()
  *
@@ -25,7 +29,7 @@ use SDK\Core\Enums\Traits\EnumResolverTrait;
  * @package SDK\Dtos\Documents
  */
 class DocumentCustomTag extends Element {
-    use ElementTrait, ElementNameTrait, EnumResolverTrait;
+    use ElementTrait, ElementNameTrait, EnumResolverTrait, CdnImageTrait;
 
     protected int $customTagId = 0;
 
@@ -34,6 +38,10 @@ class DocumentCustomTag extends Element {
     protected string $controlType = '';
 
     protected int $position = 0;
+
+    protected array $values = [];
+
+    protected string $image = '';
 
     /**
      * Returns the document custom tag internal identifier.
@@ -51,6 +59,30 @@ class DocumentCustomTag extends Element {
      */
     public function getValue(): string {
         return $this->value;
+    }
+
+    /**
+     * Returns the selected values for multi-selection custom tags (MULTIPLE_SELECTION, MULTIPLE_SELECTION_IMAGE).
+     * Empty for single-value control types.
+     *
+     * @return CustomTagSelectedValue[]
+     */
+    public function getValues(): array {
+        return $this->values;
+    }
+
+    protected function setValues(array $values): void {
+        $this->values = $this->setArrayField($values, CustomTagSelectedValue::class);
+    }
+
+    /**
+     * Returns the image path associated with single image-selection control types (SINGLE_SELECTION_IMAGE).
+     * Empty for non-image control types.
+     *
+     * @return string
+     */
+    public function getImage(): string {
+        return $this->image;
     }
 
     /**

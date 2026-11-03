@@ -2,6 +2,8 @@
 
 namespace SDK\Core\Dtos;
 
+use SDK\Core\Dtos\Traits\CdnImageTrait;
+use SDK\Core\Dtos\Traits\CustomTagsDataTrait;
 use SDK\Core\Dtos\Traits\ElementTrait;
 use SDK\Core\Dtos\Traits\ElementNameTrait;
 
@@ -21,7 +23,7 @@ use SDK\Core\Dtos\Traits\ElementNameTrait;
  * @package SDK\Core\Dtos
  */
 class CustomTagValue {
-    use ElementTrait, ElementNameTrait;
+    use ElementTrait, ElementNameTrait, CustomTagsDataTrait, CdnImageTrait;
 
     protected int $customTagId = 0;
 
